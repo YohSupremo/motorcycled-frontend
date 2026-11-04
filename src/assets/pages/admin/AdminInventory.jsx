@@ -618,11 +618,20 @@ export const AdminInventory = () => {
       }
     } catch (error) {
       const message = error.response?.data?.message || "Could not save supplier";
-      if (error.response?.status === 409) {
-        setSupplierError("name", { type: "server", message });
-      } else {
-        toast.error(message);
-      }
+      const normalizedMessage = message.toLowerCase();
+      const field = error.response?.status === 409
+        ? "name"
+        : normalizedMessage.includes("phone")
+          ? "phone"
+          : normalizedMessage.includes("address")
+            ? "address"
+            : normalizedMessage.includes("email")
+              ? "email"
+              : normalizedMessage.includes("contact")
+                ? "contactPerson"
+                : "name";
+
+      setSupplierError(field, { type: "server", message });
       return;
     }
 
