@@ -27,17 +27,16 @@ const supplierSchema = yup.object({
   phone: yup
     .string()
     .trim()
-    .default("")
-    .test(
-      "valid-phone",
-      "Enter a valid phone number (7–15 digits)",
-      (value) => {
-        if (!value) return true;
-        const digits = value.replace(/\D/g, "");
-        return digits.length >= 7 && digits.length <= 15;
-      },
+    .required("Phone number is required")
+    .matches(
+      /^(09\d{2}[\s-]?\d{3}[\s-]?\d{4}|\+639\d{2}[\s-]?\d{3}[\s-]?\d{4})$/,
+      "Enter a valid Philippine mobile number (09XXXXXXXXX or +639XXXXXXXXX)",
     ),
-  address: yup.string().trim().default(""),
+  address: yup
+    .string()
+    .trim()
+    .required("Supplier address is required")
+    .min(10, "Address must be at least 10 characters"),
 });
 
 const bulkRestockSchema = yup.object({
@@ -1664,7 +1663,7 @@ export const AdminInventory = () => {
                     htmlFor="supplier-phone"
                     className="font-semibold text-zinc-900"
                   >
-                    Phone
+                    Phone *
                   </label>
                   <input
                     id="supplier-phone"
@@ -1689,14 +1688,23 @@ export const AdminInventory = () => {
                     htmlFor="supplier-address"
                     className="font-semibold text-zinc-900"
                   >
-                    Address
+                    Address *
                   </label>
                   <input
                     id="supplier-address"
                     type="text"
                     {...registerSupplier("address")}
-                    className="w-full !h-8 px-2 border border-zinc-300 rounded transition-colors focus:border-emerald-700 focus:outline-2 focus:outline-offset-1 focus:outline-emerald-700"
+                    className={`w-full !h-8 px-2 border rounded transition-colors focus:outline-2 focus:outline-offset-1 ${
+                      supplierErrors.address
+                        ? "border-rose-500 focus:border-rose-500 focus:outline-rose-500"
+                        : "border-zinc-300 focus:border-emerald-700 focus:outline-emerald-700"
+                    }`}
                   />
+                  {supplierErrors.address && (
+                    <span className="text-[11px] text-rose-600 block">
+                      {supplierErrors.address.message}
+                    </span>
+                  )}
                 </div>
               </div>
 
