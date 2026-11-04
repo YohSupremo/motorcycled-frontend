@@ -26,7 +26,6 @@ import { AdminLayout } from "./assets/components/AdminLayout";
 import { AdminDashboard } from "./assets/pages/admin/AdminDashboard";
 import { AdminInventory } from "./assets/pages/admin/AdminInventory";
 import { AdminOrders } from "./assets/pages/admin/AdminOrders";
-import { AdminPayments } from "./assets/pages/admin/AdminPayments";
 import { AdminProducts } from "./assets/pages/admin/AdminProducts";
 import { AdminCategories } from "./assets/pages/admin/AdminCategories";
 import { AdminBrands } from "./assets/pages/admin/AdminBrands";
@@ -176,7 +175,6 @@ function App() {
             <Route path="/admin/credit-verifications" element={<AdminCreditVerifications />} />
             <Route path="/admin/inventory" element={<AdminInventory />} />
             <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/payments" element={<AdminPayments />} />
             <Route path="/admin/products" element={<AdminProducts />} />
             <Route path="/admin/categories" element={<AdminCategories />} />
             <Route path="/admin/brands" element={<AdminBrands />} />
