@@ -190,7 +190,34 @@ export const Profile = ({ activeTab = "all" }) => {
   };
 
   const handleDeleteAddress = async (id) => {
-    if (!window.confirm("Delete this address?")) return;
+    const address = addresses.find((item) => item._id === id);
+    const addressLabel = address?.label || "this address";
+    const addressDetails = address
+      ? `${address.street}, ${address.barangay}, ${address.city} ${address.postalCode}`
+      : "This saved delivery address";
+    const { isConfirmed } = await import("sweetalert2").then((m) =>
+      m.default.fire({
+        icon: "warning",
+        title: `Delete ${addressLabel}?`,
+        text: `This address will be removed from your saved delivery addresses.\n\n${addressDetails}`,
+        showCancelButton: true,
+        confirmButtonText: "Delete address",
+        cancelButtonText: "Keep address",
+        buttonsStyling: false,
+        customClass: {
+          popup: "rounded-xl border border-zinc-200 shadow-xl",
+          title: "text-base font-bold text-zinc-900",
+          htmlContainer: "text-sm text-zinc-600",
+          confirmButton:
+            "rounded-md bg-rose-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-rose-700",
+          cancelButton:
+            "rounded-md border border-zinc-300 bg-white px-3.5 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50",
+          actions: "gap-2",
+        },
+      }),
+    );
+    if (!isConfirmed) return;
+
     const deleted = await dispatch(deleteAddress(id));
     if (deleted) {
       showNotice("Address deleted successfully.");
