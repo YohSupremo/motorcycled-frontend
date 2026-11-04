@@ -879,8 +879,8 @@ export const AdminInventory = () => {
       {
         field: "name",
         headerName: "Supplier",
-        flex: 1.2,
-        minWidth: 180,
+        flex: 1.35,
+        minWidth: 220,
         renderCell: (params) => (
           <span className="font-bold text-zinc-900 truncate">
             {params.row.name}
@@ -890,8 +890,8 @@ export const AdminInventory = () => {
       {
         field: "contactPerson",
         headerName: "Contact",
-        flex: 1,
-        minWidth: 170,
+        flex: 1.2,
+        minWidth: 220,
         renderCell: (params) => (
           <div className="flex flex-col justify-center min-w-0 leading-tight">
             <span className="font-semibold text-zinc-900 text-xs truncate">
@@ -906,14 +906,14 @@ export const AdminInventory = () => {
       {
         field: "phone",
         headerName: "Phone and address",
-        flex: 1.2,
-        minWidth: 180,
+        flex: 1.5,
+        minWidth: 260,
         renderCell: (params) => (
-          <div className="flex flex-col justify-center min-w-0 leading-tight">
-            <span className="font-mono text-zinc-700 text-xs leading-tight truncate">
+          <div className="flex flex-col justify-center min-w-0 leading-snug py-2">
+            <span className="font-mono text-zinc-700 text-xs leading-snug">
               {params.row.phone || "No phone"}
             </span>
-            <span className="text-[11px] text-zinc-500 truncate mt-1">
+            <span className="text-[11px] text-zinc-500 leading-snug break-words mt-1">
               {params.row.address || "No address"}
             </span>
           </div>
@@ -922,7 +922,7 @@ export const AdminInventory = () => {
       {
         field: "restockCount",
         headerName: "Restocks",
-        width: 110,
+        width: 125,
         renderCell: (params) => {
           const count = Number(params.row.restockCount || 0);
           return (
@@ -941,7 +941,7 @@ export const AdminInventory = () => {
       {
         field: "status",
         headerName: "Status",
-        width: 130,
+        width: 145,
         renderCell: (params) =>
           params.row.deletedAt ? (
             <span className="admin-table-badge gap-1.5 text-[11px] font-medium bg-zinc-100 text-zinc-600 border border-zinc-200">
@@ -958,7 +958,7 @@ export const AdminInventory = () => {
       {
         field: "actions",
         headerName: "Actions",
-        width: 140,
+        width: 112,
         headerAlign: "right",
         align: "right",
         sortable: false,
@@ -967,29 +967,46 @@ export const AdminInventory = () => {
         renderCell: (params) => {
           const supplier = params.row;
           return (
-            <div className="inline-flex items-center justify-end gap-1 w-full">
+            <div className="inline-flex items-center justify-end gap-1.5 w-full">
               <button
                 type="button"
                 onClick={() => openEditSupplier(supplier)}
-                className="!h-7 px-2 rounded border border-zinc-200 bg-white text-[11px] font-semibold text-zinc-700 hover:bg-zinc-50 cursor-pointer transition-colors"
+                title="Edit supplier"
+                aria-label={`Edit ${supplier.name}`}
+                className="!h-8 !w-8 rounded border border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 cursor-pointer transition-colors inline-flex items-center justify-center"
               >
-                Edit
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
               </button>
               {supplier.deletedAt ? (
                 <button
                   type="button"
                   onClick={() => handleRestoreSupplier(supplier)}
-                  className="!h-7 px-2 rounded border border-emerald-200 bg-emerald-50 text-[11px] font-semibold text-emerald-800 hover:bg-emerald-100 cursor-pointer transition-colors"
+                  title="Restore supplier"
+                  aria-label={`Restore ${supplier.name}`}
+                  className="!h-8 !w-8 rounded border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-900 cursor-pointer transition-colors inline-flex items-center justify-center"
                 >
-                  Restore
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                    <path d="M3 12a9 9 0 1 0 3-6.7" />
+                    <path d="M3 4v6h6" />
+                  </svg>
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={() => handleDeactivateSupplier(supplier)}
-                  className="!h-7 px-2 rounded border border-rose-200 bg-rose-50 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 cursor-pointer transition-colors"
+                  title="Deactivate supplier"
+                  aria-label={`Deactivate ${supplier.name}`}
+                  className="!h-8 !w-8 rounded border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-900 cursor-pointer transition-colors inline-flex items-center justify-center"
                 >
-                  Deactivate
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                    <path d="M6 7h12" />
+                    <path d="M9 7V5h6v2" />
+                    <path d="M8 7l.7 12h6.6L16 7" />
+                    <path d="M10 10v6M14 10v6" />
+                  </svg>
                 </button>
               )}
             </div>
@@ -1214,8 +1231,7 @@ export const AdminInventory = () => {
             columns={supplierColumns}
             loading={suppliersLoading}
             getRowId={(row) => row._id}
-            getRowHeight={() => "auto"}
-            getEstimatedRowHeight={() => 72}
+            getRowHeight={() => 78}
             pageSizeOptions={[10, 25, 50]}
             initialState={{
               pagination: { paginationModel: { pageSize: 10 } },
