@@ -617,12 +617,7 @@ export const Shipping = () => {
                           <div className="space-y-3">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {addresses.map((addr) => {
-                                const isSelected =
-                                  selectedAddressId === addr._id ||
-                                  (form.address &&
-                                    form.address.trim().toLowerCase() === addr.street?.trim().toLowerCase() &&
-                                    form.city &&
-                                    form.city.trim().toLowerCase() === addr.city?.trim().toLowerCase());
+                                const isSelected = selectedAddressId === addr._id;
 
                                 return (
                                   <div
