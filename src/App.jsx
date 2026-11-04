@@ -175,6 +175,7 @@ function App() {
             <Route path="/admin/credit-verifications" element={<AdminCreditVerifications />} />
             <Route path="/admin/inventory" element={<AdminInventory />} />
             <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/admin/payments" element={<Navigate to="/admin/orders" replace />} />
             <Route path="/admin/products" element={<AdminProducts />} />
             <Route path="/admin/categories" element={<AdminCategories />} />
             <Route path="/admin/brands" element={<AdminBrands />} />
