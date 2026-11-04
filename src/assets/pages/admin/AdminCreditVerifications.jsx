@@ -88,7 +88,7 @@ export const AdminCreditVerifications = () => {
         decision === "reject" ? { rejectionReason } : {},
         { withCredentials: true },
       );
-      toast.success(`Credit verification ${decision}d.`);
+      toast.success(`Credit verification ${decision}ed.`);
       setSelected(null);
       await loadVerifications();
     } catch (error) {
@@ -140,7 +140,9 @@ export const AdminCreditVerifications = () => {
             <span className="text-right">Action</span>
           </div>
           {loading ? (
-            <p className="p-8 text-center text-sm text-zinc-500">Loading records...</p>
+            <p className="p-8 text-center text-sm text-zinc-500">
+              Loading records...
+            </p>
           ) : verifications.length === 0 ? (
             <p className="p-8 text-center text-sm text-zinc-500">
               No {status} credit verification records.
@@ -155,16 +157,22 @@ export const AdminCreditVerifications = () => {
                   <p className="truncate text-sm font-semibold text-zinc-900">
                     {verification.user?.firstName} {verification.user?.lastName}
                   </p>
-                  <p className="truncate text-xs text-zinc-500">{verification.user?.email}</p>
+                  <p className="truncate text-xs text-zinc-500">
+                    {verification.user?.email}
+                  </p>
                 </div>
                 <p className="text-xs text-zinc-600">
                   {verification.user?.contactNumber || "No contact number"}
                 </p>
                 <div>
                   <p className="text-xs text-zinc-600">
-                    {new Date(verification.createdAt).toLocaleDateString("en-PH")}
+                    {new Date(verification.createdAt).toLocaleDateString(
+                      "en-PH",
+                    )}
                   </p>
-                  <span className={`mt-1 inline-block rounded border px-1.5 py-0.5 text-[10px] font-bold uppercase ${statusStyles[verification.status]}`}>
+                  <span
+                    className={`mt-1 inline-block rounded border px-1.5 py-0.5 text-[10px] font-bold uppercase ${statusStyles[verification.status]}`}
+                  >
                     {verification.status}
                   </span>
                 </div>
@@ -204,11 +212,20 @@ export const AdminCreditVerifications = () => {
                 ["Government ID", selected.governmentId],
                 ["Proof of income", selected.proofOfIncome],
               ].map(([label, document]) => (
-                <div key={label} className="rounded-lg border border-zinc-200 p-3">
-                  <p className="mb-2 text-xs font-bold text-zinc-800">{label}</p>
+                <div
+                  key={label}
+                  className="rounded-lg border border-zinc-200 p-3"
+                >
+                  <p className="mb-2 text-xs font-bold text-zinc-800">
+                    {label}
+                  </p>
                   {document?.url ? (
                     <a href={document.url} target="_blank" rel="noreferrer">
-                      <img src={document.url} alt={label} className="h-56 w-full rounded-md object-contain bg-zinc-100" />
+                      <img
+                        src={document.url}
+                        alt={label}
+                        className="h-56 w-full rounded-md object-contain bg-zinc-100"
+                      />
                     </a>
                   ) : (
                     <p className="flex h-56 items-center justify-center bg-zinc-50 text-xs text-zinc-500">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   getAdminOrders,
@@ -27,6 +28,8 @@ const statusStyle = (status) => STATUS_STYLES[status] || STATUS_STYLES.Pending;
 
 export const AdminOrders = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("orders"); // "orders" | "finance"
   const [activeStatusTab, setActiveStatusTab] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,7 +55,7 @@ export const AdminOrders = () => {
   }, [dispatch]);
 
   // Transform backend orders and applications into unified table items
-  const unifiedOrders = [
+  const unifiedOrders = useMemo(() => [
     // Regular orders
     ...orders.map((o) => {
       const customerName = o.user
@@ -175,7 +178,23 @@ export const AdminOrders = () => {
         },
       };
     }),
-  ];
+  ], [orders, applications]);
+
+  useEffect(() => {
+    const selectedOrderId = location.state?.selectedOrderId;
+    if (!selectedOrderId) return;
+
+    const selected = unifiedOrders.find(
+      (order) => order._id === selectedOrderId,
+    );
+    if (!selected) return;
+
+    // The route state selects the requested order after Redux data loads.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveSection(selected.isApplication ? "finance" : "orders");
+    setSelectedOrder(selected);
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.pathname, location.state, navigate, unifiedOrders]);
 
 
   const computeTotal = (order) => {

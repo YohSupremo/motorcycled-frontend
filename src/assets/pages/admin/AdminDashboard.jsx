@@ -63,7 +63,7 @@ const timeAgo = (value) => {
   });
 };
 
-export const AdminDashboard = ({ onSelectOrder }) => {
+export const AdminDashboard = () => {
   // Telemetry and analytics state
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -299,7 +299,10 @@ export const AdminDashboard = ({ onSelectOrder }) => {
           <div className="inline-flex items-center justify-end w-full">
             <Link
               to="/admin/orders"
-              onClick={() => onSelectOrder?.(params.row._id)}
+              state={{
+                selectedOrderId: params.row._id,
+                isApplication: true,
+              }}
               className="inline-flex items-center justify-center px-3 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs cursor-pointer whitespace-nowrap"
             >
               Review
@@ -308,7 +311,7 @@ export const AdminDashboard = ({ onSelectOrder }) => {
         ),
       },
     ],
-    [onSelectOrder]
+    []
   );
 
   // Material UI DataGrid columns for real recent orders stream
