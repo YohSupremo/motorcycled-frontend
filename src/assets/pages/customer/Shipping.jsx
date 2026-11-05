@@ -728,16 +728,9 @@ export const Shipping = () => {
                                 <input
                                   type="text"
                                   {...registerAddress("label")}
-                                  list="address-label-suggestions"
-                                  placeholder="e.g. Home, Work, Office"
+                                  placeholder="Home, Work, etc."
                                   className="w-full px-3 py-2 text-xs bg-white border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
                                 />
-                                <datalist id="address-label-suggestions">
-                                  <option value="Home" />
-                                  <option value="Work" />
-                                  <option value="Office" />
-                                  <option value="Warehouse" />
-                                </datalist>
                               </div>
 
                               <div className="sm:col-span-2">
@@ -877,16 +870,9 @@ export const Shipping = () => {
                                 <input
                                   type="text"
                                   {...registerAddress("label")}
-                                  list="address-label-suggestions"
-                                  placeholder="e.g. Home, Work, Office"
+                                  placeholder="Home, Work, etc."
                                   className="w-full px-3 py-2 text-xs bg-white border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
                                 />
-                                <datalist id="address-label-suggestions">
-                                  <option value="Home" />
-                                  <option value="Work" />
-                                  <option value="Office" />
-                                  <option value="Warehouse" />
-                                </datalist>
                               </div>
 
                               <div className="sm:col-span-2">
