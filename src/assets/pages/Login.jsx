@@ -17,7 +17,7 @@ import {
 
 const API = import.meta.env.VITE_API;
 
-// Yup schema for login validation
+
 const loginSchema = yup.object({
   identifier: yup.string().trim().required("Email or contact number is required"),
   password: yup.string().required("Password is required"),
@@ -46,9 +46,9 @@ export const Login = () => {
   const [socialLoading, setSocialLoading] = useState("");
   const [socialError, setSocialError] = useState("");
 
-  // useRef so it updates SYNCHRONOUSLY — unlike useState, changes to a ref
-  // are visible immediately in the same render cycle (no batching delay).
-  // This blocks the isAuthenticated redirect while the Google popup is open.
+  
+  
+  
   const googleAuthInProgress = useRef(false);
   const lastAlertMessage = useRef("");
 
@@ -58,11 +58,11 @@ export const Login = () => {
 
   const redirect = new URLSearchParams(location.search).get("redirect");
 
-  // Redirect once login succeeds (supporting ?redirect=shipping or admin dashboard).
-  // Guard: skip redirect while a Google auth popup is in progress.
-  // We use a ref (not state) because refs update synchronously — state updates
-  // are batched and may not be visible until the next render, which can cause
-  // the redirect to fire before handleGoogleSignIn sets socialLoading.
+  
+  
+  
+  
+  
   useEffect(() => {
     if (isAuthenticated && !googleAuthInProgress.current) {
       const defaultTarget = user?.role === "admin" ? "/admin/dashboard" : "/";
@@ -83,7 +83,7 @@ export const Login = () => {
       pendingDeactivationNotice = sessionStorage.getItem("deactivationNotice") || "";
       if (pendingDeactivationNotice) sessionStorage.removeItem("deactivationNotice");
     } catch {
-      // Storage may be unavailable.
+      
     }
 
     const alertMessage = pendingDeactivationNotice || message;
@@ -125,13 +125,13 @@ export const Login = () => {
       return;
     }
 
-    // Block the isAuthenticated redirect SYNCHRONOUSLY before the popup opens.
+    
     googleAuthInProgress.current = true;
 
     try {
       setSocialLoading("google");
 
-      // 1. Authenticate with Firebase (opens Google account picker popup).
+      
       const result = await signInWithPopup(auth, googleProvider);
       const socialUser = result.user;
       const idToken = await socialUser.getIdToken();
@@ -140,10 +140,10 @@ export const Login = () => {
       const [firstName = "", ...lastNameParts] = fullName.split(" ");
       const lastName = lastNameParts.join(" ");
 
-      // 2. Ask OUR backend whether this email is registered.
-      //    We call axios directly so we can read the raw response immediately,
-      //    before any Redux state change has a chance to trigger a re-render
-      //    and fire the isAuthenticated redirect.
+      
+      
+      
+      
       let data;
       try {
         const response = await axios.post(
@@ -199,7 +199,7 @@ export const Login = () => {
         }
       }
 
-      // 3a. Not registered → go to registration with their Google info pre-filled.
+      
       if (data.isRegistered === false) {
         navigate("/register", {
           state: { email, firstName, lastName, fromGoogle: true },
@@ -207,17 +207,17 @@ export const Login = () => {
         return;
       }
 
-      // 3b. Registered → store session marker and update Redux store.
+      
       try {
         localStorage.setItem("isLoggedIn", "1");
-      } catch { /* ignore */ }
+      } catch {  }
 
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { ...data.user, address: data.address },
       });
 
-      // Release the guard — isAuthenticated is now true, let the redirect fire.
+      
       googleAuthInProgress.current = false;
     } catch (err) {
       console.error("Google Auth error:", err);
@@ -227,7 +227,7 @@ export const Login = () => {
       }
     } finally {
       setSocialLoading("");
-      // Safety net: always release the guard when the function exits.
+      
       googleAuthInProgress.current = false;
     }
   };
@@ -272,7 +272,7 @@ export const Login = () => {
   return (
     <div className="min-h-screen bg-zinc-50/60 text-zinc-900 flex flex-col justify-center items-center px-4 py-8 antialiased selection:bg-emerald-100 selection:text-emerald-900">
       <div className="w-full max-w-sm">
-        {/* Brand Header */}
+        {}
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <img
@@ -287,7 +287,7 @@ export const Login = () => {
           <span className="text-xs text-zinc-500">Account Portal</span>
         </div>
 
-        {/* Card Container */}
+        {}
         <div className="bg-white border border-zinc-200 rounded-lg p-5 sm:p-6">
           <div className="mb-5">
             <h1 className="text-xl font-semibold text-zinc-900 tracking-tight">
@@ -299,7 +299,7 @@ export const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit(onLoginSubmit)} noValidate className="space-y-4">
-            {/* Identifier input */}
+            {}
             <div>
               <label
                 htmlFor="identifier"
@@ -325,7 +325,7 @@ export const Login = () => {
               )}
             </div>
 
-            {/* Password input */}
+            {}
             <div>
               <label
                 htmlFor="password"
@@ -389,7 +389,7 @@ export const Login = () => {
               )}
             </div>
 
-            {/* Remember me & Forgot password row below input */}
+            {}
             <div className="flex items-center justify-between pt-0.5">
               <div className="flex items-center">
                 <input
@@ -414,7 +414,7 @@ export const Login = () => {
               </Link>
             </div>
 
-            {/* Action button */}
+            {}
             <div className="pt-2">
               <button
                 type="submit"
@@ -426,7 +426,7 @@ export const Login = () => {
             </div>
           </form>
 
-          {/* Social login divider (Quiz 4: 15pts) */}
+          {}
           <div className="relative my-5">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-zinc-200" />
@@ -438,9 +438,9 @@ export const Login = () => {
             </div>
           </div>
 
-          {/* Social Auth Providers */}
+          {}
           <div className="space-y-2">
-            {/* Google Sign-In */}
+            {}
             <button
               type="button"
               onClick={handleGoogleSignIn}
@@ -473,7 +473,7 @@ export const Login = () => {
             </button>
           </div>
 
-          {/* Footer Navigation */}
+          {}
           <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
             <p className="text-xs text-zinc-500">
               Don't have an account?{" "}
@@ -487,7 +487,7 @@ export const Login = () => {
           </div>
         </div>
 
-        {/* Bottom Metadata */}
+        {}
         <p className="text-center text-[11px] text-zinc-400 mt-4">
           Motorcycled Service & Account Management System
         </p>

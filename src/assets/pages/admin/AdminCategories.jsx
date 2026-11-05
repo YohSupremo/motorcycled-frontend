@@ -65,14 +65,14 @@ export const AdminCategories = () => {
     error,
   } = useSelector((state) => state.catalog);
 
-  // Local state
-  const [statusFilter, setStatusFilter] = useState("all"); // "all" | "active" | "archived"
+  
+  const [statusFilter, setStatusFilter] = useState("all"); 
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("name-asc");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
 
-  // Form handling via React Hook Form + Yup
+  
   const categorySchema = useMemo(
     () => buildCategorySchema(categories, editingCategory),
     [categories, editingCategory],
@@ -114,7 +114,7 @@ export const AdminCategories = () => {
     name: "targetCategoryId",
   });
 
-  // Initial fetch (fetch all so admin can filter active & soft-deleted)
+  
   useEffect(() => {
     dispatch(getCategories({ all: "true" }));
   }, [dispatch]);
@@ -125,7 +125,7 @@ export const AdminCategories = () => {
     reset({ name: "", description: "" });
   };
 
-  // Handle side-effects (toasts, modal close, refetch)
+  
   useEffect(() => {
     if (error) {
       toast.error(error, { position: "bottom-right" });
@@ -152,14 +152,14 @@ export const AdminCategories = () => {
     }
   }, [error, isCategoryCreated, isCategoryUpdated, isCategoryDeleted, dispatch]);
 
-  // Open modal for add
+  
   const handleOpenAdd = () => {
     setEditingCategory(null);
     reset({ name: "", description: "" });
     setIsModalOpen(true);
   };
 
-  // Open modal for edit
+  
   const handleOpenEdit = (category) => {
     setEditingCategory(category);
     reset({
@@ -169,7 +169,7 @@ export const AdminCategories = () => {
     setIsModalOpen(true);
   };
 
-  // Form submit
+  
   const onSubmitCategory = (data) => {
     const payload = {
       name: data.name.trim(),
@@ -183,7 +183,7 @@ export const AdminCategories = () => {
     }
   };
 
-  // Delete handler: backend checks if active products exist
+  
   const handleDelete = async (category) => {
     const confirm = await Swal.fire({
       title: `Delete "${category.name}"?`,
@@ -198,10 +198,10 @@ export const AdminCategories = () => {
 
     if (!confirm.isConfirmed) return;
 
-    // Backend checks whether the category has active products
+    
     const res = await dispatch(deleteCategory(category._id));
 
-    // If products exist, backend returns a 409 Conflict with the product count & products
+    
     if (res?.conflict) {
       resetReassign({ targetCategoryId: "" });
       setReassignState({
@@ -219,7 +219,7 @@ export const AdminCategories = () => {
     }
   };
 
-  // Restore handler for soft-deleted category
+  
   const handleRestore = async (category) => {
     const confirm = await Swal.fire({
       title: `Restore "${category.name}"?`,
@@ -243,7 +243,7 @@ export const AdminCategories = () => {
     }
   };
 
-  // Close reassign modal and clear its form
+  
   const closeReassignModal = () => {
     setReassignState({
       isOpen: false,
@@ -254,7 +254,7 @@ export const AdminCategories = () => {
     resetReassign({ targetCategoryId: "" });
   };
 
-  // Handle reassigning products and soft-deleting category
+  
   const handleReassignSubmit = async (data) => {
     const res = await dispatch(
       reassignCategoryAndDelete(
@@ -270,11 +270,11 @@ export const AdminCategories = () => {
     }
   };
 
-  // Active & Archived counts
+  
   const activeCategories = categories.filter((c) => !c.isArchived);
   const archivedCategories = categories.filter((c) => c.isArchived);
 
-  // Filter and sort
+  
   const filteredCategories = categories
     .filter((c) => {
       if (statusFilter === "active" && c.isArchived) return false;
@@ -480,7 +480,7 @@ export const AdminCategories = () => {
 
   return (
     <div className="space-y-6">
-      {/* Catalog subnavigation */}
+      {}
       <div className="flex items-center gap-2 border-b border-zinc-200 pb-3">
         <Link
           to="/admin/products"
@@ -502,7 +502,7 @@ export const AdminCategories = () => {
         </Link>
       </div>
 
-      {/* Title and actions */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -532,7 +532,7 @@ export const AdminCategories = () => {
         </button>
       </div>
 
-      {/* Counts */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-4 bg-white rounded border border-zinc-200">
           <span className="text-[11px] font-semibold text-zinc-500 block">Active categories</span>
@@ -565,7 +565,7 @@ export const AdminCategories = () => {
         </div>
       </div>
 
-      {/* Search and filter toolbar */}
+      {}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white p-4 rounded border border-zinc-200">
         <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded shrink-0">
           <button
@@ -648,7 +648,7 @@ export const AdminCategories = () => {
         </div>
       </div>
 
-      {/* Categories grid */}
+      {}
       {loadingCategories ? (
         <div className="py-16 text-center text-zinc-500 bg-white rounded border border-zinc-200">
           <div className="w-6 h-6 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
@@ -702,7 +702,7 @@ export const AdminCategories = () => {
         </div>
       )}
 
-      {/* Add and edit modal */}
+      {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50">
           <div
@@ -807,7 +807,7 @@ export const AdminCategories = () => {
         </div>
       )}
 
-      {/* Category in use dialog */}
+      {}
       {reassignState.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50">
           <div

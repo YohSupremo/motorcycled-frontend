@@ -122,7 +122,7 @@ export const About = () => {
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 antialiased flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
-      {/* Page header */}
+      {}
       <section
         style={{ marginTop: "calc(-1 * var(--nav-h, 56px))" }}
         className="bg-zinc-950 text-white pt-24 pb-16 sm:pt-28 sm:pb-20 border-b border-zinc-800"
@@ -147,7 +147,7 @@ export const About = () => {
         </div>
       </section>
 
-      {/* At a glance */}
+      {}
       <section data-nav-hero-end className="bg-zinc-900 border-b border-zinc-800 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-y-6 sm:gap-x-8">
           <div className="space-y-1">
@@ -166,7 +166,7 @@ export const About = () => {
       </section>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-16 flex-1 w-full">
-        {/* How we operate */}
+        {}
         <ScrollReveal threshold={0.08} duration={400}>
           <section className="grid lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-8 lg:gap-14">
             <div className="space-y-3">
@@ -205,7 +205,7 @@ export const About = () => {
           </section>
         </ScrollReveal>
 
-        {/* FAQ */}
+        {}
         <ScrollReveal threshold={0.08} duration={400}>
           <section id="faq" className="space-y-6 scroll-mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-3 border-b border-zinc-900">
@@ -216,7 +216,7 @@ export const About = () => {
                 </p>
               </div>
 
-              {/* Search Bar for Q and A */}
+              {}
               <div className="w-full md:w-72">
                 <div className="relative">
                   <input
@@ -252,7 +252,7 @@ export const About = () => {
               </div>
             </div>
 
-            {/* Category Filter Pills */}
+            {}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
               {CATEGORIES.map((cat) => (
                 <button
@@ -270,7 +270,7 @@ export const About = () => {
               ))}
             </div>
 
-            {/* Q and A Accordion List */}
+            {}
             <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-lg overflow-hidden bg-white">
               {filteredFaqs.length === 0 ? (
                 <div className="p-8 text-center space-y-2">
@@ -341,7 +341,7 @@ export const About = () => {
           </section>
         </ScrollReveal>
 
-        {/* Showroom and contact */}
+        {}
         <section id="contact" className="bg-zinc-900 text-white p-6 sm:p-8 rounded-lg border border-zinc-800 space-y-6 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
             <h3 className="text-lg sm:text-xl font-bold text-white">

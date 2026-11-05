@@ -94,17 +94,17 @@ export const Orders = () => {
     (state) => state.myOrders
   );
 
-  // Installment Payment Modal State
+  
   const [payingApp, setPayingApp] = useState(null);
   const [submittingPay, setSubmittingPay] = useState(false);
 
-  // Downpayment Submission Modal State
+  
   const [downpaymentApp, setDownpaymentApp] = useState(null);
   const [dpMethod, setDpMethod] = useState("gcash");
   const [dpRef, setDpRef] = useState("");
   const [submittingDp, setSubmittingDp] = useState(false);
 
-  // Collapsible Payment Ledger Accordion State
+  
   const [expandedLedgers, setExpandedLedgers] = useState({});
 
   const toggleLedger = (appId) => {
@@ -255,7 +255,7 @@ export const Orders = () => {
   return (
     <div className="min-h-screen bg-zinc-50/60 text-zinc-900 antialiased flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
-        {/* Header */}
+        {}
         <div className="space-y-4 pb-4 border-b border-zinc-200">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
@@ -307,9 +307,9 @@ export const Orders = () => {
           </div>
         )}
 
-        {/* ────────────────────────────────────────────────────────────── */}
-        {/* SECTION 1: CASH PURCHASES & DELIVERIES                         */}
-        {/* ────────────────────────────────────────────────────────────── */}
+        {}
+        {}
+        {}
         {activeTab !== "applications" && (
           <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
@@ -367,7 +367,7 @@ export const Orders = () => {
                           : "border-zinc-200"
                         }`}
                     >
-                      {/* Order header */}
+                      {}
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-3.5 bg-zinc-50/80 border-b border-zinc-200/80">
                         <div className="flex items-center gap-2.5 flex-wrap">
                           <div className="flex items-center gap-1.5">
@@ -400,7 +400,7 @@ export const Orders = () => {
                         </div>
                       </div>
 
-                      {/* Completed order review prompt banner */}
+                      {}
                       {isCompleted && (
                         <div className="px-5 py-2.5 bg-emerald-50/70 border-b border-emerald-100 flex items-center justify-between gap-3 text-xs">
                           <div className="flex items-center gap-2 text-emerald-900">
@@ -417,7 +417,7 @@ export const Orders = () => {
                         </div>
                       )}
 
-                      {/* Order items */}
+                      {}
                       <div className="px-5 py-4 divide-y divide-zinc-100">
                         {order.orderItems?.map((item, idx) => {
                           const prodId = item.product?._id || item.product;
@@ -467,7 +467,7 @@ export const Orders = () => {
                                 </div>
                               </div>
 
-                              {/* Item Right Side: Price & Actions */}
+                              {}
                               <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-zinc-100">
                                 <div className="text-left sm:text-right pr-1">
                                   <span className="text-[10px] text-zinc-400 block uppercase tracking-wider font-medium">Item Total</span>
@@ -503,9 +503,9 @@ export const Orders = () => {
                         })}
                       </div>
 
-                      {/* Order Details & Settlement Footer */}
+                      {}
                       <div className="px-5 py-3.5 border-t border-zinc-200/80 bg-zinc-50/70 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        {/* Left: Fulfillment & Payment */}
+                        {}
                         <div className="space-y-1.5 text-xs">
                           <div className="flex items-center gap-2 flex-wrap">
                             <div className="w-5 h-5 rounded-md bg-white border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-600">
@@ -547,7 +547,7 @@ export const Orders = () => {
                           </div>
                         </div>
 
-                        {/* Right: Totals & Receipt Action */}
+                        {}
                         <div className="flex items-center justify-between md:justify-end gap-3.5 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-zinc-200/70">
                           <div className="flex items-center gap-1.5 flex-wrap">
                             {(order.orderStatus === "pending" || order.orderStatus === "processing") && (
@@ -603,9 +603,9 @@ export const Orders = () => {
             </section>
         )}
 
-        {/* ────────────────────────────────────────────────────────────── */}
-        {/* SECTION 2: IN-HOUSE FINANCING APPLICATIONS & AMORTIZATION      */}
-        {/* ────────────────────────────────────────────────────────────── */}
+        {}
+        {}
+        {}
         {shownApplications.length > 0 && (
           <section className="space-y-4">
               <h2 className="text-base font-bold text-zinc-900 border-b border-zinc-200 pb-2">
@@ -622,7 +622,7 @@ export const Orders = () => {
                     key={app._id}
                     className="border border-zinc-200 rounded-2xl bg-white overflow-hidden shadow-xs space-y-0"
                   >
-                    {/* Application header */}
+                    {}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-5 py-3.5 bg-zinc-50/80 border-b border-zinc-200/80">
                       <div className="flex items-center gap-3 flex-wrap">
                         <span className="font-mono font-bold text-zinc-900 text-sm bg-white px-2 py-0.5 rounded border border-zinc-200 shadow-2xs">
@@ -646,7 +646,7 @@ export const Orders = () => {
                     </div>
 
                     <div className="px-5 py-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
-                      {/* Left: Product & Showroom info (5 cols) */}
+                      {}
                       <div className="lg:col-span-5 space-y-3">
                         <div>
                           <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
@@ -660,7 +660,7 @@ export const Orders = () => {
                           </p>
                         </div>
 
-                        {/* Showroom Releasing Depot & Handover Instructions */}
+                        {}
                         <div className="bg-zinc-50 rounded-xl p-3.5 border border-zinc-200 text-xs space-y-1.5">
                           <span className="font-bold text-zinc-900 block text-[11px] uppercase tracking-wide">
                             Assigned Releasing Showroom Depot:
@@ -674,7 +674,7 @@ export const Orders = () => {
                         </div>
                       </div>
 
-                      {/* Right: Financing Terms & Metrics (7 cols) */}
+                      {}
                       <div className="lg:col-span-7 space-y-3">
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                           <div className="bg-zinc-50 rounded-xl p-2.5 border border-zinc-200">
@@ -697,7 +697,7 @@ export const Orders = () => {
                           </div>
                         </div>
 
-                        {/* Amortization Progress Tracker */}
+                        {}
                         {app.applicationStatus === "approved" && (
                           <div className="bg-emerald-50/40 rounded-xl p-3.5 border border-emerald-200 space-y-2.5">
                             <div className="flex items-center justify-between text-xs">
@@ -709,7 +709,7 @@ export const Orders = () => {
                               </span>
                             </div>
 
-                            {/* Progress bar */}
+                            {}
                             <div className="w-full h-2.5 bg-zinc-200 rounded-full overflow-hidden">
                               <div
                                 className="h-full bg-emerald-600 rounded-full transition-all duration-500"
@@ -730,14 +730,14 @@ export const Orders = () => {
 
                               {!isFullyPaid && (
                                 app.downPaymentSettled === false ? (
-                                  /* Downpayment not yet settled — show relevant guidance */
+                                  
                                   <div className="flex items-start gap-2 p-2.5 rounded-lg border border-amber-200 bg-amber-50 text-xs text-amber-900 max-w-sm">
                                     <svg className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                       <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                                     </svg>
                                     <div className="space-y-1.5">
                                       {!app.downPaymentMethod ? (
-                                        // Method not yet chosen — prompt customer to submit
+                                        
                                         <>
                                           <span className="leading-snug block font-semibold">
                                             Action required: Submit your downpayment
@@ -754,12 +754,12 @@ export const Orders = () => {
                                           </button>
                                         </>
                                       ) : app.downPaymentMethod === "cash_on_releasing" ? (
-                                        // Cash — awaiting admin to collect physically
+                                        
                                         <span className="leading-snug">
                                           Please bring your downpayment of <strong className="font-mono">{fmt(app.downPayment)}</strong> to the branch. Monthly installments will unlock once admin confirms receipt.
                                         </span>
                                       ) : (
-                                        // Online method submitted — awaiting admin verification
+                                        
                                         <span className="leading-snug">
                                           Your <strong className="uppercase">{app.downPaymentMethod.replace(/_/g, " ")}</strong> downpayment submission is being verified by the admin. Monthly installments will unlock once confirmed.
                                           {app.downPaymentReference && (
@@ -785,7 +785,7 @@ export const Orders = () => {
                       </div>
                     </div>
 
-                    {/* Status Guidelines Banner */}
+                    {}
                     {app.applicationStatus === "pending" && (
                       <div className="px-5 py-3.5 border-t border-amber-200 bg-amber-50/60 text-xs text-amber-950 flex items-start gap-2.5">
                         <span className="font-bold font-mono text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded shrink-0 mt-0.5">UNDER REVIEW</span>
@@ -827,7 +827,7 @@ export const Orders = () => {
                       </div>
                     )}
 
-                    {/* Payment History Accordion */}
+                    {}
                     {app.paymentHistory && app.paymentHistory.length > 0 && (() => {
                       const isExpanded = !!expandedLedgers[app._id];
                       return (
@@ -889,7 +889,7 @@ export const Orders = () => {
             </section>
         )}
 
-        {/* Empty state */}
+        {}
         {!loading &&
           shownOrders.length === 0 &&
           shownApplications.length === 0 && (
@@ -915,9 +915,9 @@ export const Orders = () => {
           )}
       </main>
 
-      {/* ────────────────────────────────────────────────────────────── */}
-      {/* MODAL: PAY MONTHLY INSTALLMENT AMORTIZATION                    */}
-      {/* ────────────────────────────────────────────────────────────── */}
+      {}
+      {}
+      {}
       {payingApp && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-5 animate-in fade-in zoom-in-95 duration-150">
@@ -1034,13 +1034,13 @@ export const Orders = () => {
         </div>
       )}
 
-      {/* ────────────────────────────────────────────────────────────── */}
-      {/* MODAL: SUBMIT DOWNPAYMENT METHOD (after approval)              */}
-      {/* ────────────────────────────────────────────────────────────── */}
+      {}
+      {}
+      {}
       {downpaymentApp && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-5 animate-in fade-in zoom-in-95 duration-150">
-            {/* Header */}
+            {}
             <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
               <div>
                 <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded uppercase">
@@ -1062,7 +1062,7 @@ export const Orders = () => {
               </button>
             </div>
 
-            {/* Amount summary */}
+            {}
             <div className="bg-amber-50 rounded-xl p-3.5 border border-amber-200 space-y-1 text-xs">
               <div className="flex justify-between">
                 <span className="text-amber-800">Downpayment Due (20%):</span>
@@ -1077,7 +1077,7 @@ export const Orders = () => {
               </p>
             </div>
 
-            {/* Payment method selector */}
+            {}
             <div>
               <label className="text-xs font-bold text-zinc-800 block mb-1.5 uppercase tracking-wide">
                 How will you pay the downpayment?
@@ -1106,7 +1106,7 @@ export const Orders = () => {
               </div>
             </div>
 
-            {/* Reference number (only for online methods) */}
+            {}
             {dpMethod !== "cash_on_releasing" && (
               <div>
                 <label className="text-xs font-semibold text-zinc-700 block mb-1">
@@ -1142,7 +1142,7 @@ export const Orders = () => {
               </div>
             )}
 
-            {/* Actions */}
+            {}
             <div className="flex items-center justify-end gap-2 pt-2">
               <button
                 type="button"

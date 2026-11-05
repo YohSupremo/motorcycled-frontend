@@ -1,22 +1,17 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-// Hash targets can mount asynchronously (data-driven sections, product details).
-// Retry a few times before giving up, then let the user scroll manually.
+
+
 const HASH_RETRY_DELAYS = [0, 150, 400, 800, 1400];
 
-/**
- * ScrollToTop Component
- * Ensures every route navigation resets window scroll to the top (0, 0),
- * unless the URL carries an anchor hash (e.g. #reviews, #faq). In that case
- * the matching element is scrolled into view once it exists.
- */
+
 export function ScrollToTop() {
   const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
     if (!hash) {
-      // The review flow manages its own scroll position.
+      
       if (search.includes("writeReview=true")) return undefined;
 
       window.scrollTo({

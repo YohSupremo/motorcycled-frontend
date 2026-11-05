@@ -64,7 +64,7 @@ const timeAgo = (value) => {
 };
 
 export const AdminDashboard = () => {
-  // Telemetry and analytics state
+  
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
@@ -108,11 +108,11 @@ export const AdminDashboard = () => {
     lowStockProducts: [],
   });
 
-  // Quiz 2: date range filter and chart configuration state
+  
   const [preset, setPreset] = useState("30d");
-  const [chartType, setChartType] = useState("area"); // area, bar, or line
-  const [metricMode, setMetricMode] = useState("sales"); // sales, orders, or units
-  const [financialView, setFinancialView] = useState("profit"); // profit or cash
+  const [chartType, setChartType] = useState("area"); 
+  const [metricMode, setMetricMode] = useState("sales"); 
+  const [financialView, setFinancialView] = useState("profit"); 
   const [showAllRestocks, setShowAllRestocks] = useState(false);
 
   const {
@@ -212,7 +212,7 @@ export const AdminDashboard = () => {
   const formatTooltipLabel = (label) =>
     rangeYear ? `Date: ${label}, ${rangeYear}` : `Date: ${label}`;
 
-  // Material UI DataGrid columns for real underwriting credit applications
+  
   const approvalColumns = useMemo(
     () => [
       {
@@ -314,7 +314,7 @@ export const AdminDashboard = () => {
     []
   );
 
-  // Material UI DataGrid columns for real recent orders stream
+  
   const recentOrdersColumns = useMemo(
     () => [
       {
@@ -409,7 +409,7 @@ export const AdminDashboard = () => {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Page header */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -467,7 +467,7 @@ export const AdminDashboard = () => {
         </div>
       )}
 
-      {/* Cash flow */}
+      {}
       <section className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-zinc-900">
           <div>
@@ -517,7 +517,7 @@ export const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* Key figures */}
+      {}
       <div className="border-y border-zinc-200 bg-white grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200 py-3">
         <div className="px-4 py-2 space-y-1">
           <span className="block font-mono uppercase text-[10px] tracking-wider text-zinc-500">
@@ -554,7 +554,7 @@ export const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Inventory and financials */}
+      {}
       <section className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-2 border-b border-zinc-900">
           <div>
@@ -721,7 +721,7 @@ export const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* Sales charts with date range filter */}
+      {}
       <section className="border border-zinc-200 bg-white rounded overflow-hidden">
         <div className="p-6 border-b border-zinc-100 space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
@@ -901,7 +901,7 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Figures for the selected range */}
+        {}
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-zinc-100 bg-zinc-50/50 border-b border-zinc-100">
           <div className="p-4">
             <span className="text-[10px] font-mono uppercase text-zinc-500 font-bold block">
@@ -943,7 +943,7 @@ export const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Sales chart */}
+        {}
         <div className="p-6">
           {loading ? (
             <div className="h-80 flex flex-col items-center justify-center space-y-2 text-zinc-500">
@@ -1077,7 +1077,7 @@ export const AdminDashboard = () => {
           )}
         </div>
 
-        {/* Category breakdown */}
+        {}
         {categorySales.length > 0 && (
           <div className="p-4 bg-zinc-50 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-4">
             <span className="text-[10px] font-mono uppercase text-zinc-500 font-bold">
@@ -1096,7 +1096,7 @@ export const AdminDashboard = () => {
         )}
       </section>
 
-      {/* Underwriting queue */}
+      {}
       <section className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-zinc-900">
           <h2 className="text-base sm:text-lg font-bold text-zinc-900 tracking-tight text-balance">
@@ -1133,7 +1133,7 @@ export const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* Recent orders and low stock */}
+      {}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
         <div className="lg:col-span-7 space-y-3">
           <div className="flex items-center justify-between pb-2 border-b border-zinc-900">
@@ -1221,7 +1221,7 @@ export const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Recent stock activity */}
+      {}
       <section className="space-y-3 pt-2">
         <div className="flex items-center justify-between pb-2 border-b border-zinc-900">
           <h2 className="text-base font-bold text-zinc-900 tracking-tight flex items-center gap-2">

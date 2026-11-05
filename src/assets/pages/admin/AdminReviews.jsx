@@ -24,7 +24,7 @@ const formatDate = (value) => {
 
 export const AdminReviews = () => {
   const dispatch = useDispatch();
-  const [filterMode, setFilterMode] = useState("all"); // "all", "public", "hidden"
+  const [filterMode, setFilterMode] = useState("all"); 
   const [ratingFilter, setRatingFilter] = useState("all");
 
   const { loading, reviews: rawReviews } = useSelector(
@@ -38,7 +38,7 @@ export const AdminReviews = () => {
     dispatch(getAdminReviews());
   }, [dispatch]);
 
-  // Map backend shape to DataGrid row shape
+  
   const reviews = useMemo(
     () =>
       (rawReviews || []).map((r) => {
@@ -312,7 +312,7 @@ export const AdminReviews = () => {
 
   return (
     <div className="space-y-6">
-      {/* Title row */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -323,7 +323,7 @@ export const AdminReviews = () => {
           </p>
         </div>
 
-        {/* Filter tabs */}
+        {}
         <div className="flex flex-wrap items-center justify-end gap-2">
           <label className="sr-only" htmlFor="review-rating-filter">
             Filter by rating
@@ -401,7 +401,7 @@ export const AdminReviews = () => {
       </div>
       </div>
 
-      {/* Reviews grid */}
+      {}
       <div className="border border-zinc-200 bg-white rounded overflow-hidden">
         <DataGrid
           rows={filteredReviews}

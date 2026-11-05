@@ -22,13 +22,13 @@ body {
   color: #18181b;
 }
 
-/* Headings use the refined geometric Plus Jakarta Sans */
+
 h1, h2, h3, h4, .font-heading, .font-display {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
 }
 
-/* Neutralize typewriter monospace: format prices & numbers with clean tabular digits */
+
 .font-mono,
 [class*="font-mono"] {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
@@ -36,7 +36,7 @@ h1, h2, h3, h4, .font-heading, .font-display {
   letter-spacing: -0.015em;
 }
 
-/* Dedicated crisp price typography */
+
 .font-price,
 .price-tag,
 .price-value {
@@ -46,7 +46,7 @@ h1, h2, h3, h4, .font-heading, .font-display {
   letter-spacing: -0.02em;
 }
 
-/* Ensure MUI components inherit unified typography */
+
 .MuiTypography-root,
 .MuiButton-root,
 .MuiInputBase-root,
@@ -76,13 +76,13 @@ h1, h2, h3, h4, .font-heading, .font-display {
     @apply h-10;
   }
 
-  /* Prevent browser native password reveal eye from colliding or disappearing custom icons */
+  
   input::-ms-reveal,
   input::-ms-clear {
     display: none;
   }
 
-  /* Hide native browser search cancel button — we use a custom clear button */
+  
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;

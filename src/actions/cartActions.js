@@ -18,12 +18,12 @@ const api = import.meta.env.VITE_API
 const getErrorMessage = (error) =>
   error?.response?.data?.message || error?.message || 'Something went wrong'
 
-// Generate a stable cartItemId for a product entry.
-// Motorcycles: unique per addition (timestamp-based), parts: productId
+
+
 const makeCartItemId = (productId, isVehicle) =>
   isVehicle ? `${productId}-${Date.now()}` : productId
 
-// Add a product to the cart (fetches fresh data from backend & enforces stock limit)
+
 export const addToCart = (productId, quantity = 1) => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(`${api}/product/${productId}`, {
@@ -82,7 +82,7 @@ export const addToCart = (productId, quantity = 1) => async (dispatch, getState)
       isVehicle,
       installmentEligible: isInstallmentEligible,
       selected: true,
-      purchaseMethod: 'cash', // default; user can change for motorcycles
+      purchaseMethod: 'cash', 
       termMonths: 12,
     }
 
@@ -135,7 +135,7 @@ export const clearCart = () => (dispatch) => {
   dispatch({ type: CLEAR_CART })
 }
 
-// Remove only the cart items that were successfully processed
+
 export const clearSuccessfulItems = (cartItemIds) => (dispatch) => {
   dispatch({ type: CLEAR_SELECTED_ITEMS, payload: cartItemIds })
 }

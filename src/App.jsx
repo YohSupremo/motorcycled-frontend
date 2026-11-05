@@ -73,7 +73,7 @@ function App() {
               try {
                 localStorage.removeItem("isLoggedIn");
               } catch {
-                // Redux still clears the session if storage is unavailable.
+                
               }
               dispatch({ type: LOGOUT_SUCCESS });
               window.location.assign("/login");
@@ -88,8 +88,8 @@ function App() {
     return () => axios.interceptors.response.eject(interceptorId);
   }, [dispatch]);
 
-  // Restore the authenticated session (if any) from the JWT cookie on load.
-  // This effect runs after the interceptor setup above.
+  
+  
   useEffect(() => {
     let shouldLoad;
     try {
@@ -154,14 +154,13 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* Compatibility aliases matching reference repo routes */}
+            {}
             <Route path="/shipping" element={<Navigate to="/checkout/shipping" replace />} />
             <Route path="/confirm" element={<Navigate to="/checkout/confirm" replace />} />
             <Route path="/orders/me" element={<Navigate to="/orders" replace />} />
           </Route>
 
-          {/* Admin routes — requires authenticated admin role
-              Reference: itcp318-s3a-2026/frontend/src/Components/Route/ProtectedRoute.jsx */}
+          {}
           <Route
             element={
               <ProtectedRoute isAdmin>

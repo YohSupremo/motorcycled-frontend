@@ -13,26 +13,26 @@ import {
 
 const api = import.meta.env.VITE_API;
 
-// The JWT lives in an httpOnly cookie (invisible to JS), so we keep a small
-// marker here to avoid probing /me with a pointless 401 when signed out.
+
+
 const SESSION_MARKER = "isLoggedIn";
 const markLoggedIn = () => {
   try {
     localStorage.setItem(SESSION_MARKER, "1");
   } catch {
-    /* storage unavailable - ignore */
+    
   }
 };
 const clearSessionMarker = () => {
   try {
     localStorage.removeItem(SESSION_MARKER);
   } catch {
-    /* storage unavailable - ignore */
+    
   }
 };
 
-// Safely pull an error message regardless of whether the request ever
-// reached the server (error.response can be undefined for network errors).
+
+
 const getErrorMessage = (error) =>
   error?.response?.data?.message || error?.message || "Something went wrong";
 
@@ -106,7 +106,7 @@ export const reactivateOwnAccount = (email, password) => async (dispatch) => {
   }
 };
 
-// Restores the session on page refresh using the JWT cookie.
+
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
@@ -162,9 +162,7 @@ export const clearErrors = () => async (dispatch) => {
   });
 };
 
-/**
- * Quiz 4 (15 pts): Social authentication via Firebase (Google/Facebook)
- */
+
 export const firebaseLoginAction = (socialUserData) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
@@ -184,8 +182,8 @@ export const firebaseLoginAction = (socialUserData) => async (dispatch) => {
 
     if (data.isRegistered === false) {
       clearSessionMarker();
-      // Reset loading state so the auth reducer doesn't leave a stale
-      // loading:true that could interfere with the redirect to /register.
+      
+      
       dispatch({ type: LOGIN_FAIL, payload: null });
       return {
         success: false,

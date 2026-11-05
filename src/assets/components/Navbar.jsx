@@ -6,7 +6,7 @@ import axios from "axios";
 
 const API = import.meta.env.VITE_API || "http://localhost:4001/api/v1";
 
-// ── Inline NavSearch component ────────────────────────────────────────────────
+
 const NavSearch = ({ overDark }) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -18,7 +18,7 @@ const NavSearch = ({ overDark }) => {
   const containerRef = useRef(null);
   const debounceRef = useRef(null);
 
-  // Fetch suggestions debounced
+  
   const fetchSuggestions = useCallback(async (q) => {
     if (!q || q.trim().length < 2) {
       setSuggestions([]);
@@ -79,7 +79,7 @@ const NavSearch = ({ overDark }) => {
     }
   };
 
-  // Close on outside click
+  
   useEffect(() => {
     const handler = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
@@ -98,7 +98,7 @@ const NavSearch = ({ overDark }) => {
     <div ref={containerRef} className="relative flex-1 max-w-xs hidden md:block">
       <form onSubmit={handleSubmit} role="search" aria-label="Search shop catalog">
         <div className="relative flex items-center">
-          {/* Search icon */}
+          {}
           <svg
             className={`absolute left-2.5 w-3.5 h-3.5 pointer-events-none ${
               overDark ? "text-white/50" : "text-zinc-400"
@@ -132,7 +132,7 @@ const NavSearch = ({ overDark }) => {
             }
           />
 
-          {/* Clear button */}
+          {}
           {query && (
             <button
               type="button"
@@ -150,7 +150,7 @@ const NavSearch = ({ overDark }) => {
             </button>
           )}
 
-          {/* Spinner */}
+          {}
           {loading && !query === "" && (
             <div className="absolute right-2.5">
               <svg className="w-3 h-3 animate-spin text-zinc-400" fill="none" viewBox="0 0 24 24">
@@ -162,7 +162,7 @@ const NavSearch = ({ overDark }) => {
         </div>
       </form>
 
-      {/* Autocomplete Dropdown */}
+      {}
       {open && suggestions.length > 0 && (
         <div
           id="navbar-search-suggestions"
@@ -188,7 +188,7 @@ const NavSearch = ({ overDark }) => {
                   isActive ? "bg-emerald-50" : "hover:bg-zinc-50"
                 }`}
               >
-                {/* Product thumbnail */}
+                {}
                 <div className="w-8 h-8 rounded-lg overflow-hidden border border-zinc-200 bg-zinc-100 shrink-0 flex items-center justify-center">
                   {imgSrc ? (
                     <img src={imgSrc} alt={product.name} className="w-full h-full object-cover" />
@@ -200,7 +200,7 @@ const NavSearch = ({ overDark }) => {
                   )}
                 </div>
 
-                {/* Name + price */}
+                {}
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold text-zinc-900 truncate">{product.name}</p>
                   <p className="text-zinc-500 text-[11px] truncate">
@@ -215,7 +215,7 @@ const NavSearch = ({ overDark }) => {
                   </p>
                 </div>
 
-                {/* Arrow */}
+                {}
                 <svg
                   className={`w-3.5 h-3.5 shrink-0 transition-colors ${
                     isActive ? "text-emerald-600" : "text-zinc-300"
@@ -231,7 +231,7 @@ const NavSearch = ({ overDark }) => {
             );
           })}
 
-          {/* View all results footer */}
+          {}
           <button
             type="button"
             onMouseDown={(e) => e.preventDefault()}
@@ -252,7 +252,7 @@ const NavSearch = ({ overDark }) => {
   );
 };
 
-// ── Main Navbar ───────────────────────────────────────────────────────────────
+
 export const Navbar = ({ currentPage }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -290,7 +290,7 @@ export const Navbar = ({ currentPage }) => {
     ? location.pathname.split("/")[2] || "personal-info"
     : null;
 
-  // Show search bar on every page EXCEPT home
+  
   const showSearch = activePage !== "home";
 
   const darkHeroPage = activePage === "home" || activePage === "about";
@@ -374,7 +374,7 @@ export const Navbar = ({ currentPage }) => {
       className={`sticky top-0 z-30 border-b transition-colors duration-300 ${headerTone}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center gap-3">
-        {/* Brand */}
+        {}
         <div className="flex items-center gap-6 shrink-0">
           <Link
             to="/"
@@ -396,7 +396,7 @@ export const Navbar = ({ currentPage }) => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
+          {}
           <nav className="hidden md:flex items-center gap-1 text-xs font-medium">
             <Link
               to="/"
@@ -433,15 +433,15 @@ export const Navbar = ({ currentPage }) => {
           </nav>
         </div>
 
-        {/* ── Search Bar (hidden on homepage) ── */}
+        {}
         {showSearch && <NavSearch overDark={overDark} />}
 
-        {/* Spacer when search is hidden */}
+        {}
         {!showSearch && <div className="flex-1" />}
 
-        {/* Right Section */}
+        {}
         <div className="flex items-center gap-2.5 shrink-0">
-          {/* Cart Nav Button */}
+          {}
           <Link
             to="/cart"
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer border ${
@@ -476,7 +476,7 @@ export const Navbar = ({ currentPage }) => {
 
 
           {isAuthenticated && user ? (
-            /* User Account Menu */
+            
             <div className="relative" ref={dropdownRef}>
               <button
                 id="account-menu-button"
@@ -553,7 +553,7 @@ export const Navbar = ({ currentPage }) => {
                 </svg>
               </button>
 
-              {/* Account menu dropdown */}
+              {}
               {isDropdownOpen && (
                 <div
                   id="account-menu"
@@ -736,7 +736,7 @@ export const Navbar = ({ currentPage }) => {
               )}
             </div>
           ) : (
-            /* Signed-out state */
+            
             <div className="flex items-center gap-2">
               <Link
                 to="/register"
@@ -757,7 +757,7 @@ export const Navbar = ({ currentPage }) => {
         </div>
       </div>
 
-      {/* Mobile Sub-Navigation Bar */}
+      {}
       <div
         className={`md:hidden border-t px-4 py-2 flex items-center justify-between text-xs font-medium overflow-x-auto gap-2 ${subnavTone}`}
       >

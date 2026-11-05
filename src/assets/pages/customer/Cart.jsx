@@ -35,7 +35,7 @@ const CHECKOUT_STEPS = ["Cart", "Fulfillment and verification", "Review and term
 const fmt = (n) =>
   `₱${Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-// Compute financing preview (client-side display only; backend recalculates authoritatively)
+
 const computeInstallmentPreview = (price, termMonths = 12) => {
   const RATES = { 12: 0.07, 24: 0.08, 36: 0.09 };
   const rate = RATES[termMonths] || 0.07;
@@ -85,11 +85,11 @@ export const Cart = () => {
           );
       });
     });
-    // Stock refresh is keyed by product IDs; cart item updates must not refetch.
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartProductIdsKey, dispatch]);
 
-  // Credit verification — only fetch when authenticated
+  
   const [creditStatus, setCreditStatus] = useState(null);
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -99,7 +99,7 @@ export const Cart = () => {
       .catch(() => setCreditStatus("none"));
   }, [isAuthenticated]);
 
-  // Group cart items into vehicles vs parts
+  
   const motorcycleItems = useMemo(
     () => cartItems.filter((i) => i.isVehicle),
     [cartItems]
@@ -109,7 +109,7 @@ export const Cart = () => {
     [cartItems]
   );
 
-  // Selected items
+  
   const selectedItems = useMemo(
     () => cartItems.filter((i) => i.selected),
     [cartItems]
@@ -142,7 +142,7 @@ export const Cart = () => {
     selectedParts.length > 0 ||
     selectedMotorcycles.some((m) => m.purchaseMethod === "cash");
 
-  // Handlers
+  
   const handleRemove = (item) => {
     dispatch(removeFromCart(item.cartItemId));
     toast.info(`Removed "${item.name}" from cart`);
@@ -188,7 +188,7 @@ export const Cart = () => {
     dispatch(selectAllCartItems(nextVal));
   };
 
-  // Synchronize indeterminate state on the master checkbox
+  
   useEffect(() => {
     if (selectAllRef.current) {
       selectAllRef.current.indeterminate = someSelected && !allSelected;
@@ -281,10 +281,10 @@ export const Cart = () => {
     navigate("/checkout/shipping");
   };
 
-  // True when checkout should be blocked due to unverified credit
+  
   const installmentBlocked = isAuthenticated && hasInstallment && creditStatus !== "approved";
 
-  // Empty cart view
+  
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-zinc-50 text-zinc-900 antialiased flex flex-col font-sans">
@@ -321,7 +321,7 @@ export const Cart = () => {
     <div className="min-h-screen bg-zinc-50 text-zinc-900 antialiased flex flex-col font-sans">
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
         
-        {/* MUI Stepper (Step 1) */}
+        {}
         <Box sx={{ width: "100%", pb: 1 }}>
           <Stepper activeStep={0} alternativeLabel>
             {CHECKOUT_STEPS.map((label) => (
@@ -348,7 +348,7 @@ export const Cart = () => {
           </Stepper>
         </Box>
 
-        {/* Page Title Header */}
+        {}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2">
           <div>
             <div className="flex items-center gap-2.5">
@@ -365,18 +365,18 @@ export const Cart = () => {
           </div>
         </div>
 
-        {/* Main 2-Column Grid */}
+        {}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Left: Item Showcase (8 cols) */}
+          {}
           <div className="lg:col-span-8 space-y-6">
             
-            {/* Products Container Card */}
+            {}
             <div className="bg-white rounded-xl border border-zinc-200 divide-y divide-zinc-100 shadow-xs overflow-hidden">
-              {/* Master selection header bar directly inside the card */}
+              {}
               {renderMasterSelectionBar()}
 
-              {/* Motorcycles section header if both motorcycles & parts exist */}
+              {}
               {motorcycleItems.length > 0 && partItems.length > 0 && (
                 <div className="px-4 py-2 bg-zinc-50 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-zinc-700">
                   <div className="flex items-center gap-2">
@@ -387,7 +387,7 @@ export const Cart = () => {
                 </div>
               )}
 
-              {/* Motorcycle items */}
+              {}
               {motorcycleItems.map((item) => {
                 const isInstallment = item.purchaseMethod === "installment";
                 const currentTerm = item.termMonths || 12;
@@ -400,7 +400,7 @@ export const Cart = () => {
                       item.selected ? "bg-emerald-50/15" : "hover:bg-zinc-50/40"
                     }`}
                   >
-                    {/* Top Row: Checkbox, Image, Title & Price */}
+                    {}
                     <div className="flex items-start gap-3 sm:gap-4">
                       <input
                         type="checkbox"
@@ -409,7 +409,7 @@ export const Cart = () => {
                         className="mt-1.5 w-4 h-4 accent-emerald-600 cursor-pointer shrink-0"
                       />
 
-                      {/* Motorcycle Visual Thumbnail */}
+                      {}
                       <div className="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-lg bg-zinc-100 border border-zinc-200 overflow-hidden flex items-center justify-center">
                         {item.image ? (
                           <img
@@ -427,7 +427,7 @@ export const Cart = () => {
                         )}
                       </div>
 
-                      {/* Details & Pricing */}
+                      {}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div>
@@ -470,7 +470,7 @@ export const Cart = () => {
                       </div>
                     </div>
 
-                    {/* Purchase Mode Segmented Switcher */}
+                    {}
                     {item.installmentEligible && (
                       <div className="pt-3 border-t border-zinc-100 space-y-3">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -478,7 +478,7 @@ export const Cart = () => {
                             Payment method
                           </span>
 
-                          {/* Segmented Tactile Pill Toggle */}
+                          {}
                           <div className="inline-flex rounded-lg bg-zinc-100 p-1 border border-zinc-200 text-xs font-semibold self-start sm:self-auto">
                             <button
                               type="button"
@@ -505,7 +505,7 @@ export const Cart = () => {
                           </div>
                         </div>
 
-                        {/* Interactive Financing Loan Calculator Bar */}
+                        {}
                         {isInstallment && (
                           <div className="bg-amber-50/60 border border-amber-200 rounded-xl p-3.5 space-y-3">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-amber-200/80 text-xs">
@@ -530,7 +530,7 @@ export const Cart = () => {
                               </div>
                             </div>
 
-                            {/* Metric Tiles */}
+                            {}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                               <div className="bg-white/80 rounded-lg p-2 border border-amber-200">
                                 <span className="text-[10px] text-zinc-500 block uppercase font-mono">Min. downpayment</span>
@@ -568,7 +568,7 @@ export const Cart = () => {
                 );
               })}
 
-              {/* Parts section header if both motorcycles & parts exist */}
+              {}
               {motorcycleItems.length > 0 && partItems.length > 0 && (
                 <div className="px-4 py-2 bg-zinc-50 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-zinc-700">
                   <div className="flex items-center gap-2">
@@ -579,7 +579,7 @@ export const Cart = () => {
                 </div>
               )}
 
-              {/* Parts & Accessories items */}
+              {}
               {partItems.map((item) => (
                 <div
                   key={item.cartItemId}
@@ -634,7 +634,7 @@ export const Cart = () => {
                     </div>
                   </div>
 
-                  {/* Quantity Stepper & Subtotal */}
+                  {}
                   <div className="flex items-center gap-4 shrink-0">
                     <div className="flex items-center border border-zinc-200 rounded-lg bg-zinc-50 overflow-hidden">
                       <button
@@ -683,7 +683,7 @@ export const Cart = () => {
               ))}
             </div>
 
-            {/* 3. LOGISTICS PROTOCOL BRIEFING (Structured Hallmark Module) */}
+            {}
             {(selectedParts.length > 0 && selectedMotorcycles.length > 0 || hasInstallment) && (
               <div className="bg-white border border-zinc-200 rounded-xl p-4 shadow-xs space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100">
@@ -727,7 +727,7 @@ export const Cart = () => {
             )}
           </div>
 
-          {/* Right: Order Summary Sidebar (4 cols) */}
+          {}
           <div className="lg:col-span-4 lg:sticky lg:top-20 self-start">
             <ScrollReveal threshold={0.1} duration={500}>
               <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-xs space-y-5">
@@ -740,7 +740,7 @@ export const Cart = () => {
                   </span>
                 </div>
 
-                {/* Line Item Breakdown */}
+                {}
                 <div className="space-y-2.5 text-xs divide-y divide-zinc-100">
                   {selectedMotorcycles.filter((m) => m.purchaseMethod === "cash").length > 0 && (
                     <div className="flex justify-between py-1 text-zinc-600">
@@ -769,7 +769,7 @@ export const Cart = () => {
                     </div>
                   )}
 
-                  {/* Financial Total Block */}
+                  {}
                   <div className="pt-3 pb-1 space-y-1">
                     {hasInstallment && !hasCashItems ? (
                       <div className="space-y-1">
@@ -806,9 +806,9 @@ export const Cart = () => {
                   </div>
                 </div>
 
-                {/* Checkout Action Button */}
+                {}
 
-                {/* Credit verification banner — shown when installment selected but not approved */}
+                {}
                 {installmentBlocked && (
                   <div className="flex gap-3 p-3 rounded-md border border-amber-300 bg-amber-50 text-xs">
                     <svg className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -864,7 +864,7 @@ export const Cart = () => {
                   </p>
                 )}
 
-                {/* Dealership assurances */}
+                {}
                 <div className="pt-4 border-t border-zinc-100 space-y-2">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-bold block">
                     Dealership assurances
@@ -917,7 +917,7 @@ export const Cart = () => {
         </div>
       </main>
 
-      {/* Clear Cart Confirmation Dialog */}
+      {}
       <Dialog
         open={showClearConfirm}
         onClose={() => setShowClearConfirm(false)}

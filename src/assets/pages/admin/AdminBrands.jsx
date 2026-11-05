@@ -64,15 +64,15 @@ export const AdminBrands = () => {
     error,
   } = useSelector((state) => state.catalog);
 
-  // Local UI state
-  const [statusFilter, setStatusFilter] = useState("all"); // "all", "active", "archived"
+  
+  const [statusFilter, setStatusFilter] = useState("all"); 
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterLogo, setFilterLogo] = useState("all"); // "all", "with-logo", "without-logo"
+  const [filterLogo, setFilterLogo] = useState("all"); 
   const [sortBy, setSortBy] = useState("name-asc");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBrand, setEditingBrand] = useState(null);
 
-  // Form state via React Hook Form + Yup
+  
   const brandSchema = useMemo(
     () => buildBrandSchema(brands, editingBrand),
     [brands, editingBrand],
@@ -90,8 +90,8 @@ export const AdminBrands = () => {
     },
   });
 
-  const [logoPreview, setLogoPreview] = useState(""); // data URL or existing image URL
-  const [logoData, setLogoData] = useState(undefined); // undefined = untouched, string = new data url, null = removed
+  const [logoPreview, setLogoPreview] = useState(""); 
+  const [logoData, setLogoData] = useState(undefined); 
   const [reassignState, setReassignState] = useState({
     isOpen: false,
     sourceBrand: null,
@@ -115,7 +115,7 @@ export const AdminBrands = () => {
     name: "targetBrandId",
   });
 
-  // Initial fetch (fetch all so admin can filter active & soft-deleted)
+  
   useEffect(() => {
     dispatch(getBrands({ all: "true" }));
   }, [dispatch]);
@@ -128,7 +128,7 @@ export const AdminBrands = () => {
     setLogoData(undefined);
   };
 
-  // Handle side-effects (toasts, modal close, refetch)
+  
   useEffect(() => {
     if (error) {
       toast.error(error, { position: "bottom-right" });
@@ -171,7 +171,7 @@ export const AdminBrands = () => {
     setIsModalOpen(true);
   };
 
-  // Image file picker handler
+  
   const handleLogoChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -191,13 +191,13 @@ export const AdminBrands = () => {
     reader.readAsDataURL(file);
   };
 
-  // Clear chosen logo
+  
   const handleRemoveLogo = () => {
     setLogoPreview("");
     setLogoData(null);
   };
 
-  // Submit form
+  
   const onSubmitBrand = (data) => {
     const payload = { name: data.name.trim() };
     if (logoData !== undefined) {
@@ -211,7 +211,7 @@ export const AdminBrands = () => {
     }
   };
 
-  // Delete handler: backend checks if active products exist
+  
   const handleDelete = async (brand) => {
     const confirm = await Swal.fire({
       title: `Delete "${brand.name}"?`,
@@ -226,10 +226,10 @@ export const AdminBrands = () => {
 
     if (!confirm.isConfirmed) return;
 
-    // Backend checks whether the brand has active products
+    
     const res = await dispatch(deleteBrand(brand._id));
 
-    // If products exist, backend returns a conflict with the product count and products
+    
     if (res?.conflict) {
       resetReassign({ targetBrandId: "" });
       setReassignState({
@@ -247,7 +247,7 @@ export const AdminBrands = () => {
     }
   };
 
-  // Restore handler for soft-deleted brand
+  
   const handleRestore = async (brand) => {
     const confirm = await Swal.fire({
       title: `Restore "${brand.name}"?`,
@@ -271,7 +271,7 @@ export const AdminBrands = () => {
     }
   };
 
-  // Close reassign modal and clear its form
+  
   const closeReassignModal = () => {
     setReassignState({
       isOpen: false,
@@ -282,7 +282,7 @@ export const AdminBrands = () => {
     resetReassign({ targetBrandId: "" });
   };
 
-  // Handle reassigning products and soft-deleting brand
+  
   const handleReassignSubmit = async (data) => {
     const res = await dispatch(
       reassignBrandAndDelete(
@@ -298,11 +298,11 @@ export const AdminBrands = () => {
     }
   };
 
-  // Active & Archived counts
+  
   const activeBrands = brands.filter((b) => !b.isArchived);
   const archivedBrands = brands.filter((b) => b.isArchived);
 
-  // Filter and sort
+  
   const filteredBrands = brands
     .filter((b) => {
       if (statusFilter === "active" && b.isArchived) return false;
@@ -524,7 +524,7 @@ export const AdminBrands = () => {
 
   return (
     <div className="space-y-6">
-      {/* Catalog subnavigation */}
+      {}
       <div className="flex items-center gap-2 border-b border-zinc-200 pb-3">
         <Link
           to="/admin/products"
@@ -546,7 +546,7 @@ export const AdminBrands = () => {
         </Link>
       </div>
 
-      {/* Title and actions */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -576,7 +576,7 @@ export const AdminBrands = () => {
         </button>
       </div>
 
-      {/* Counts */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-4 bg-white rounded border border-zinc-200">
           <span className="text-[11px] font-semibold text-zinc-500 block">Active brands</span>
@@ -609,7 +609,7 @@ export const AdminBrands = () => {
         </div>
       </div>
 
-      {/* Search and filter toolbar */}
+      {}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white p-4 rounded border border-zinc-200">
         <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded shrink-0">
           <button
@@ -706,7 +706,7 @@ export const AdminBrands = () => {
         </div>
       </div>
 
-      {/* Brands grid */}
+      {}
       {loadingBrands ? (
         <div className="py-16 text-center text-zinc-500 bg-white rounded border border-zinc-200">
           <div className="w-6 h-6 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
@@ -760,7 +760,7 @@ export const AdminBrands = () => {
         </div>
       )}
 
-      {/* Add and edit modal */}
+      {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50">
           <div
@@ -822,7 +822,7 @@ export const AdminBrands = () => {
                 </span>
               </div>
 
-              {/* Logo upload */}
+              {}
               <div className="space-y-2">
                 <label htmlFor="brand-logo-file" className="font-semibold text-zinc-900 block">
                   Logo
@@ -923,7 +923,7 @@ export const AdminBrands = () => {
         </div>
       )}
 
-      {/* Brand in use dialog */}
+      {}
       {reassignState.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50">
           <div

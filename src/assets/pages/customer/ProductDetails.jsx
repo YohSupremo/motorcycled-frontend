@@ -21,7 +21,7 @@ import { toast } from "react-toastify";
 import { ProductImagePlaceholder } from "../../components/ProductImagePlaceholder";
 import { reviewSchema } from "../../schema/reviewSchema.js";
 
-// Product detail page: gallery, pricing, financing, reviews, and specifications.
+
 export const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -67,8 +67,8 @@ export const ProductDetails = () => {
 
   const reviewForm = useWatch({ control: reviewControl });
 
-  // MP2 Review Filters (5pts: Star filter, Verified Purchase filter, keyword search)
-  const [reviewFilterRating, setReviewFilterRating] = useState(0); // 0 = all
+  
+  const [reviewFilterRating, setReviewFilterRating] = useState(0); 
   const [reviewFilterVerified, setReviewFilterVerified] = useState(false);
   const [reviewSearchKeyword, setReviewSearchKeyword] = useState("");
 
@@ -84,7 +84,7 @@ export const ProductDetails = () => {
     };
   }, [dispatch, id, isAuthenticated]);
 
-  // Scroll to top on navigation, or auto-scroll to review section if explicitly requested
+  
   useEffect(() => {
     if (
       window.location.hash === "#reviews" ||
@@ -162,7 +162,7 @@ export const ProductDetails = () => {
   const brandName = product?.brand?.name || product?.brand || "OEM";
   const inStock = product?.stock || 0;
 
-  // Financing calculation
+  
   const minDown = Number(
     product?.minInstallmentPrice || (product?.price ? product.price * 0.2 : 0)
   );
@@ -241,7 +241,7 @@ export const ProductDetails = () => {
     setSelectedImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  // Review aggregates derived from the loaded review list (with product.ratings fallback)
+  
   const avgRating =
     reviewCount > 0
       ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
@@ -254,7 +254,7 @@ export const ProductDetails = () => {
 
   const otherReviews = reviews.filter((r) => r.user?._id !== user?._id);
 
-  // Filter reviews dynamically based on star rating, verified badge, and keyword
+  
   const filteredOtherReviews = otherReviews.filter((r) => {
     if (reviewFilterRating > 0 && r.rating !== reviewFilterRating) return false;
     if (reviewFilterVerified && !r.isVerifiedPurchase) return false;
@@ -316,7 +316,7 @@ export const ProductDetails = () => {
   return (
     <div className="min-h-screen bg-white text-zinc-900 antialiased font-sans selection:bg-emerald-100 selection:text-emerald-900">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10">
-        {/* Breadcrumb */}
+        {}
         <nav className="flex items-center gap-1.5 text-xs text-zinc-500">
           <Link to="/" className="hover:text-zinc-900 transition-colors">
             Showroom
@@ -344,9 +344,9 @@ export const ProductDetails = () => {
           </span>
         </nav>
 
-        {/* Core grid */}
+        {}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Gallery */}
+          {}
           <div className="space-y-3">
             <div className="w-full aspect-4/3 rounded-lg border border-zinc-200 bg-zinc-50 overflow-hidden relative flex items-center justify-center group select-none">
               {activeImage ? (
@@ -363,7 +363,7 @@ export const ProductDetails = () => {
                 />
               )}
 
-              {/* Stock badge */}
+              {}
               <div className="absolute top-3 left-3 z-10">
                 <span
                   className={`text-[11px] font-semibold px-2 py-1 rounded border ${
@@ -413,7 +413,7 @@ export const ProductDetails = () => {
               )}
             </div>
 
-            {/* Thumbnails */}
+            {}
             {images.length > 1 && (
               <div className="grid grid-cols-4 gap-2.5">
                 {images.length <= 4 ? (
@@ -495,7 +495,7 @@ export const ProductDetails = () => {
             )}
           </div>
 
-          {/* Info panel */}
+          {}
           <div className="space-y-6">
             <div className="space-y-3 border-b border-zinc-200 pb-5">
               <div className="flex items-center gap-2 flex-wrap text-xs">
@@ -539,7 +539,7 @@ export const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Price */}
+            {}
             <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-4 space-y-2">
               <div className="flex items-baseline justify-between">
                 <div>
@@ -577,7 +577,7 @@ export const ProductDetails = () => {
               )}
             </div>
 
-            {/* Compatible models */}
+            {}
             {product.compatibleModels && product.compatibleModels.length > 0 && (
               <div className="space-y-2">
                 <span className="text-sm font-semibold text-zinc-900 block">
@@ -596,7 +596,7 @@ export const ProductDetails = () => {
               </div>
             )}
 
-            {/* Description */}
+            {}
             <div className="space-y-2">
               <span className="text-sm font-semibold text-zinc-900 block">
                 Description
@@ -607,7 +607,7 @@ export const ProductDetails = () => {
               </p>
             </div>
 
-            {/* Quantity and actions */}
+            {}
             <div className="pt-2 space-y-3">
               <div className="flex items-center gap-3">
                 <div className="flex items-center border border-zinc-300 rounded-md overflow-hidden bg-white">
@@ -670,7 +670,7 @@ export const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Assurance */}
+            {}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-zinc-200 text-xs">
               <div className="flex items-start gap-2 text-zinc-600">
                 <svg className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -702,7 +702,7 @@ export const ProductDetails = () => {
           </div>
         </div>
 
-        {/* Specifications */}
+        {}
         <section className="pt-8 border-t border-zinc-200 space-y-4">
           <h2 className="text-lg font-bold text-zinc-900 tracking-tight">
             Specifications
@@ -749,10 +749,10 @@ export const ProductDetails = () => {
           </div>
         </section>
 
-        {/* Customer reviews */}
+        {}
         <section id="reviews" className="pt-8 border-t border-zinc-200 space-y-6 scroll-mt-24">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Summary */}
+            {}
             <div className="lg:w-64 shrink-0 space-y-4">
               <h2 className="text-lg font-bold text-zinc-900 tracking-tight">
                 Customer reviews
@@ -838,9 +838,9 @@ export const ProductDetails = () => {
               )}
             </div>
 
-            {/* List and form */}
+            {}
             <div className="flex-1 min-w-0 space-y-6">
-              {/* Your review */}
+              {}
               {isAuthenticated && myReview && !editingReview && (
                 <div className="border border-emerald-200 bg-emerald-50/50 rounded-lg p-5">
                   <div className="flex items-center justify-between gap-3">
@@ -899,7 +899,7 @@ export const ProductDetails = () => {
                 </div>
               )}
 
-              {/* MP2: Review Filter Bar (5pts) */}
+              {}
               {reviews.length > 0 && (
                 <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 space-y-2.5">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -910,7 +910,7 @@ export const ProductDetails = () => {
                       </span>
                     </span>
 
-                    {/* Verified Only Toggle */}
+                    {}
                     <label className="inline-flex items-center gap-1.5 cursor-pointer text-xs text-zinc-700 font-medium">
                       <input
                         type="checkbox"
@@ -923,7 +923,7 @@ export const ProductDetails = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                    {/* Star chips */}
+                    {}
                     <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
                       <button
                         type="button"
@@ -953,7 +953,7 @@ export const ProductDetails = () => {
                       ))}
                     </div>
 
-                    {/* Search keyword inside reviews */}
+                    {}
                     <div className="relative flex-1 min-w-[140px]">
                       <input
                         type="text"
@@ -1084,7 +1084,7 @@ export const ProductDetails = () => {
                 </p>
               ) : null}
 
-              {/* Write / update review */}
+              {}
               {(!isAuthenticated || !myReview || editingReview) && (
                 <div className="border border-zinc-200 rounded-lg p-5 bg-zinc-50">
                   <h3 className="text-sm font-bold text-zinc-900">

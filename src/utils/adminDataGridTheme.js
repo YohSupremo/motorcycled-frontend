@@ -1,7 +1,4 @@
-/**
- * Shared aesthetic theme configuration for MUI X DataGrid
- * Designed for dealership admin telemetry, inventory, and backoffice management.
- */
+
 export const adminDataGridSx = {
   border: "none",
   fontFamily: "inherit",

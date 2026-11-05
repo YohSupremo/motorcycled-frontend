@@ -48,7 +48,7 @@ export const Register = () => {
   useEffect(() => {
     const email = emailValue?.trim().toLowerCase();
     if (fromGoogle || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      // Reset availability when the input is incomplete or not user-editable.
+      
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setEmailAvailability("idle");
       return undefined;
@@ -111,7 +111,7 @@ export const Register = () => {
       formData.append("password", data.password);
       formData.append("confirmPassword", data.confirmPassword);
 
-      // Step 1: Create the account with session cookie support
+      
       const res = await axios.post(`${API}/register`, formData, {
         withCredentials: true,
       });
@@ -119,8 +119,8 @@ export const Register = () => {
       let loggedInUser = res.data?.user;
       let userAddress = res.data?.address;
 
-      // Fallback: If running against a backend instance that hasn't reloaded yet,
-      // authenticate via /login
+      
+      
       if (!loggedInUser) {
         try {
           const loginRes = await axios.post(
@@ -234,7 +234,7 @@ export const Register = () => {
   return (
     <div className="min-h-screen bg-zinc-50/60 text-zinc-900 flex flex-col justify-center items-center px-4 py-8 antialiased selection:bg-emerald-100 selection:text-emerald-900">
       <div className="w-full max-w-sm">
-        {/* Brand Header */}
+        {}
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <img
@@ -251,10 +251,10 @@ export const Register = () => {
           </span>
         </div>
 
-        {/* Form Card */}
+        {}
         <div className="bg-white border border-zinc-200 rounded-lg p-5 sm:p-6">
           {submitted ? (
-            /* Submission Success State */
+            
             <div className="py-6 text-center space-y-4">
               <div className="w-12 h-12 mx-auto rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                 <svg
@@ -287,7 +287,7 @@ export const Register = () => {
             </div>
           ) : (
             <>
-              {/* Google Account Alert */}
+              {}
               {fromGoogle && (
                 <div className="mb-4 p-3 rounded-md bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-start gap-2.5">
                   <svg
@@ -313,7 +313,7 @@ export const Register = () => {
                 </div>
               )}
 
-              {/* Step Title & Description */}
+              {}
               <div className="mb-5">
                 <h1 className="text-xl font-semibold text-zinc-900 tracking-tight">
                   {stepMeta[step].title}
@@ -322,7 +322,7 @@ export const Register = () => {
                   {stepMeta[step].subtitle}
                 </p>
 
-                {/* Segmented Step Progress Bar */}
+                {}
                 <div
                   className="grid grid-cols-4 gap-1.5 mt-4"
                   aria-hidden="true"
@@ -339,7 +339,7 @@ export const Register = () => {
               </div>
 
               <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-                {/* STEP 0: Personal Details */}
+                {}
                 {step === 0 && (
                   <>
                     <div className="mb-0">
@@ -437,7 +437,7 @@ export const Register = () => {
                   </>
                 )}
 
-                {/* STEP 1: Address */}
+                {}
                 {step === 1 && (
                   <>
                     <div className="mb-0">
@@ -450,7 +450,7 @@ export const Register = () => {
                       <input
                         id="addressStreet"
                         type="text"
-                        // value={formData.street}
+                        
                         {...register("street", {
                           onChange: () => clearErrors("street"),
                         })}
@@ -474,7 +474,7 @@ export const Register = () => {
                       <input
                         id="addressBarangay"
                         type="text"
-                        // value={formData.barangay}
+                        
                         {...register("barangay", {
                           onChange: () => clearErrors("barangay"),
                         })}
@@ -500,7 +500,7 @@ export const Register = () => {
                           <input
                             id="addressCity"
                             type="text"
-                            // value={formData.city}
+                            
                             {...register("city", {
                               onChange: () => clearErrors("city"),
                             })}
@@ -528,7 +528,7 @@ export const Register = () => {
                             type="text"
                             maxLength={4}
                             minLength={4}
-                            // value={formData.postalCode}
+                            
                             {...register("postalCode", {
                               onChange: () => clearErrors("postalCode"),
                             })}
@@ -546,7 +546,7 @@ export const Register = () => {
                   </>
                 )}
 
-                {/* STEP 2: Email & Password Credentials */}
+                {}
                 {step === 2 && (
                   <>
                     <div className="mb-0">
@@ -607,7 +607,7 @@ export const Register = () => {
                         <input
                           id="account_password"
                           type={showPassword ? "text" : "password"}
-                          // value={formData.password}
+                          
                           {...register("password", {
                             onChange: () => clearErrors("password"),
                           })}
@@ -671,7 +671,7 @@ export const Register = () => {
                         <input
                           id="confirmPassword"
                           type={showConfirmPassword ? "text" : "password"}
-                          // value={formData.confirmPassword}
+                          
                           {...register("confirmPassword", {
                             onChange: () => clearErrors("confirmPassword"),
                           })}
@@ -735,10 +735,10 @@ export const Register = () => {
                   </>
                 )}
 
-                {/* STEP 3: Review Step */}
+                {}
                 {step === 3 && (
                   <div className="space-y-4 text-xs">
-                    {/* Personal Details Group */}
+                    {}
                     <div className="border border-zinc-200 rounded-md p-3.5 bg-zinc-50/50">
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-200/80">
                         <span className="font-semibold text-zinc-800 uppercase tracking-wider text-[11px]">
@@ -768,7 +768,7 @@ export const Register = () => {
                       </dl>
                     </div>
 
-                    {/* Address Group */}
+                    {}
                     <div className="border border-zinc-200 rounded-md p-3.5 bg-zinc-50/50">
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-200/80">
                         <span className="font-semibold text-zinc-800 uppercase tracking-wider text-[11px]">
@@ -798,7 +798,7 @@ export const Register = () => {
                       </dl>
                     </div>
 
-                    {/* Account Credentials Group */}
+                    {}
                     <div className="border border-zinc-200 rounded-md p-3.5 bg-zinc-50/50">
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-200/80">
                         <span className="font-semibold text-zinc-800 uppercase tracking-wider text-[11px]">
@@ -826,7 +826,7 @@ export const Register = () => {
                   </div>
                 )}
 
-                {/* Action Buttons */}
+                {}
                 {submitError && (
                   <p className="text-[11px] text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2 leading-relaxed">
                     {submitError}
@@ -889,7 +889,7 @@ export const Register = () => {
                 </div>
               </form>
 
-              {/* Card Footer */}
+              {}
               <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
                 <p className="text-xs text-zinc-500">
                   Already have an account?{" "}
@@ -905,7 +905,7 @@ export const Register = () => {
           )}
         </div>
 
-        {/* Bottom Metadata */}
+        {}
         <p className="text-center text-[11px] text-zinc-400 mt-4">
           By signing up, you agree to our terms of service and privacy policy.
         </p>

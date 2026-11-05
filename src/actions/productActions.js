@@ -1,5 +1,5 @@
-// Product Redux actions
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx
+
+
 
 import axios from "axios";
 import {
@@ -59,8 +59,8 @@ import {
 
 const API = import.meta.env.VITE_API;
 
-// ─── Admin: fetch all products ────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 92-109
+
+
 export const getAdminProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCTS_REQUEST });
@@ -76,8 +76,8 @@ export const getAdminProducts = () => async (dispatch) => {
   }
 };
 
-// ─── Public: fetch storefront products ───────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 27-51
+
+
 export const getProducts =
   (
     currentPage = 1,
@@ -126,8 +126,8 @@ export const getProducts =
     }
   };
 
-// ─── Public: fetch single product ────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 53-67
+
+
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
@@ -141,8 +141,8 @@ export const getProductDetails = (id) => async (dispatch) => {
   }
 };
 
-// ─── Admin: create product ────────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 69-90
+
+
 export const newProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
@@ -160,8 +160,8 @@ export const newProduct = (productData) => async (dispatch) => {
   }
 };
 
-// ─── Admin: update product ────────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 111-132
+
+
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
@@ -179,8 +179,8 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   }
 };
 
-// ─── Admin: delete product ────────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 134-152
+
+
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
@@ -194,7 +194,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   }
 };
 
-// ─── Admin: bulk soft-delete products ─────────────────────────────────────────
+
 export const bulkDeleteProducts = (productIds) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
@@ -215,7 +215,7 @@ export const bulkDeleteProducts = (productIds) => async (dispatch) => {
   }
 };
 
-// ─── Admin: bulk restore products ─────────────────────────────────────────────
+
 export const bulkRestoreProducts = (productIds) => async (dispatch) => {
   try {
     dispatch({ type: ARCHIVE_PRODUCT_REQUEST });
@@ -239,8 +239,8 @@ export const bulkRestoreProducts = (productIds) => async (dispatch) => {
   }
 };
 
-// ─── Admin: toggle archive ────────────────────────────────────────────────────
-// PDF §4.5: isArchived — archive instead of delete (PDF §1 Design Principles #5)
+
+
 export const toggleArchiveProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: ARCHIVE_PRODUCT_REQUEST });
@@ -258,7 +258,7 @@ export const toggleArchiveProduct = (id) => async (dispatch) => {
   }
 };
 
-// ─── Admin: toggle featured status ───────────────────────────────────────────
+
 export const toggleFeatureProduct = (id) => async (dispatch) => {
   try {
     const { data } = await axios.patch(
@@ -266,7 +266,7 @@ export const toggleFeatureProduct = (id) => async (dispatch) => {
       {},
       { withCredentials: true }
     );
-    // Refresh products list for admin
+    
     dispatch(getAdminProducts());
     return { success: true, isFeatured: data.isFeatured, message: data.message };
   } catch (error) {
@@ -275,7 +275,7 @@ export const toggleFeatureProduct = (id) => async (dispatch) => {
   }
 };
 
-// ─── Catalog: fetch categories & brands ──────────────────────────────────────
+
 export const getCategories = (params = {}) => async (dispatch) => {
   try {
     dispatch({ type: GET_CATEGORIES_REQUEST });
@@ -302,7 +302,7 @@ export const getBrands = (params = {}) => async (dispatch) => {
   }
 };
 
-// ─── Category CRUD actions ───────────────────────────────────────────────────
+
 export const createCategory = (categoryData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_CATEGORY_REQUEST });
@@ -400,7 +400,7 @@ export const restoreCategory = (id) => async (dispatch) => {
   }
 };
 
-// ─── Brand CRUD actions ──────────────────────────────────────────────────────
+
 export const createBrand = (brandData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_BRAND_REQUEST });
@@ -498,8 +498,8 @@ export const restoreBrand = (id) => async (dispatch) => {
   }
 };
 
-// ─── Clear errors ─────────────────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/actions/productActions.jsx lines 176-181
+
+
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };

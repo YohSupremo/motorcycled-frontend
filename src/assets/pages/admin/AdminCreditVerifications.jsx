@@ -50,7 +50,7 @@ export const AdminCreditVerifications = () => {
 
   useEffect(() => {
     if (user?.role !== "admin") return;
-    // Loading remote data is the synchronization this effect owns.
+    
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadVerifications();
   }, [loadVerifications, user?.role]);

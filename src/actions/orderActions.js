@@ -43,8 +43,8 @@ const api = import.meta.env.VITE_API
 const getErrorMessage = (error) =>
   error?.response?.data?.message || error?.message || 'Something went wrong'
 
-// Submit checkout — creates orders and/or installment applications
-// checkoutPayload: { checkoutSessionId, items, shippingInfo, paymentMethod }
+
+
 export const submitCheckout = (checkoutPayload) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ORDER_REQUEST })
@@ -64,7 +64,7 @@ export const resetCheckout = () => (dispatch) => {
   dispatch({ type: CREATE_ORDER_RESET })
 }
 
-// Get current user's orders and applications
+
 export const getMyOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST })
@@ -83,7 +83,7 @@ export const getMyOrders = () => async (dispatch) => {
   }
 }
 
-// Get single order details
+
 export const getOrderDetails = (orderId) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST })
@@ -99,7 +99,7 @@ export const getOrderDetails = (orderId) => async (dispatch) => {
   }
 }
 
-// Get single installment application details
+
 export const getApplicationDetails = (applicationId) => async (dispatch) => {
   try {
     dispatch({ type: APPLICATION_DETAILS_REQUEST })
@@ -115,7 +115,7 @@ export const getApplicationDetails = (applicationId) => async (dispatch) => {
   }
 }
 
-// ── Admin actions ─────────────────────────────────────────────────────────────
+
 
 export const getAdminOrders = () => async (dispatch) => {
   try {
@@ -254,10 +254,7 @@ export const cancelOrder = (orderId) => async (dispatch) => {
   }
 };
 
-/**
- * Customer submits their downpayment method + optional reference after application approval.
- * Returns the result directly so the component can toast feedback.
- */
+
 export const submitDownpayment = (applicationId, payload) => async (dispatch) => {
   try {
     const { data } = await axios.put(
@@ -265,7 +262,7 @@ export const submitDownpayment = (applicationId, payload) => async (dispatch) =>
       payload,
       { withCredentials: true }
     );
-    dispatch(getMyOrders()); // refresh applications list
+    dispatch(getMyOrders()); 
     return { success: true, data };
   } catch (error) {
     return { success: false, message: getErrorMessage(error) };

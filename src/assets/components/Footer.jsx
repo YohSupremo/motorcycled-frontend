@@ -43,7 +43,7 @@ export const Footer = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
-          {/* Brand Column */}
+          {}
           <div className="lg:col-span-2 space-y-3">
             <Link to="/" className="flex items-center gap-2.5 w-fit">
               <img
@@ -77,7 +77,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Catalog Categories */}
+          {}
           <div>
             <h4 className="font-semibold text-zinc-900 uppercase tracking-wider text-[11px] mb-3">
               Products and Catalog
@@ -101,7 +101,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Financing and Installments */}
+          {}
           <div>
             <h4 className="font-semibold text-zinc-900 uppercase tracking-wider text-[11px] mb-3">
               Financing and Plans
@@ -117,7 +117,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Customer Support */}
+          {}
           <div>
             <h4 className="font-semibold text-zinc-900 uppercase tracking-wider text-[11px] mb-3">
               Customer Support
@@ -151,7 +151,7 @@ export const Footer = () => {
 
         </div>
 
-        {/* Sub-Footer */}
+        {}
         <div className="mt-10 pt-6 border-t border-zinc-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-zinc-400">
           <span>© 2026 Motorcycled. All rights reserved.</span>
 

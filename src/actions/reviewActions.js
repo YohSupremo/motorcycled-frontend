@@ -1,4 +1,4 @@
-// Review Redux actions
+
 
 import axios from "axios";
 import {
@@ -25,7 +25,7 @@ import {
 
 const API = import.meta.env.VITE_API;
 
-// ─── Public: reviews for a product ────────────────────────────────────────────
+
 export const getProductReviews = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_REVIEWS_REQUEST });
@@ -39,7 +39,7 @@ export const getProductReviews = (productId) => async (dispatch) => {
   }
 };
 
-// ─── Customer: own review + eligibility ───────────────────────────────────────
+
 export const getMyReview = (productId) => async (dispatch) => {
   try {
     dispatch({ type: MY_REVIEW_REQUEST });
@@ -56,7 +56,7 @@ export const getMyReview = (productId) => async (dispatch) => {
   }
 };
 
-// ─── Customer: submit own review ──────────────────────────────────────────────
+
 export const newReview = (productId, reviewData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_REVIEW_REQUEST });
@@ -78,7 +78,7 @@ export const newReview = (productId, reviewData) => async (dispatch) => {
   }
 };
 
-// ─── Customer: update own review ──────────────────────────────────────────────
+
 export const updateReview = (productId, reviewData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_REVIEW_REQUEST });
@@ -100,7 +100,7 @@ export const updateReview = (productId, reviewData) => async (dispatch) => {
   }
 };
 
-// ─── Customer: delete own review ──────────────────────────────────────────────
+
 export const deleteMyReview = (productId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_MY_REVIEW_REQUEST });
@@ -116,7 +116,7 @@ export const deleteMyReview = (productId) => async (dispatch) => {
   }
 };
 
-// ─── Admin: all reviews ───────────────────────────────────────────────────────
+
 export const getAdminReviews = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_REVIEWS_REQUEST });
@@ -132,7 +132,7 @@ export const getAdminReviews = () => async (dispatch) => {
   }
 };
 
-// ─── Admin: toggle review visibility ──────────────────────────────────────────
+
 export const toggleReviewVisibility = (id) => async (dispatch) => {
   try {
     dispatch({ type: MODERATE_REVIEW_REQUEST });

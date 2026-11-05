@@ -30,7 +30,7 @@ export const AdminOrders = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState("orders"); // "orders" | "finance"
+  const [activeSection, setActiveSection] = useState("orders"); 
   const [activeStatusTab, setActiveStatusTab] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -54,15 +54,15 @@ export const AdminOrders = () => {
     dispatch(getAdminApplications());
   }, [dispatch]);
 
-  // Transform backend orders and applications into unified table items
+  
   const unifiedOrders = useMemo(() => [
-    // Regular orders
+    
     ...orders.map((o) => {
       const customerName = o.user
         ? `${o.user.firstName || ""} ${o.user.lastName || ""}`.trim()
         : "Customer";
 
-      // Map backend status to tab labels
+      
       let displayStatus = "Pending";
       if (o.orderStatus === "processing") displayStatus = "Processing";
       else if (o.orderStatus === "shipped") displayStatus = "Shipped";
@@ -104,7 +104,7 @@ export const AdminOrders = () => {
       };
     }),
 
-    // Installment applications
+    
     ...applications.map((app) => {
       const customerName = app.user
         ? `${app.user.firstName || ""} ${app.user.lastName || ""}`.trim()
@@ -189,7 +189,7 @@ export const AdminOrders = () => {
     );
     if (!selected) return;
 
-    // The route state selects the requested order after Redux data loads.
+    
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveSection(selected.isApplication ? "finance" : "orders");
     setSelectedOrder(selected);
@@ -204,12 +204,12 @@ export const AdminOrders = () => {
     return itemsPrice + order.shippingPrice + tax;
   };
 
-  // Section-split: pure cash orders vs installment applications
+  
   const cashOrders = unifiedOrders.filter((o) => !o.isApplication);
   const financeOrders = unifiedOrders.filter((o) => o.isApplication);
   const activePool = activeSection === "orders" ? cashOrders : financeOrders;
 
-  // Sub-status tabs per section
+  
   const orderStatusTabs = ["All", "Pending", "Processing", "Shipped", "Delivered", "Cancelled"];
   const financeStatusTabs = ["All", "For Approval", "Awaiting Downpayment", "Active Loan", "Fully Paid", "Cancelled"];
   const statusTabs = activeSection === "orders" ? orderStatusTabs : financeStatusTabs;
@@ -447,7 +447,7 @@ export const AdminOrders = () => {
 
   return (
     <div className="space-y-6">
-      {/* ── Title + Refresh ── */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">
@@ -482,9 +482,9 @@ export const AdminOrders = () => {
         </div>
       )}
 
-      {/* ── PRIMARY SECTION TABS ── */}
+      {}
       <div className="flex items-stretch gap-3">
-        {/* Orders tab */}
+        {}
         <button
           type="button"
           onClick={() => switchSection("orders")}
@@ -514,7 +514,7 @@ export const AdminOrders = () => {
           </div>
         </button>
 
-        {/* Financing tab */}
+        {}
         <button
           type="button"
           onClick={() => switchSection("finance")}
@@ -552,7 +552,7 @@ export const AdminOrders = () => {
         </button>
       </div>
 
-      {/* ── SUB-STATUS FILTER + SEARCH ── */}
+      {}
       <div className="space-y-3">
         <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
           {statusTabs.map((tab) => {
@@ -593,7 +593,7 @@ export const AdminOrders = () => {
         </div>
       </div>
 
-      {/* Orders DataGrid */}
+      {}
       <div className="border border-zinc-200 bg-white rounded overflow-hidden">
         <DataGrid
           rows={filteredOrders}
@@ -610,7 +610,7 @@ export const AdminOrders = () => {
         />
       </div>
 
-      {/* Order review modal */}
+      {}
       {selectedOrder && (
         <div className="fixed inset-0 bg-zinc-900/50 flex items-center justify-center p-4 z-50">
           <div
@@ -619,7 +619,7 @@ export const AdminOrders = () => {
             aria-labelledby="order-review-heading"
             className="bg-white border border-zinc-300 rounded max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden text-xs"
           >
-            {/* Modal header */}
+            {}
             <div className="p-4 border-b border-zinc-200 bg-zinc-50 flex items-center justify-between gap-3">
               <div className="min-w-0">
                 <h2 id="order-review-heading" className="text-base font-bold text-zinc-900 font-mono truncate">
@@ -637,9 +637,9 @@ export const AdminOrders = () => {
               </span>
             </div>
 
-            {/* Modal body */}
+            {}
             <div className="p-6 overflow-y-auto space-y-4 flex-1">
-              {/* Customer and delivery */}
+              {}
               <div className="grid grid-cols-2 gap-4 pb-4 border-b border-zinc-200 text-xs">
                 <div>
                   <h3 className="text-[11px] font-semibold text-zinc-500 mb-1">
@@ -659,7 +659,7 @@ export const AdminOrders = () => {
                 </div>
               </div>
 
-              {/* Items */}
+              {}
               <div className="space-y-2">
                 <h3 className="text-[11px] font-semibold text-zinc-500">
                   Items
@@ -679,7 +679,7 @@ export const AdminOrders = () => {
                 </div>
               </div>
 
-              {/* Financing review */}
+              {}
               {selectedOrder.installment && (
                 <div className="p-4 bg-zinc-50 rounded border border-zinc-200 space-y-3">
                   <div className="flex items-center justify-between gap-3 pb-2 border-b border-zinc-200">
@@ -714,7 +714,7 @@ export const AdminOrders = () => {
                     </div>
                   </div>
 
-                  {/* Submitted documents */}
+                  {}
                   <div className="p-3 bg-white rounded border border-zinc-200 space-y-2 text-xs">
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-2 min-w-0">
@@ -765,7 +765,7 @@ export const AdminOrders = () => {
                     </div>
                   </div>
 
-                  {/* Decision actions */}
+                  {}
                   {selectedOrder.status === "For Approval" && (
                     <div className="pt-2 border-t border-zinc-200 space-y-2">
                       <div className="flex items-center gap-2">
@@ -800,17 +800,17 @@ export const AdminOrders = () => {
                     </div>
                   )}
 
-                  {/* Confirm downpayment section — shows once application is approved */}
+                  {}
                   {selectedOrder.status === "Awaiting Downpayment" && !selectedOrder.installment?.downPaymentSettled && (
                     <div className="pt-2 border-t border-zinc-200 space-y-2">
                       {!selectedOrder.installment?.downPaymentMethod ? (
-                        /* Customer hasn't submitted their payment method yet */
+                        
                         <div className="flex items-center gap-2 p-2.5 rounded bg-zinc-50 border border-zinc-200 text-xs text-zinc-600">
                           <svg className="w-3.5 h-3.5 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
                           Waiting for customer to submit their downpayment method. They will be prompted on their Orders page.
                         </div>
                       ) : selectedOrder.installment.downPaymentMethod === "cash_on_releasing" ? (
-                        /* Cash on releasing — admin needs to physically collect */
+                        
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-[11px] text-zinc-600">
                             Customer will pay the downpayment <strong>in cash at the branch</strong>. Collect and verify before confirming.
@@ -824,7 +824,7 @@ export const AdminOrders = () => {
                           </button>
                         </div>
                       ) : (
-                        /* Online payment submitted — show method + reference for admin to verify */
+                        
                         <div className="space-y-2">
                           <div className="flex items-start gap-2 p-2.5 rounded bg-blue-50 border border-blue-200 text-xs text-blue-800">
                             <svg className="w-3.5 h-3.5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
@@ -850,7 +850,7 @@ export const AdminOrders = () => {
                     </div>
                   )}
 
-                  {/* ── Amortization Progress (Active Loan & Fully Paid) ── */}
+                  {}
                   {(selectedOrder.status === "Active Loan" || selectedOrder.status === "Fully Paid") && selectedOrder.installment && (() => {
                     const inst = selectedOrder.installment;
                     const paid = inst.installmentsPaid || 0;
@@ -864,7 +864,7 @@ export const AdminOrders = () => {
 
                     return (
                       <div className="pt-3 border-t border-zinc-200 space-y-3">
-                        {/* Header */}
+                        {}
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold text-zinc-900 uppercase tracking-wide">Amortization Progress</span>
                           <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono ${
@@ -874,7 +874,7 @@ export const AdminOrders = () => {
                           </span>
                         </div>
 
-                        {/* Progress bar */}
+                        {}
                         <div className="space-y-1">
                           <div className="w-full h-3 bg-zinc-100 rounded-full overflow-hidden border border-zinc-200">
                             <div
@@ -890,7 +890,7 @@ export const AdminOrders = () => {
                           </div>
                         </div>
 
-                        {/* Stats grid */}
+                        {}
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                           <div className="bg-zinc-50 rounded-lg p-2.5 border border-zinc-200 space-y-0.5">
                             <span className="text-[10px] text-zinc-400 uppercase font-medium block">Monthly</span>
@@ -910,7 +910,7 @@ export const AdminOrders = () => {
                           </div>
                         </div>
 
-                        {/* Payment ledger */}
+                        {}
                         <div className="space-y-1.5">
                           <span className="text-[10px] font-bold uppercase tracking-wide text-zinc-500 block">Payment Ledger</span>
                           {inst.paymentHistory && inst.paymentHistory.length > 0 ? (
@@ -954,7 +954,7 @@ export const AdminOrders = () => {
                 </div>
               )}
 
-              {/* Fulfillment step for cash orders */}
+              {}
               {!selectedOrder.isApplication && selectedOrder.status !== "Delivered" && selectedOrder.status !== "Cancelled" && (
                 <div className="pt-3 border-t border-zinc-200 flex items-center justify-between gap-3">
                   <span className="font-medium text-zinc-700">Fulfillment status</span>
@@ -994,7 +994,7 @@ export const AdminOrders = () => {
               )}
             </div>
 
-            {/* Modal footer */}
+            {}
             <div className="p-4 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between gap-3">
               {!selectedOrder.isApplication ? (
                 <div className="flex items-center gap-2">

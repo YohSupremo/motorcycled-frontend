@@ -1,14 +1,14 @@
-/* Motion tokens: Standard pace (400ms), slide-up pattern */
+
 :root {
-  --dur-fast: 150ms;      /* hover, focus */
-  --dur: 400ms;           /* entrances, reveals */
-  --dur-slow: 600ms;      /* image reveals */
-  --ease: cubic-bezier(.22, .61, .36, 1);   /* decelerate, no overshoot */
-  --stagger: 80ms;        /* delay between siblings */
-  --rise: 16px;           /* travel distance for slide-up entrances */
+  --dur-fast: 150ms;      
+  --dur: 400ms;           
+  --dur-slow: 600ms;      
+  --ease: cubic-bezier(.22, .61, .36, 1);   
+  --stagger: 80ms;        
+  --rise: 16px;           
 }
 
-/* Reduced motion accessibility */
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -55,12 +55,12 @@
   }
 }
 
-/* Smooth scroll and dynamic transitions */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Hero entrance: slide up */
+
 .anim-rise {
   animation: a-rise var(--dur) var(--ease) both;
 }
@@ -76,7 +76,7 @@ html {
   }
 }
 
-/* Hero entrance staggered sequence */
+
 .anim-stagger > * {
   animation: a-rise var(--dur) var(--ease) both;
 }
@@ -87,7 +87,7 @@ html {
 .anim-stagger > *:nth-child(5) { animation-delay: calc(var(--stagger) * 4); }
 .anim-stagger > *:nth-child(6) { animation-delay: calc(var(--stagger) * 5); }
 
-/* Image motion: subtle settle from scale 1.03 to 1 once on load */
+
 .anim-settle {
   animation: a-settle var(--dur-slow) var(--ease) both;
 }
@@ -100,7 +100,7 @@ html {
   }
 }
 
-/* Button & card interactive motion */
+
 .btn-motion {
   transition: background-color var(--dur-fast) var(--ease),
               border-color var(--dur-fast) var(--ease),
@@ -119,7 +119,7 @@ html {
   transform: translateY(-2px);
 }
 
-/* Brand logo marquee: continuous loop scrolling to left */
+
 @keyframes marqueeScroll {
   0% {
     transform: translateX(0);
@@ -147,7 +147,7 @@ html {
   }
 }
 
-/* Observer-driven scroll animation classes */
+
 .fade-in-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -176,7 +176,7 @@ html {
   animation: subtleFadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Financing timeline: steps, nodes and connector reveal once on scroll */
+
 .timeline {
   position: relative;
 }
@@ -220,8 +220,7 @@ html {
 .timeline.is-in .timeline__step:nth-child(1) .timeline__connector { transition-delay: 180ms; }
 .timeline.is-in .timeline__step:nth-child(2) .timeline__connector { transition-delay: 300ms; }
 
-/* Reviews: looping spotlight. One owner quote fills the frame and
-   cross-fades to the next on a timer. Stage reveals once on scroll. */
+
 .reviews {
   position: relative;
 }
@@ -294,7 +293,7 @@ html {
   background: #047857;
 }
 
-/* Homepage featured product spotlight (Motortrade-inspired presentation) */
+
 .home-spotlight__viewport {
   overflow: hidden;
   width: 100%;
@@ -377,7 +376,7 @@ a.group:hover .home-spotlight__hero-img {
   background: #18181b;
 }
 
-/* Subtle scrollbar for sticky filter aside */
+
 aside::-webkit-scrollbar {
   width: 4px;
 }
@@ -397,7 +396,7 @@ aside::-webkit-scrollbar-thumb:hover {
   letter-spacing: -0.01em;
 }
 
-/* Compact labels used inside dense admin data grids. */
+
 .admin-table-badge {
   box-sizing: border-box;
   display: inline-flex;

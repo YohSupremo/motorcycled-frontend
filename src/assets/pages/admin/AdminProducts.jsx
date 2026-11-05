@@ -44,9 +44,9 @@ const StarIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
-// Product Image Manager
-// Allows multiple image uploads, preview gallery, reordering, and explicit primary image selection.
-// The primary image (index 0) is used across catalog thumbnails.
+
+
+
 const ProductImageManager = ({
   imageList,
   onFilesAdded,
@@ -286,7 +286,7 @@ const ProductModal = ({
   isLoading,
 }) => {
   const dispatch = useDispatch();
-  const [imageList, setImageList] = useState([]); // List of { id, preview, data, isNew }
+  const [imageList, setImageList] = useState([]); 
 
   const isEdit = !!editingProduct;
 
@@ -317,7 +317,7 @@ const ProductModal = ({
 
   const installmentEligible = watch("installmentEligible");
 
-  // Populate form and existing images when editing or reset on close
+  
   useEffect(() => {
     if (!isOpen) {
       reset({
@@ -382,7 +382,7 @@ const ProductModal = ({
     }
   }, [editingProduct, isOpen, reset]);
 
-  // Handle adding multiple images via file picker (preserves and appends to existing list)
+  
   const handleFilesAdded = (e) => {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
@@ -408,11 +408,11 @@ const ProductModal = ({
       };
       reader.readAsDataURL(file);
     });
-    // Reset file input value so user can pick additional files or re-pick if needed
+    
     e.target.value = "";
   };
 
-  // Promotes the image at index to become index 0 (Primary)
+  
   const handleSetPrimary = (index) => {
     if (index === 0) return;
     setImageList((prev) => {
@@ -423,7 +423,7 @@ const ProductModal = ({
     });
   };
 
-  // Reorders images forward/backward
+  
   const handleMoveImage = (index, direction) => {
     const target = index + direction;
     if (target < 0 || target >= imageList.length) return;
@@ -436,7 +436,7 @@ const ProductModal = ({
     });
   };
 
-  // Removes an image from the list
+  
   const handleRemoveImage = (index) => {
     setImageList((prev) => prev.filter((_, i) => i !== index));
   };
@@ -795,13 +795,13 @@ const ProductModal = ({
   );
 };
 
-// Admin Products Page
-// Reference: itcp318-s3a-2026/frontend/src/Components/Admin/ProductsList.jsx
+
+
 export const AdminProducts = () => {
   const dispatch = useDispatch();
 
-  // Redux state
-  // Reference: itcp318-s3a-2026/frontend/src/Components/Admin/ProductsList.jsx lines 23-24
+  
+  
   const { loading, error, products = [] } = useSelector((state) => state.products);
   const { loading: createLoading, error: createError, success } = useSelector((state) => state.newProduct);
   const {
@@ -816,8 +816,8 @@ export const AdminProducts = () => {
 
   const isProductBusy = createLoading || actionLoading;
 
-  // Local UI state
-  const [statusFilter, setStatusFilter] = useState("all"); // "all" | "active" | "archived"
+  
+  const [statusFilter, setStatusFilter] = useState("all"); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedBrand, setSelectedBrand] = useState("all");
@@ -828,16 +828,16 @@ export const AdminProducts = () => {
   const [bulkLoading, setBulkLoading] = useState(false);
   const headerCheckboxRef = useRef(null);
 
-  // Fetch data on mount
-  // Reference: itcp318-s3a-2026/frontend/src/Components/Admin/ProductsList.jsx line 55
+  
+  
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(getCategories());
     dispatch(getBrands());
   }, [dispatch]);
 
-  // Handle success / error side-effects with toast
-  // Reference: itcp318-s3a-2026/frontend/src/Components/Admin/ProductsList.jsx lines 57-80
+  
+  
   useEffect(() => {
     if (error) {
       toast.error(error, { position: "bottom-right" });
@@ -882,7 +882,7 @@ export const AdminProducts = () => {
     }
   }, [error, createError, actionError, success, isUpdated, isDeleted, isArchived, actionMessage, dispatch]);
 
-  // Soft-delete with SweetAlert2 confirmation (no permanent deletion)
+  
   const handleSoftDelete = async (p) => {
     const result = await Swal.fire({
       title: `Delete "${p.name}"?`,
@@ -899,7 +899,7 @@ export const AdminProducts = () => {
     }
   };
 
-  // Restore product with confirmation
+  
   const handleRestore = async (p) => {
     const confirm = await Swal.fire({
       title: `Restore "${p.name}"?`,
@@ -931,12 +931,12 @@ export const AdminProducts = () => {
     setEditingProduct(null);
   };
 
-  // Active, Archived & Featured counts
+  
   const activeProducts = products.filter((p) => !p.isArchived);
   const archivedProducts = products.filter((p) => p.isArchived);
   const featuredProducts = products.filter((p) => p.isFeatured && !p.isArchived);
 
-  // Filter products
+  
   const filtered = products.filter((p) => {
     if (statusFilter === "active" && p.isArchived) return false;
     if (statusFilter === "archived" && !p.isArchived) return false;
@@ -956,7 +956,7 @@ export const AdminProducts = () => {
     return true;
   });
 
-  // Bulk selection calculations
+  
   const selectedProducts = useMemo(
     () => products.filter((p) => selectedProductIds.includes(p._id)),
     [products, selectedProductIds]
@@ -970,7 +970,7 @@ export const AdminProducts = () => {
     [selectedProducts]
   );
 
-  // Clear selections when switching status tabs
+  
   useEffect(() => {
     setSelectedProductIds([]);
   }, [statusFilter]);
@@ -1295,7 +1295,7 @@ export const AdminProducts = () => {
     [handleRestore, handleOpenEdit, handleSoftDelete]
   );
 
-  // Bulk Soft-Delete with SweetAlert2 confirmation
+  
   const handleBulkSoftDelete = async () => {
     const targetIds = selectedActiveProducts.map((p) => p._id);
     if (targetIds.length === 0) return;
@@ -1319,7 +1319,7 @@ export const AdminProducts = () => {
     }
   };
 
-  // Bulk Restore with confirmation
+  
   const handleBulkRestore = async () => {
     const targetIds = selectedArchivedProducts.map((p) => p._id);
     if (targetIds.length === 0) return;
@@ -1345,7 +1345,7 @@ export const AdminProducts = () => {
 
   return (
     <div className="space-y-6">
-      {/* Catalog subnavigation */}
+      {}
       <div className="flex items-center gap-2 border-b border-zinc-200 pb-3">
         <Link
           to="/admin/products"
@@ -1367,7 +1367,7 @@ export const AdminProducts = () => {
         </Link>
       </div>
 
-      {/* Title and actions */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -1397,7 +1397,7 @@ export const AdminProducts = () => {
         </button>
       </div>
 
-      {/* Counts */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-4 bg-white rounded border border-zinc-200">
           <span className="text-[11px] font-semibold text-zinc-500 block">Active products</span>
@@ -1430,7 +1430,7 @@ export const AdminProducts = () => {
         </div>
       </div>
 
-      {/* Filter toolbar */}
+      {}
       <div className="py-4 border-y border-zinc-200 bg-white px-4 space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded shrink-0">
@@ -1555,7 +1555,7 @@ export const AdminProducts = () => {
         </div>
       </div>
 
-      {/* Bulk actions */}
+      {}
       {selectedProductIds.length > 0 && (
         <div className="bg-zinc-900 text-white rounded p-4 sm:px-4 sm:py-3 flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-2">
@@ -1622,7 +1622,7 @@ export const AdminProducts = () => {
         </div>
       )}
 
-      {/* Products grid */}
+      {}
       <div className="border border-zinc-200 bg-white rounded overflow-hidden">
         <DataGrid
           className="admin-products-grid"
@@ -1662,7 +1662,7 @@ export const AdminProducts = () => {
         />
       </div>
 
-      {/* Add / edit modal */}
+      {}
       <ProductModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}

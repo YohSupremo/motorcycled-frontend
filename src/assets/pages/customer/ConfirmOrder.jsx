@@ -66,7 +66,7 @@ export const ConfirmOrder = () => {
         setGlobalShippingFee(Number(data.settings?.globalShippingFee ?? 350));
       })
       .catch(() => {
-        // The checkout API uses the same default when settings are unavailable.
+        
       });
   }, []);
 
@@ -80,7 +80,7 @@ export const ConfirmOrder = () => {
   const [agreedTerms, setAgreedTerms] = useState(false);
   const hasNotifiedRef = useRef(false);
 
-  // Online Payment Input Fields
+  
   const paymentSchema = useMemo(
     () => buildPaymentSchema(paymentMethod),
     [paymentMethod],
@@ -144,7 +144,7 @@ export const ConfirmOrder = () => {
   const hasInstallment = installmentMotorcycles.length > 0;
   const hasMotorcycles = selectedMotorcycles.length > 0;
 
-  // Financials
+  
   const partsCashTotal = useMemo(
     () => selectedParts.reduce((acc, i) => acc + (i.price || 0) * (i.quantity || 1), 0),
     [selectedParts]
@@ -169,8 +169,8 @@ export const ConfirmOrder = () => {
       (!selectedMotorcycles.length && shippingInfo?.fulfillmentMethod === "delivery"));
 
   const shippingFee = isPartsDelivery ? globalShippingFee : 0;
-  // Grand total = only cash items + shipping. Installment downpayments are NOT
-  // collected at checkout — they are due after admin approves the application.
+  
+  
   const grandTotal = partsCashTotal + motoCashTotal + shippingFee;
 
   const placeOrder = (data) => {
@@ -258,7 +258,7 @@ export const ConfirmOrder = () => {
     };
   }, [dispatch]);
 
-  // SUCCESS RECEIPT VIEW
+  
   if (success && results) {
     const responseData = results?.data || results || {};
     const checkoutResults = responseData.results || [];
@@ -271,7 +271,7 @@ export const ConfirmOrder = () => {
             <CheckoutStepper activeStep={3} />
           </div>
           <div className="receipt-print-card bg-white border border-zinc-200 rounded-xl shadow-xs overflow-hidden">
-            {/* Status Header */}
+            {}
             <div className="p-8 text-center border-b border-zinc-100 space-y-3">
               <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -286,9 +286,9 @@ export const ConfirmOrder = () => {
               </p>
             </div>
 
-            {/* Receipt Summary Body */}
+            {}
             <div className="p-6 space-y-5 text-xs divide-y divide-zinc-100">
-              {/* Order References */}
+              {}
               <div className="space-y-2">
                 <span className="font-bold text-zinc-500 uppercase tracking-wider text-[11px] block">
                   Reference Numbers
@@ -305,7 +305,7 @@ export const ConfirmOrder = () => {
                 ))}
               </div>
 
-              {/* Payment Details Recap */}
+              {}
               <div className="pt-4 space-y-2">
                 <span className="font-bold text-zinc-500 uppercase tracking-wider text-[11px] block">
                   Payment Information
@@ -347,7 +347,7 @@ export const ConfirmOrder = () => {
                 )}
               </div>
 
-              {/* Releasing / Destination */}
+              {}
               <div className="pt-4 space-y-2">
                 <span className="font-bold text-zinc-500 uppercase tracking-wider text-[11px] block">
                   Fulfillment Destination
@@ -368,7 +368,7 @@ export const ConfirmOrder = () => {
               </div>
             </div>
 
-            {/* Actions */}
+            {}
             <div className="receipt-print-actions p-6 bg-zinc-50 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 type="button"
@@ -404,7 +404,7 @@ export const ConfirmOrder = () => {
     );
   }
 
-  // EMPTY CHECKOUT FALLBACK
+  
   if (selectedItems.length === 0) {
     return (
       <div className="min-h-[70vh] bg-zinc-50 flex items-center justify-center p-6">
@@ -424,17 +424,17 @@ export const ConfirmOrder = () => {
     );
   }
 
-  // MAIN REVIEW & PAYMENT FORM
+  
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 antialiased py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Progress Stepper Bar */}
+        {}
         <CheckoutStepper activeStep={2} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Main Content (7 cols) — Unified Panel with Hairline Dividers */}
+          {}
           <div className="lg:col-span-7 bg-white border border-zinc-200 rounded-xl shadow-xs divide-y divide-zinc-200 overflow-hidden">
-            {/* 1. Fulfillment Recap */}
+            {}
             <div className="p-6">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">
@@ -470,7 +470,7 @@ export const ConfirmOrder = () => {
               </div>
             </div>
 
-            {/* 2. Payment Method Selector & Inputs — only for cash items */}
+            {}
             {grandTotal > 0 ? (
               <div className="p-6 space-y-4">
                 <div>
@@ -523,7 +523,7 @@ export const ConfirmOrder = () => {
                   })}
                 </div>
 
-                {/* DYNAMIC PAYMENT INPUT FIELDS */}
+                {}
                 {paymentMethod === "gcash" && (
                   <div className="mt-4 p-4.5 bg-blue-50/40 border border-blue-200 rounded-lg space-y-3.5 text-xs">
                     <div className="pb-2 border-b border-blue-100">
@@ -707,7 +707,7 @@ export const ConfirmOrder = () => {
                 )}
               </div>
             ) : (
-              /* Installment-only cart — no payment needed at checkout */
+              
               <div className="p-6">
                 <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900">
                   <svg className="w-5 h-5 shrink-0 mt-0.5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -723,7 +723,7 @@ export const ConfirmOrder = () => {
               </div>
             )}
 
-            {/* 3. In-House Financing Summary (if installment item exists) */}
+            {}
             {hasInstallment && (
               <div className="p-6 bg-amber-50/40 space-y-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-900 block">
@@ -753,7 +753,7 @@ export const ConfirmOrder = () => {
               </div>
             )}
 
-            {/* 4. Dealership Terms Agreement & Actions */}
+            {}
             <div className="p-6 bg-zinc-50 space-y-4">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
@@ -794,7 +794,7 @@ export const ConfirmOrder = () => {
             </div>
           </div>
 
-          {/* Sticky Order Summary (5 cols) */}
+          {}
           <div className="lg:col-span-5">
             <div className="bg-white border border-zinc-200 rounded-xl p-6 sticky top-6 shadow-xs space-y-5">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
@@ -806,7 +806,7 @@ export const ConfirmOrder = () => {
                 </Link>
               </div>
 
-              {/* Items List */}
+              {}
               <div className="divide-y divide-zinc-100 max-h-72 overflow-y-auto pr-1">
                 {selectedItems.map((item) => (
                   <div key={item.cartItemId || item.productId} className="py-3 flex items-center gap-3">
@@ -847,7 +847,7 @@ export const ConfirmOrder = () => {
                 ))}
               </div>
 
-              {/* Price Breakdown */}
+              {}
               <div className="border-t border-zinc-100 pt-3 space-y-2 text-xs">
                 {partsCashTotal > 0 && (
                   <div className="flex justify-between text-zinc-600">
@@ -895,7 +895,7 @@ export const ConfirmOrder = () => {
                 )}
               </div>
 
-              {/* Guarantees */}
+              {}
               <div className="pt-2 border-t border-zinc-100 text-[11px] text-zinc-500 space-y-1.5">
                 <div className="flex items-center gap-2">
                   <svg className="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

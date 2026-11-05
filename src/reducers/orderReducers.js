@@ -37,7 +37,7 @@ import {
   CLEAR_ERRORS,
 } from '../constants/orderConstants'
 
-// ── Checkout / Create Order reducer ──────────────────────────────────────────
+
 export const checkoutReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
@@ -55,7 +55,7 @@ export const checkoutReducer = (state = {}, action) => {
   }
 }
 
-// ── My Orders (customer history) ─────────────────────────────────────────────
+
 export const myOrdersReducer = (state = { orders: [], applications: [] }, action) => {
   switch (action.type) {
     case MY_ORDERS_REQUEST:
@@ -75,7 +75,7 @@ export const myOrdersReducer = (state = { orders: [], applications: [] }, action
   }
 }
 
-// ── Order Details ─────────────────────────────────────────────────────────────
+
 export const orderDetailsReducer = (state = { order: null }, action) => {
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:
@@ -91,7 +91,7 @@ export const orderDetailsReducer = (state = { order: null }, action) => {
   }
 }
 
-// ── Application Details ───────────────────────────────────────────────────────
+
 export const applicationDetailsReducer = (state = { application: null }, action) => {
   switch (action.type) {
     case APPLICATION_DETAILS_REQUEST:
@@ -107,7 +107,7 @@ export const applicationDetailsReducer = (state = { application: null }, action)
   }
 }
 
-// ── Admin: All Orders ─────────────────────────────────────────────────────────
+
 export const adminOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ADMIN_ORDERS_REQUEST:
@@ -123,7 +123,7 @@ export const adminOrdersReducer = (state = { orders: [] }, action) => {
   }
 }
 
-// ── Admin: All Applications ───────────────────────────────────────────────────
+
 export const adminApplicationsReducer = (state = { applications: [] }, action) => {
   switch (action.type) {
     case ADMIN_APPLICATIONS_REQUEST:
@@ -139,7 +139,7 @@ export const adminApplicationsReducer = (state = { applications: [] }, action) =
   }
 }
 
-// ── Admin: Update Order Status ────────────────────────────────────────────────
+
 export const updateOrderStatusReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ORDER_STATUS_REQUEST:
@@ -155,7 +155,7 @@ export const updateOrderStatusReducer = (state = {}, action) => {
   }
 }
 
-// ── Admin: Approve Application ────────────────────────────────────────────────
+
 export const approveApplicationReducer = (state = {}, action) => {
   switch (action.type) {
     case APPROVE_APPLICATION_REQUEST:
@@ -171,7 +171,7 @@ export const approveApplicationReducer = (state = {}, action) => {
   }
 }
 
-// ── Admin: Reject Application ─────────────────────────────────────────────────
+
 export const rejectApplicationReducer = (state = {}, action) => {
   switch (action.type) {
     case REJECT_APPLICATION_REQUEST:
@@ -187,7 +187,7 @@ export const rejectApplicationReducer = (state = {}, action) => {
   }
 }
 
-// ── Admin: Confirm Installment Order ──────────────────────────────────────────
+
 export const confirmInstallmentOrderReducer = (state = {}, action) => {
   switch (action.type) {
     case CONFIRM_INSTALLMENT_ORDER_REQUEST:

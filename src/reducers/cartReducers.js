@@ -12,7 +12,7 @@ import {
   SET_ITEM_TERM_MONTHS,
 } from '../constants/cartConstants'
 
-// Rehydrate persisted cart from localStorage on load
+
 const loadCartFromStorage = () => {
   try {
     const raw = localStorage.getItem('motorcycledCart')
@@ -29,7 +29,7 @@ const initialState = {
   shippingInfo: persisted.shippingInfo || {},
 }
 
-// Helper: persist non-sensitive cart data
+
 const persist = (cartItems, shippingInfo) => {
   try {
     localStorage.setItem(
@@ -37,7 +37,7 @@ const persist = (cartItems, shippingInfo) => {
       JSON.stringify({ cartItems, shippingInfo })
     )
   } catch {
-    /* storage unavailable */
+    
   }
 }
 
@@ -45,15 +45,15 @@ export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
       const incoming = action.payload
-      // For motorcycles (isVehicle), each unit is a separate line
-      // For parts, accumulate by productId
+      
+      
       if (incoming.isVehicle) {
-        // Do not deduplicate motorcycles — each may have its own purchase method
+        
         const exists = state.cartItems.find(
           (i) => i.cartItemId === incoming.cartItemId
         )
         if (exists) {
-          // Already in cart (exact cartItemId match); do nothing
+          
           persist(state.cartItems, state.shippingInfo)
           return state
         }
@@ -61,7 +61,7 @@ export const cartReducer = (state = initialState, action) => {
         persist(updated, state.shippingInfo)
         return { ...state, cartItems: updated }
       }
-      // Parts: accumulate quantity if same productId already in cart
+      
       const existingIndex = state.cartItems.findIndex(
         (i) => i.productId === incoming.productId && !i.isVehicle
       )
@@ -157,7 +157,7 @@ export const cartReducer = (state = initialState, action) => {
     }
 
     case CLEAR_SELECTED_ITEMS: {
-      // Remove only the cart items whose cartItemId is in the payload array
+      
       const toRemove = new Set(action.payload)
       const updated = state.cartItems.filter(
         (i) => !toRemove.has(i.cartItemId)

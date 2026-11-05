@@ -1045,7 +1045,7 @@ export const AdminInventory = () => {
 
   return (
     <div className="space-y-6">
-      {/* Title and actions */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 text-balance">
@@ -1078,7 +1078,7 @@ export const AdminInventory = () => {
         </button>
       </div>
 
-      {/* Tab switcher */}
+      {}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-200 pb-2">
         <div className="flex items-center gap-2 text-xs">
           <button
@@ -1150,7 +1150,7 @@ export const AdminInventory = () => {
         )}
       </div>
 
-      {/* Stock ledger */}
+      {}
       {activeTab === "ledger" && (
         <div className="border border-zinc-200 rounded bg-white overflow-hidden">
           <div className="p-4 bg-zinc-50 border-b border-zinc-200 text-xs text-zinc-600 flex items-center justify-between gap-3">
@@ -1207,7 +1207,7 @@ export const AdminInventory = () => {
         </div>
       )}
 
-      {/* Suppliers */}
+      {}
       {activeTab === "suppliers" && (
         <div className="border border-zinc-200 bg-white rounded overflow-hidden">
           <div className="p-4 bg-zinc-50 border-b border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1270,7 +1270,7 @@ export const AdminInventory = () => {
         </div>
       )}
 
-      {/* Bulk restock modal */}
+      {}
       {isRestockModalOpen && (
         <div className="fixed inset-0 z-50 bg-zinc-900/50 flex items-center justify-center p-4">
           <div
@@ -1600,7 +1600,7 @@ export const AdminInventory = () => {
         </div>
       )}
 
-      {/* Add / edit supplier modal */}
+      {}
       {isSupplierModalOpen && (
         <div className="fixed inset-0 z-50 bg-zinc-900/50 flex items-center justify-center p-4">
           <div

@@ -334,7 +334,7 @@ export const Profile = ({ activeTab = "all" }) => {
         className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 space-y-10"
         style={{ display: "flex", flexDirection: "column" }}
       >
-        {/* Header */}
+        {}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-zinc-900">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
@@ -347,7 +347,7 @@ export const Profile = ({ activeTab = "all" }) => {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            {/* Sub-tab Switcher: Profile vs Address vs Verification */}
+            {}
             <div className="flex items-center gap-1 border border-zinc-200 p-0.5 rounded-lg bg-zinc-50 text-xs font-medium max-w-full overflow-x-auto">
               <Link
                 to="/profile"
@@ -403,7 +403,7 @@ export const Profile = ({ activeTab = "all" }) => {
           </div>
         </div>
 
-        {/* Section 1: Customer Information - 2-Column Unboxed Settings Layout */}
+        {}
         {(currentTab === "all" || currentTab === "profile") && (
           <ScrollReveal threshold={0.08} duration={600} style={{ order: 1 }}>
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-zinc-200">
@@ -427,7 +427,7 @@ export const Profile = ({ activeTab = "all" }) => {
                 onSubmit={handleSubmitProfile(handleSaveProfile)}
                 noValidate
               >
-                {/* Profile Picture Upload & Preview */}
+                {}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 pb-6 border-b border-zinc-200">
                   <div className="relative shrink-0 inline-block">
                     <div className="w-16 h-16 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-lg ring-2 ring-zinc-200 overflow-hidden shadow-2xs">
@@ -444,7 +444,7 @@ export const Profile = ({ activeTab = "all" }) => {
                         <span className="tracking-tighter">JD</span>
                       )}
                     </div>
-                    {/* Active indicator dot placed cleanly outside circular boundary, uncropped */}
+                    {}
                     <span
                       className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-600 ring-2 ring-white shadow-xs z-10 pointer-events-none"
                       title="Active Customer"
@@ -503,7 +503,7 @@ export const Profile = ({ activeTab = "all" }) => {
                   </div>
                 </div>
 
-                {/* Form Fields Grid */}
+                {}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div>
                     <label className="block text-zinc-700 font-semibold mb-1">
@@ -615,7 +615,7 @@ export const Profile = ({ activeTab = "all" }) => {
           </ScrollReveal>
         )}
 
-        {/* Section 2: Registered Delivery Address - 2-Column Unboxed Settings Layout */}
+        {}
         {(currentTab === "all" || currentTab === "address") && (
           <ScrollReveal threshold={0.08} delay={50} duration={600} style={{ order: 3 }}>
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-zinc-200">
@@ -823,11 +823,11 @@ export const Profile = ({ activeTab = "all" }) => {
           </ScrollReveal>
         )}
 
-        {/* Section 3: Credit verification - 2-Column Unboxed Settings Layout */}
+        {}
         {(currentTab === "all" || currentTab === "verification") && (
           <ScrollReveal threshold={0.08} delay={70} duration={600} style={{ order: 4 }}>
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10">
-              {/* Left: label + status badge */}
+              {}
               <div className="md:col-span-4 space-y-2">
                 <h2 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
                   Credit Verification
@@ -836,7 +836,7 @@ export const Profile = ({ activeTab = "all" }) => {
                   Required to qualify for installment financing. Submit a valid government-issued ID and a recent proof of income for admin review.
                 </p>
 
-                {/* Status pill */}
+                {}
                 <div className="pt-1">
                   {!creditVerification?.status && (
                     <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-500 border border-zinc-200">
@@ -865,10 +865,10 @@ export const Profile = ({ activeTab = "all" }) => {
                 </div>
               </div>
 
-              {/* Right: content area */}
+              {}
               <div className="md:col-span-8 space-y-4">
 
-                {/* Rejection reason banner */}
+                {}
                 {creditVerification?.status === "rejected" && (
                   <div className="flex gap-3 p-4 rounded-md border border-rose-200 bg-rose-50">
                     <svg className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -883,7 +883,7 @@ export const Profile = ({ activeTab = "all" }) => {
                   </div>
                 )}
 
-                {/* Approved state */}
+                {}
                 {creditVerification?.status === "approved" && (
                   <div className="flex gap-3 p-4 rounded-md border border-emerald-200 bg-emerald-50">
                     <svg className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -898,7 +898,7 @@ export const Profile = ({ activeTab = "all" }) => {
                   </div>
                 )}
 
-                {/* Pending state */}
+                {}
                 {creditVerification?.status === "pending" && (
                   <div className="flex gap-3 p-4 rounded-md border border-amber-200 bg-amber-50">
                     <svg className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -913,7 +913,7 @@ export const Profile = ({ activeTab = "all" }) => {
                   </div>
                 )}
 
-                {/* Upload form — shown when not yet approved */}
+                {}
                 {creditVerification?.status !== "approved" && (
                   <form onSubmit={handleCreditVerificationSubmit} className="space-y-4" noValidate>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -965,7 +965,7 @@ export const Profile = ({ activeTab = "all" }) => {
 
                             {creditFiles[key] ? (
                               <>
-                                {/* File selected state */}
+                                {}
                                 <svg className="w-6 h-6 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                                 </svg>
@@ -991,7 +991,7 @@ export const Profile = ({ activeTab = "all" }) => {
                               </>
                             ) : (
                               <>
-                                {/* Empty state */}
+                                {}
                                 {icon}
                                 <span className="text-xs font-medium text-zinc-600">
                                   Click to upload
@@ -1032,7 +1032,7 @@ export const Profile = ({ activeTab = "all" }) => {
           </ScrollReveal>
         )}
 
-        {/* Section 4: Security - Change Password & Deactivate Account */}
+        {}
         {(currentTab === "all" || currentTab === "security") && (
           <ScrollReveal threshold={0.08} delay={90} duration={600} style={{ order: 2 }}>
             <section

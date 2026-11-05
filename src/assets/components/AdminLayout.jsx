@@ -212,7 +212,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
 
   return (
     <div className="admin-shell min-h-screen bg-zinc-100/60 text-zinc-900 flex antialiased font-sans">
-      {/* Mobile Backdrop */}
+      {}
       {isMobileOpen && (
         <div
           className="fixed inset-0 bg-zinc-900/40 backdrop-blur-2xs z-40 lg:hidden"
@@ -220,13 +220,13 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
         />
       )}
 
-      {/* Collapsible Sidebar */}
+      {}
       <aside
         className={`fixed lg:sticky top-0 h-screen z-50 bg-white border-r border-zinc-200 flex flex-col justify-between transition-all duration-200 ease-in-out shrink-0 ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         } ${isCollapsed ? "w-16" : "w-64"}`}
       >
-        {/* Top Header / Brand - Click Header or Logo to Open/Close Sidebar */}
+        {}
         <div>
           <div
             onClick={() => setIsCollapsed(!isCollapsed)}
@@ -257,7 +257,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
               )}
             </div>
 
-            {/* Subtle collapse indicator chevron when expanded */}
+            {}
             {!isCollapsed && (
               <span className="text-zinc-400 group-hover:text-zinc-700 transition-colors shrink-0">
                 <svg
@@ -273,7 +273,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
             )}
           </div>
 
-          {/* Navigation Links */}
+          {}
           <div className="p-2 space-y-1 overflow-y-auto max-h-[calc(100vh-10rem)]">
             {orderedNavItems.map((item, index) => {
               const isActive = activeTab === item.id;
@@ -319,7 +319,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
                       </span>
                     )}
 
-                    {/* Indicator Pip when active */}
+                    {}
                     {isActive && (
                       <span className="absolute left-0 top-1.5 bottom-1.5 w-1 bg-emerald-600 rounded-r-full" />
                     )}
@@ -330,9 +330,9 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
           </div>
         </div>
 
-        {/* Bottom Sidebar: User Switcher & Storefront */}
+        {}
         <div className="p-2 border-t border-zinc-200 bg-zinc-50/60 space-y-2">
-          {/* Storefront Link */}
+          {}
           <Link
             to="/"
             className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors cursor-pointer border border-zinc-200/80 bg-white shadow-2xs ${
@@ -354,7 +354,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
             {!isCollapsed && <span className="truncate">Storefront View</span>}
           </Link>
 
-          {/* Staff User Card */}
+          {}
           <div
             className={`flex items-center gap-2.5 p-1.5 ${isCollapsed ? "justify-center" : ""}`}
           >
@@ -387,12 +387,12 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Operational Header */}
+        {}
         <header className="admin-header h-14 bg-white border-b border-zinc-200 sticky top-0 z-30 px-4 sm:px-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            {/* Mobile Drawer Trigger (Mobile Only) */}
+            {}
             <button
               type="button"
               onClick={() => setIsMobileOpen(true)}
@@ -412,7 +412,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
               </svg>
             </button>
 
-            {/* Breadcrumb Info */}
+            {}
             <div className="flex items-center gap-2 text-xs">
               <span className="font-semibold text-zinc-400 uppercase tracking-wider text-[11px]">
                 Dealership
@@ -424,9 +424,9 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
             </div>
           </div>
 
-          {/* Right Header Operations */}
+          {}
           <div className="flex items-center gap-3">
-            {/* Quick Switch to Customer View */}
+            {}
             <Link
               to="/"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold transition-colors cursor-pointer shadow-2xs"
@@ -437,7 +437,7 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
           </div>
         </header>
 
-        {/* Dynamic Page Content */}
+        {}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>

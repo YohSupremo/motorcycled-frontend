@@ -5,10 +5,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-/**
- * Firebase Authentication Configuration
- * Reads credentials from Vite environment variables (.env).
- */
+
 const clean = (val) =>
   typeof val === "string" ? val.replace(/^["']|["',]$/g, "").trim() : val;
 
@@ -21,7 +18,7 @@ const firebaseConfig = {
   appId: clean(import.meta.env.VITE_FIREBASE_APP_ID),
 };
 
-// Check if credentials are provided in .env
+
 export const isFirebaseConfigured = Boolean(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
@@ -37,7 +34,7 @@ if (isFirebaseConfigured) {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
 
-    // Google Provider configuration
+    
     googleProvider = new GoogleAuthProvider();
     googleProvider.setCustomParameters({
       prompt: "select_account",

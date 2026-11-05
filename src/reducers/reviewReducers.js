@@ -1,4 +1,4 @@
-// Review Redux reducers
+
 
 import {
   PRODUCT_REVIEWS_REQUEST,
@@ -24,7 +24,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/reviewConstants.js";
 
-// ─── Public: reviews for a single product ─────────────────────────────────────
+
 export const productReviewsReducer = (
   state = { loading: false, reviews: [], count: 0, error: null },
   action,
@@ -52,7 +52,7 @@ export const productReviewsReducer = (
   }
 };
 
-// ─── Customer: own review + eligibility ───────────────────────────────────────
+
 export const myReviewReducer = (
   state = {
     loading: false,
@@ -87,7 +87,7 @@ export const myReviewReducer = (
   }
 };
 
-// ─── Customer: submit / update own review ─────────────────────────────────────
+
 export const newReviewReducer = (
   state = { loading: false, success: false, review: null, error: null },
   action,
@@ -118,7 +118,7 @@ export const newReviewReducer = (
   }
 };
 
-// ─── Customer: delete own review ──────────────────────────────────────────────
+
 export const deleteMyReviewReducer = (
   state = { loading: false, success: false, error: null },
   action,
@@ -144,7 +144,7 @@ export const deleteMyReviewReducer = (
   }
 };
 
-// ─── Admin: all reviews ───────────────────────────────────────────────────────
+
 export const adminReviewsReducer = (
   state = { loading: false, reviews: [], count: 0, error: null },
   action,
@@ -172,7 +172,7 @@ export const adminReviewsReducer = (
   }
 };
 
-// ─── Admin: moderation (hide / delete) ────────────────────────────────────────
+
 export const reviewModerationReducer = (
   state = { loading: false, message: null, error: null },
   action,

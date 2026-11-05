@@ -1,5 +1,5 @@
-// Product Redux reducers
-// Reference: itcp318-s3a-2026/frontend/src/reducers/productReducers.jsx
+
+
 
 import {
   ADMIN_PRODUCTS_REQUEST,
@@ -68,8 +68,8 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productConstants.js";
 
-// ─── Admin / public products list ─────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/reducers/productReducers.jsx
+
+
 export const productsReducer = (
   state = { loading: false, products: [], error: null },
   action,
@@ -102,7 +102,7 @@ export const productsReducer = (
   }
 };
 
-// ─── Single product details ────────────────────────────────────────────────────
+
 export const productDetailsReducer = (
   state = { loading: false, product: {}, error: null },
   action,
@@ -125,8 +125,8 @@ export const productDetailsReducer = (
   }
 };
 
-// ─── New product ──────────────────────────────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/reducers/productReducers.jsx (newProduct reducer)
+
+
 export const newProductReducer = (
   state = { loading: false, success: false, product: {}, error: null },
   action,
@@ -152,8 +152,8 @@ export const newProductReducer = (
   }
 };
 
-// ─── Update / Delete / Archive product ───────────────────────────────────────
-// Reference: itcp318-s3a-2026/frontend/src/reducers/productReducers.jsx (product reducer)
+
+
 export const productReducer = (
   state = { loading: false, isDeleted: false, isUpdated: false, isArchived: null, message: null, error: null },
   action,
@@ -205,7 +205,7 @@ export const productReducer = (
   }
 };
 
-// ─── Catalog: Categories & Brands (with full CRUD support) ────────────────────
+
 export const catalogReducer = (
   state = {
     loadingCategories: false,
@@ -226,7 +226,7 @@ export const catalogReducer = (
   action,
 ) => {
   switch (action.type) {
-    // Categories Fetch
+    
     case GET_CATEGORIES_REQUEST:
       return { ...state, loadingCategories: true };
     case GET_CATEGORIES_SUCCESS:
@@ -234,7 +234,7 @@ export const catalogReducer = (
     case GET_CATEGORIES_FAIL:
       return { ...state, loadingCategories: false, error: action.payload };
 
-    // Brands Fetch
+    
     case GET_BRANDS_REQUEST:
       return { ...state, loadingBrands: true };
     case GET_BRANDS_SUCCESS:
@@ -242,7 +242,7 @@ export const catalogReducer = (
     case GET_BRANDS_FAIL:
       return { ...state, loadingBrands: false, error: action.payload };
 
-    // Category & Brand CRUD Requests
+    
     case CREATE_CATEGORY_REQUEST:
     case UPDATE_CATEGORY_REQUEST:
     case DELETE_CATEGORY_REQUEST:
@@ -253,7 +253,7 @@ export const catalogReducer = (
     case RESTORE_BRAND_REQUEST:
       return { ...state, actionLoading: true, error: null };
 
-    // Category Success
+    
     case CREATE_CATEGORY_SUCCESS:
       return {
         ...state,
@@ -287,7 +287,7 @@ export const catalogReducer = (
         ),
       };
 
-    // Category Reset
+    
     case CREATE_CATEGORY_RESET:
       return { ...state, isCategoryCreated: false };
     case UPDATE_CATEGORY_RESET:
@@ -297,7 +297,7 @@ export const catalogReducer = (
     case RESTORE_CATEGORY_RESET:
       return { ...state, isCategoryRestored: false };
 
-    // Brand Success
+    
     case CREATE_BRAND_SUCCESS:
       return {
         ...state,
@@ -331,7 +331,7 @@ export const catalogReducer = (
         ),
       };
 
-    // Brand Reset
+    
     case CREATE_BRAND_RESET:
       return { ...state, isBrandCreated: false };
     case UPDATE_BRAND_RESET:
@@ -341,7 +341,7 @@ export const catalogReducer = (
     case RESTORE_BRAND_RESET:
       return { ...state, isBrandRestored: false };
 
-    // Fails
+    
     case CREATE_CATEGORY_FAIL:
     case UPDATE_CATEGORY_FAIL:
     case DELETE_CATEGORY_FAIL:

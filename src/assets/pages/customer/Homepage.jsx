@@ -76,7 +76,7 @@ export const Homepage = ({ onNavigate }) => {
 
   const { cartItems = [] } = useSelector((state) => state.cart || {});
 
-  // Infinite Scroll State (15pts deliverable via react-infinite-scroll-component)
+  
   const [infiniteProducts, setInfiniteProducts] = useState([]);
   const [infinitePage, setInfinitePage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -84,7 +84,7 @@ export const Homepage = ({ onNavigate }) => {
   const [totalCatalogCount, setTotalCatalogCount] = useState(0);
   const [liveBrands, setLiveBrands] = useState([]);
 
-  // Financing timeline: reveal once when scrolled into view
+  
   const financeTimelineRef = useRef(null);
   const [financeTimelineIn, setFinanceTimelineIn] = useState(
     () => typeof window === "undefined" || !("IntersectionObserver" in window)
@@ -114,7 +114,7 @@ export const Homepage = ({ onNavigate }) => {
     return () => io.disconnect();
   }, []);
 
-  // Reviews: staggered reveal once when scrolled into view
+  
   const reviewsRef = useRef(null);
   const [reviewsIn, setReviewsIn] = useState(
     () => typeof window === "undefined" || !("IntersectionObserver" in window)
@@ -144,7 +144,7 @@ export const Homepage = ({ onNavigate }) => {
     return () => io.disconnect();
   }, []);
 
-  // Reviews spotlight: cycle one owner quote at a time, looping continuously
+  
   const [reviewIndex, setReviewIndex] = useState(0);
   const [reviewPaused, setReviewPaused] = useState(false);
 
@@ -165,7 +165,7 @@ export const Homepage = ({ onNavigate }) => {
     return () => clearInterval(id);
   }, [reviewsIn, reviewPaused]);
 
-  // Fetch live brands with logos from MongoDB
+  
   useEffect(() => {
     let isMounted = true;
     const fetchBrands = async () => {
@@ -184,12 +184,12 @@ export const Homepage = ({ onNavigate }) => {
     };
   }, []);
 
-  // Select live products from database via Redux
+  
   const { loading, products = [], productsCount = 0 } = useSelector(
     (state) => state.products || {}
   );
 
-  // Fetch live featured units for hero carousel on mount and filter changes
+  
   useEffect(() => {
     dispatch(
       getProducts(
@@ -202,12 +202,12 @@ export const Homepage = ({ onNavigate }) => {
         0,
         12,
         false,
-        true // isFeatured: only fetch featured showroom models
+        true 
       )
     );
   }, [dispatch, searchQuery, selectedBrandFilter]);
 
-  // Initial fetch for Infinite Scroll products catalog
+  
   useEffect(() => {
     let isMounted = true;
     const fetchInitial = async () => {
@@ -230,7 +230,7 @@ export const Homepage = ({ onNavigate }) => {
     };
   }, []);
 
-  // Fetch next page function for react-infinite-scroll-component
+  
   const fetchMoreProducts = async () => {
     if (loadingMore || !hasMore) return;
     setLoadingMore(true);
@@ -240,7 +240,7 @@ export const Homepage = ({ onNavigate }) => {
       if (res.data) {
         const newItems = res.data.products || [];
         setInfiniteProducts((prev) => {
-          // Deduplicate by _id
+          
           const existingIds = new Set(prev.map((p) => p._id));
           const filtered = newItems.filter((p) => !existingIds.has(p._id));
           const updated = [...prev, ...filtered];
@@ -360,12 +360,12 @@ export const Homepage = ({ onNavigate }) => {
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 antialiased flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
-      {/* Cinematic Full-Bleed Motorcycle Hero */}
+      {}
       <section
         style={{ marginTop: "calc(-1 * var(--nav-h, 56px))" }}
         className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] flex items-center bg-zinc-950 overflow-hidden"
       >
-        {/* Full-bleed background motorcycle video with fallback poster & subtle settle on load */}
+        {}
         <video
           autoPlay
           loop
@@ -382,27 +382,27 @@ export const Homepage = ({ onNavigate }) => {
             className="w-full h-full object-cover select-none"
           />
         </video>
-        {/* Flat dark overlay for text contrast and legibility without gradients */}
+        {}
         <div className="absolute inset-0 bg-zinc-950/75 sm:bg-zinc-950/65" />
 
         <div className="relative z-10 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-24 pb-16 sm:pt-28 sm:pb-24">
           <div className="max-w-2xl anim-stagger">
-            {/* Brand line */}
+            {}
             <p className="text-xs font-bold tracking-wider text-zinc-400 uppercase mb-2">
               Motorcycled Dealership
             </p>
 
-            {/* Heavy modern condensed headline */}
+            {}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[1.05] mb-5 font-display">
               Built for the open road.
             </h1>
 
-            {/* Direct, restrained supporting copy */}
+            {}
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed mb-6 max-w-md">
               New motorcycles, genuine parts, and financing that fits.
             </p>
 
-            {/* Integrated Hero Search Bar */}
+            {}
             <form onSubmit={handleHeroSearch} className="mb-6 flex flex-col sm:flex-row items-stretch gap-2 max-w-xl">
               <div className="relative flex-1">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
@@ -427,7 +427,7 @@ export const Homepage = ({ onNavigate }) => {
               </button>
             </form>
 
-            {/* Dual action buttons */}
+            {}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button
                 type="button"
@@ -454,7 +454,7 @@ export const Homepage = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Brand Logo Loop Marquee - Dynamic from Database */}
+      {}
       {liveBrands.length > 0 && (
         <section
           id="brands"
@@ -470,7 +470,7 @@ export const Homepage = ({ onNavigate }) => {
           </div>
 
           <div className="relative w-full overflow-hidden">
-            {/* Edge gradient masks for seamless visual fade */}
+            {}
             <div className="absolute left-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 inset-y-0 w-16 sm:w-24 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
 
@@ -504,7 +504,7 @@ export const Homepage = ({ onNavigate }) => {
         </section>
       )}
 
-      {/* Featured product spotlight - full-bleed carousel, live catalog units */}
+      {}
       <ScrollReveal threshold={0.08} duration={400}>
         <section className="w-full bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-4">
@@ -528,7 +528,7 @@ export const Homepage = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Showroom Filters: Brand chips and quick model search */}
+            {}
             <div className="pt-4 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
               <div className="flex flex-wrap items-center gap-1.5">
                 <span className="text-zinc-500 font-medium mr-1">
@@ -594,9 +594,9 @@ export const Homepage = ({ onNavigate }) => {
         </section>
       </ScrollReveal>
 
-      {/* Main Content Area */}
+      {}
       <main className="flex-1 w-full">
-        {/* Section 2: Catalog Categories (Structured Directory Index - NO floating cards) */}
+        {}
         <ScrollReveal threshold={0.08} delay={60} duration={400}>
           <section id="catalog" className="w-full bg-zinc-900 scroll-mt-24">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-4">
@@ -606,7 +606,7 @@ export const Homepage = ({ onNavigate }) => {
               </h2>
             </div>
 
-            {/* Unified Directory Grid with crisp single borders */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-zinc-700">
               {categories.map((cat) => (
                 <div
@@ -636,7 +636,7 @@ export const Homepage = ({ onNavigate }) => {
           </section>
         </ScrollReveal>
 
-        {/* Section: Live Inventory with Infinite Scroll (white band) */}
+        {}
         <ScrollReveal threshold={0.08} delay={70} duration={400}>
           <section className="w-full bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-6">
@@ -735,7 +735,7 @@ export const Homepage = ({ onNavigate }) => {
                           {p.name}
                         </Link>
 
-                        {/* MUI Rating component (20pts MUI styling deliverable) */}
+                        {}
                         <div className="flex items-center gap-1 pt-0.5">
                           <Rating
                             value={rating}
@@ -786,7 +786,7 @@ export const Homepage = ({ onNavigate }) => {
           </section>
         </ScrollReveal>
 
-        {/* Section 3: Financing Protocol (dark band) */}
+        {}
         <ScrollReveal threshold={0.08} delay={80} duration={400}>
           <section id="financing" className="w-full bg-zinc-900 scroll-mt-24">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-8">
@@ -796,7 +796,7 @@ export const Homepage = ({ onNavigate }) => {
               </h2>
             </div>
 
-            {/* Vertical timeline: numbered nodes on a connector line */}
+            {}
             <div
               ref={financeTimelineRef}
               className={`timeline max-w-2xl ${financeTimelineIn ? "is-in" : ""}`}
@@ -829,7 +829,7 @@ export const Homepage = ({ onNavigate }) => {
               ))}
             </div>
 
-            {/* Action Row */}
+            {}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-zinc-700 text-xs">
               <div className="flex items-center gap-2 text-zinc-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -850,7 +850,7 @@ export const Homepage = ({ onNavigate }) => {
           </section>
         </ScrollReveal>
 
-        {/* Section 4: Verified Customer Testimonials (white band) */}
+        {}
         <ScrollReveal threshold={0.08} delay={90} duration={650}>
           <section className="w-full bg-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-6">
@@ -860,7 +860,7 @@ export const Homepage = ({ onNavigate }) => {
               </h2>
             </div>
 
-            {/* Reviews: looping spotlight, one owner quote at a time */}
+            {}
             <div
               ref={reviewsRef}
               className={`reviews ${reviewsIn ? "is-in" : ""}`}
@@ -885,7 +885,7 @@ export const Homepage = ({ onNavigate }) => {
                       &rdquo;
                     </span>
 
-                    {/* Rating stars & badge */}
+                    {}
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <div className="flex items-center gap-0.5">
                         {[...Array(5)].map((_, i) => (
@@ -901,7 +901,7 @@ export const Homepage = ({ onNavigate }) => {
                       {t.quote}
                     </blockquote>
 
-                    {/* Rider profile info */}
+                    {}
                     <figcaption className="flex items-center justify-between gap-3 pt-2">
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="w-10 h-10 rounded-full bg-zinc-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
@@ -924,7 +924,7 @@ export const Homepage = ({ onNavigate }) => {
                 ))}
               </div>
 
-              {/* Spotlight indicator */}
+              {}
               <div className="reviews__dots">
                 {testimonials.map((t, idx) => (
                   <button

@@ -1,9 +1,5 @@
 
-/**
- * ProductImagePlaceholder Component
- * Provides clean, automotive-grade OEM schematic placeholders
- * tailored to motorcycle models, engine components, brakes, tires, gear, and lubricants.
- */
+
 export function ProductImagePlaceholder({
   category = "Motorcycles",
   name = "",
@@ -14,7 +10,7 @@ export function ProductImagePlaceholder({
   const catStr = typeof category === "string" ? category : (category?.name || "");
   const normCategory = catStr.toLowerCase();
 
-  // Category specific icons
+  
   const renderIcon = () => {
     if (
       normCategory.includes("motorcycle") ||
@@ -22,7 +18,7 @@ export function ProductImagePlaceholder({
       normCategory.includes("sportbike") ||
       normCategory.includes("units")
     ) {
-      // Motorcycle silhouette with wheels & frame
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -33,21 +29,21 @@ export function ProductImagePlaceholder({
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          {/* Back wheel */}
+          {}
           <circle cx="5.5" cy="17.5" r="3.5" />
-          {/* Front wheel */}
+          {}
           <circle cx="18.5" cy="17.5" r="3.5" />
-          {/* Chassis & frame */}
+          {}
           <path d="M15 6h-2.5l-3 5.5H5.5L8 14h7l3.5-6.5h-4" />
           <path d="M9.5 11.5L12 17.5" />
-          {/* Handlebars */}
+          {}
           <path d="M15 6l2-2.5h2" />
         </svg>
       );
     }
 
     if (normCategory.includes("engine") || normCategory.includes("transmission")) {
-      // Mechanical gear / transmission
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -65,7 +61,7 @@ export function ProductImagePlaceholder({
     }
 
     if (normCategory.includes("brake")) {
-      // Ventilated disc brake rotor
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -88,7 +84,7 @@ export function ProductImagePlaceholder({
     }
 
     if (normCategory.includes("tire") || normCategory.includes("wheel")) {
-      // Alloy wheel / tire
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -111,7 +107,7 @@ export function ProductImagePlaceholder({
     }
 
     if (normCategory.includes("helmet") || normCategory.includes("gear") || normCategory.includes("protection")) {
-      // Full face helmet
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -130,7 +126,7 @@ export function ProductImagePlaceholder({
     }
 
     if (normCategory.includes("oil") || normCategory.includes("lubricant")) {
-      // Lubricant canister
+      
       return (
         <svg
           className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -149,7 +145,7 @@ export function ProductImagePlaceholder({
       );
     }
 
-    // Default OEM Part schematic
+    
     return (
       <svg
         className={compact ? "w-5 h-5 text-zinc-600" : "w-12 h-12 text-zinc-500"}
@@ -178,12 +174,12 @@ export function ProductImagePlaceholder({
     );
   }
 
-  // Full card header placeholder (Grid view)
+  
   return (
     <div
       className={`w-full h-40 bg-linear-to-b from-zinc-100 to-zinc-200/70 flex flex-col items-center justify-center relative select-none overflow-hidden group ${className}`}
     >
-      {/* Blueprint Grid Lines Pattern */}
+      {}
       <div
         className="absolute inset-0 opacity-[0.4] pointer-events-none"
         style={{
@@ -193,7 +189,7 @@ export function ProductImagePlaceholder({
         }}
       />
 
-      {/* Top Meta Chips */}
+      {}
       <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between text-[9px] font-mono uppercase tracking-wider z-10">
         <span className="bg-white/90 border border-zinc-200 text-zinc-600 px-1.5 py-0.5 rounded shadow-2xs font-semibold">
           {brand || "OEM"}
@@ -203,7 +199,7 @@ export function ProductImagePlaceholder({
         </span>
       </div>
 
-      {/* Central Graphic */}
+      {}
       <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-300 group-hover:scale-105">
         <div className="p-3 rounded-full bg-white/80 shadow-2xs border border-zinc-200/80 mb-1 text-zinc-700">
           {renderIcon()}
@@ -213,7 +209,7 @@ export function ProductImagePlaceholder({
         </span>
       </div>
 
-      {/* Subtle Corner Caliper Watermark */}
+      {}
       <div className="absolute bottom-2 right-2 text-[9px] font-mono text-zinc-400 tracking-widest pointer-events-none opacity-60">
         2026•CATALOG
       </div>

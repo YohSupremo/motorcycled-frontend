@@ -25,7 +25,7 @@ export const Shop = ({ onNavigate }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Read URL query params on mount
+  
   const initialCategory = searchParams.get("category") || "All";
   const initialBrand = searchParams.get("brand") || "All";
   const initialKeyword = searchParams.get("keyword") || searchParams.get("search") || "";
@@ -45,16 +45,16 @@ export const Shop = ({ onNavigate }) => {
   );
   const [searchQuery, setSearchQuery] = useState(initialKeyword);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [viewMode, setViewMode] = useState("grid"); // "grid" or "table"
+  const [viewMode, setViewMode] = useState("grid"); 
 
-  // Infinite Scroll State
+  
   const [infiniteProducts, setInfiniteProducts] = useState([]);
   const [infinitePage, setInfinitePage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  // Select live data from Redux store
-  // Reference: itcp318-s3a-2026/frontend/src/Components/Home.jsx
+  
+  
   const {
     loading,
     products = [],
@@ -68,20 +68,20 @@ export const Shop = ({ onNavigate }) => {
     (state) => state.catalog || {}
   );
 
-  // Fetch categories & brands once on mount
+  
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getBrands());
   }, [dispatch]);
 
-  // Re-sync keyword when the URL changes externally (e.g. navbar search)
+  
   useEffect(() => {
     const urlKeyword = searchParams.get("keyword") || searchParams.get("search") || "";
     setSearchQuery(urlKeyword);
   }, [searchParams]);
 
 
-  // Sync initial Redux products with infiniteProducts on filter change
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setInfiniteProducts(products || []);
@@ -92,7 +92,7 @@ export const Shop = ({ onNavigate }) => {
     return () => clearTimeout(timer);
   }, [products, filteredProductsCount, productsCount]);
 
-  // Fetch products from database whenever query parameters change
+  
   useEffect(() => {
     dispatch(
       getProducts(
@@ -118,7 +118,7 @@ export const Shop = ({ onNavigate }) => {
     onlyReviewed,
   ]);
 
-  // Fetch more products for Infinite Scroll
+  
   const fetchMoreProducts = async () => {
     if (loadingMore || !hasMore) return;
     setLoadingMore(true);
@@ -155,7 +155,7 @@ export const Shop = ({ onNavigate }) => {
     }
   };
 
-  // Sync state changes back to search params (without page refresh)
+  
   useEffect(() => {
     const params = new URLSearchParams();
     if (selectedCategory && selectedCategory !== "All") params.set("category", selectedCategory);
@@ -179,7 +179,7 @@ export const Shop = ({ onNavigate }) => {
     setSearchParams,
   ]);
 
-  // Available categories list (fallback to defaults if DB is still seeding)
+  
   const categoriesList = useMemo(() => {
     const names = ["All"];
     if (dbCategories?.length > 0) {
@@ -201,7 +201,7 @@ export const Shop = ({ onNavigate }) => {
     return names;
   }, [dbCategories]);
 
-  // Available brands list
+  
   const brandsList = useMemo(() => {
     const names = ["All"];
     if (dbBrands?.length > 0) {
@@ -215,7 +215,7 @@ export const Shop = ({ onNavigate }) => {
   }, [dbBrands]);
 
   const handleAddToCart = async (product) => {
-    // Check local stock limits first
+    
     const inCart = (cartItems || [])
       .filter((i) => i.productId === product._id)
       .reduce((sum, i) => sum + (i.quantity || 1), 0);
@@ -257,7 +257,7 @@ export const Shop = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-white text-zinc-900 antialiased flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
-        {/* Header and Cart Summary */}
+        {}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-zinc-900">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight text-balance">
@@ -270,11 +270,11 @@ export const Shop = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Catalog Layout: Integrated Sidebar Filter + Unboxed Directory */}
+        {}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-          {/* Left Filter Column - Integrated without card wrapper, sticky on scroll */}
+          {}
           <aside className="lg:col-span-1 lg:border-r lg:border-zinc-200 lg:pr-6 space-y-6 lg:sticky lg:top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain">
-            {/* Search Filter */}
+            {}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
                 Search Catalog
@@ -316,7 +316,7 @@ export const Shop = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Price Filter (MUI Slider - 5pts) */}
+            {}
             <div className="pt-4 border-t border-zinc-200 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
@@ -348,7 +348,7 @@ export const Shop = ({ onNavigate }) => {
                   step={5000}
                   valueLabelFormat={(val) => `₱${val.toLocaleString()}`}
                   sx={{
-                    color: "#059669", // emerald-600
+                    color: "#059669", 
                     "& .MuiSlider-thumb": {
                       boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                     },
@@ -361,7 +361,7 @@ export const Shop = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Category Filter (MUI Chips - 5pts) */}
+            {}
             <div className="pt-4 border-t border-zinc-200 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
@@ -411,7 +411,7 @@ export const Shop = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Ratings Filter (MUI Rating - 5pts) */}
+            {}
             <div className="pt-4 border-t border-zinc-200 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
@@ -465,7 +465,7 @@ export const Shop = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Review Filter (MP2: 5pts - Customer Reviews Only) */}
+            {}
             <div className="pt-4 border-t border-zinc-200 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
@@ -508,7 +508,7 @@ export const Shop = ({ onNavigate }) => {
               </label>
             </div>
 
-            {/* Brand Filter */}
+            {}
             <div className="pt-4 border-t border-zinc-200 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-zinc-900 uppercase tracking-wider">
@@ -551,7 +551,7 @@ export const Shop = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Installment Filter */}
+            {}
             <div className="pt-4 border-t border-zinc-200">
               <label className="flex items-center gap-2 cursor-pointer select-none">
                 <input
@@ -569,7 +569,7 @@ export const Shop = ({ onNavigate }) => {
               </label>
             </div>
 
-            {/* Reset All Filters */}
+            {}
             {(selectedCategory !== "All" ||
               selectedBrand !== "All" ||
               onlyInstallment ||
@@ -601,10 +601,10 @@ export const Shop = ({ onNavigate }) => {
             )}
           </aside>
 
-          {/* Right Catalog Main Area */}
+          {}
           <div className="lg:col-span-3 space-y-4">
             <ScrollReveal threshold={0.05} duration={600}>
-              {/* View Bar and Metrics */}
+              {}
               <div className="flex items-center justify-between pb-3 border-b border-zinc-200 text-xs">
                 <span className="text-zinc-600">
                   Displaying{" "}
@@ -612,7 +612,7 @@ export const Shop = ({ onNavigate }) => {
                   <strong>{filteredProductsCount || productsCount || 0}</strong> items in database
                 </span>
 
-                {/* View Switcher: Table or Grid */}
+                {}
                 <div className="flex items-center gap-1 border border-zinc-200 rounded p-0.5 bg-zinc-50">
                   <button
                     type="button"
@@ -639,7 +639,7 @@ export const Shop = ({ onNavigate }) => {
                 </div>
               </div>
 
-              {/* Loading Skeleton */}
+              {}
               {loading && infiniteProducts.length === 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
                   {[...Array(6)].map((_, i) => (
@@ -655,7 +655,7 @@ export const Shop = ({ onNavigate }) => {
                   ))}
                 </div>
               ) : infiniteProducts.length === 0 ? (
-                /* Empty State */
+                
                 <div className="border border-zinc-200 rounded-md p-12 text-center space-y-3 bg-zinc-50/50">
                   <div className="w-12 h-12 mx-auto rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-400">
                     <svg
@@ -710,14 +710,14 @@ export const Shop = ({ onNavigate }) => {
                   }
                 >
                   {viewMode === "grid" ? (
-                    /* Architectural Grid - Real Cloudinary images + database attributes */
+                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-zinc-200">
                       {infiniteProducts.map((p) => {
                     const categoryName = p.category?.name || p.category || "General";
                     const brandName = p.brand?.name || p.brand || "OEM";
                     const hasImage = p.images && p.images.length > 0 && p.images[0]?.url;
 
-                    // Approximate installment monthly computation (standard 12-month)
+                    
                     const minDown = Number(p.minInstallmentPrice || p.price * 0.2);
                     const financedAmount = Math.max(0, p.price - minDown);
                     const monthlyEstimate = Math.round((financedAmount * 1.1) / 12);
@@ -727,7 +727,7 @@ export const Shop = ({ onNavigate }) => {
                         key={p._id}
                         className="border-r border-b border-zinc-200 bg-white hover:bg-zinc-50/70 transition-colors flex flex-col justify-between overflow-hidden group"
                       >
-                        {/* Image: Real Cloudinary photo or technical OEM placeholder */}
+                        {}
                         <Link to={`/product/${p._id}`} className="block overflow-hidden">
                           {hasImage ? (
                             <div className="w-full h-44 bg-zinc-100 overflow-hidden relative border-b border-zinc-100 flex items-center justify-center">
@@ -777,7 +777,7 @@ export const Shop = ({ onNavigate }) => {
                               {p.name}
                             </Link>
 
-                            {/* MUI Rating display (5pts deliverable) */}
+                            {}
                             <div className="flex items-center gap-1.5 pt-0.5">
                               <Rating
                                 value={Number(p.ratings) || 0}
@@ -855,7 +855,7 @@ export const Shop = ({ onNavigate }) => {
                   })}
                 </div>
               ) : (
-                /* Table Directory View - Data dense, structured dealership inventory */
+                
                 <div className="border border-zinc-200 rounded-md overflow-hidden bg-white">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse">

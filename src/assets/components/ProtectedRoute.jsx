@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
 import { Navigate, Link, useLocation } from "react-router-dom";
 
-// ProtectedRoute — Role-aware route guard
-// Reference: itcp318-s3a-2026/frontend/src/Components/Route/ProtectedRoute.jsx
-// UI design matches motorcycled customer-side scheme:
-//   bg-zinc-50/60, white cards, border-zinc-200, emerald-600 accents
+
+
+
+
 
 const Spinner = () => (
   <div className="min-h-screen bg-zinc-50/60 flex items-center justify-center antialiased">
     <div className="flex flex-col items-center gap-4">
-      {/* Brand */}
+      {}
       <div className="flex items-center gap-2 mb-2">
         <img
           src="/motorcycled-logo.png"
@@ -21,7 +21,7 @@ const Spinner = () => (
         </span>
       </div>
 
-      {/* Spinner ring */}
+      {}
       <svg
         className="animate-spin w-8 h-8 text-emerald-600"
         viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ const Spinner = () => (
 const AccessDenied = () => (
   <div className="min-h-screen bg-zinc-50/60 text-zinc-900 flex flex-col justify-center items-center px-4 py-8 antialiased selection:bg-emerald-100 selection:text-emerald-900">
     <div className="w-full max-w-sm">
-      {/* Brand Header — matches Login.jsx */}
+      {}
       <div className="mb-5 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <img
@@ -66,9 +66,9 @@ const AccessDenied = () => (
         <span className="text-xs text-zinc-500">Account Portal</span>
       </div>
 
-      {/* Card — matches Login.jsx card */}
+      {}
       <div className="bg-white border border-zinc-200 rounded-lg p-5 sm:p-6 text-center space-y-5">
-        {/* Shield icon */}
+        {}
         <div className="mx-auto w-14 h-14 rounded-full bg-red-50 border border-red-200 flex items-center justify-center">
           <svg
             className="w-7 h-7 text-red-500"
@@ -83,14 +83,14 @@ const AccessDenied = () => (
           </svg>
         </div>
 
-        {/* Badge */}
+        {}
         <div>
           <span className="inline-block font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-600 tracking-widest uppercase font-semibold">
             403 — Access Denied
           </span>
         </div>
 
-        {/* Message */}
+        {}
         <div className="space-y-1">
           <h1 className="text-xl font-semibold text-zinc-900 tracking-tight">
             Admin area restricted
@@ -101,10 +101,10 @@ const AccessDenied = () => (
           </p>
         </div>
 
-        {/* Divider */}
+        {}
         <div className="border-t border-zinc-100" />
 
-        {/* Actions */}
+        {}
         <div className="space-y-2">
           <Link
             to="/"
@@ -142,10 +142,10 @@ const ProtectedRoute = ({ children, isAdmin = false }) => {
   const location = useLocation();
   const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
 
-  // Still verifying session from cookie — don't redirect prematurely
+  
   if (loading) return <Spinner />;
 
-  // Not logged in → go to login preserving the attempted destination
+  
   if (!isAuthenticated) {
     return (
       <Navigate
@@ -155,8 +155,8 @@ const ProtectedRoute = ({ children, isAdmin = false }) => {
     );
   }
 
-  // Logged in but wrong role → show 403 page
-  // Reference: itcp318-s3a-2026/frontend/src/Components/Route/ProtectedRoute.jsx line 20-22
+  
+  
   if (isAdmin && user?.role !== "admin") return <AccessDenied />;
 
   return children;
