@@ -218,7 +218,12 @@ export const AdminReviews = () => {
               <p className="font-semibold text-zinc-900 text-xs truncate">
                 {r.title}
               </p>
-              <p className="text-zinc-600 text-xs mt-1 line-clamp-1">{r.body}</p>
+              <p
+                className="text-zinc-600 text-xs mt-1 line-clamp-1"
+                title={r.body}
+              >
+                {r.body}
+              </p>
               <span className="text-[11px] font-mono text-zinc-500 mt-1">
                 Submitted {r.createdAt}
               </span>
@@ -266,12 +271,13 @@ export const AdminReviews = () => {
               <button
                 type="button"
                 onClick={() => handleToggleHide(r.id)}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium border transition-colors cursor-pointer whitespace-nowrap ${
+                className={`inline-flex items-center justify-center w-8 h-8 rounded border transition-colors cursor-pointer ${
                   r.isHidden
                     ? "bg-white border-zinc-300 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
                     : "bg-white border-rose-200 text-rose-700 hover:bg-rose-50 hover:border-rose-300"
                 }`}
                 title={r.isHidden ? "Show this review" : "Hide this review"}
+                aria-label={r.isHidden ? "Show this review" : "Hide this review"}
               >
                 {r.isHidden ? (
                   <>
@@ -288,7 +294,6 @@ export const AdminReviews = () => {
                       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                       <circle cx="12" cy="12" r="3" />
                     </svg>
-                    <span>Unhide</span>
                   </>
                 ) : (
                   <>
@@ -305,15 +310,15 @@ export const AdminReviews = () => {
                       <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                       <line x1="1" y1="1" x2="23" y2="23" />
                     </svg>
-                    <span>Hide</span>
                   </>
                 )}
               </button>
               <button
                 type="button"
                 onClick={() => handleDelete(r.id)}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium border border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-50 hover:text-rose-700 hover:border-rose-300 transition-colors cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center justify-center w-8 h-8 rounded border border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-50 hover:text-rose-700 hover:border-rose-300 transition-colors cursor-pointer"
                 title="Delete review"
+                aria-label="Delete review"
               >
                 <svg
                   className="w-3.5 h-3.5 shrink-0"
@@ -328,7 +333,6 @@ export const AdminReviews = () => {
                   <polyline points="3 6 5 6 21 6" />
                   <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                 </svg>
-                <span>Delete</span>
               </button>
             </div>
           );
