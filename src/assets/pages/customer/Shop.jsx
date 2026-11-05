@@ -454,7 +454,7 @@ export const Shop = ({ onNavigate }) => {
                         sx={{ fontSize: "0.95rem" }}
                       />
                       <span className="text-[11px] text-zinc-600">
-                        {star === 5 ? "5 stars" : `${star} and up`}
+                        {star === 5 ? "5 stars" : `${star} and below`}
                       </span>
                     </div>
                     {selectedRating === star && (
