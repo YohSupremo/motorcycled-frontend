@@ -328,28 +328,19 @@ export const AdminReviews = () => {
           <label className="sr-only" htmlFor="review-rating-filter">
             Filter by rating
           </label>
-          <div className="relative">
-            <svg
-              className="pointer-events-none absolute left-2.5 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 fill-amber-400 text-amber-400"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-            <select
-              id="review-rating-filter"
-              value={ratingFilter}
-              onChange={(event) => setRatingFilter(event.target.value)}
-              className="h-9 rounded border border-zinc-300 bg-white py-1.5 pl-8 pr-2.5 text-xs font-semibold text-zinc-700 outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-            >
-              <option value="all">All ratings</option>
-              {[5, 4, 3, 2, 1].map((rating) => (
-                <option key={rating} value={rating}>
-                  {rating} {rating === 1 ? "star" : "stars"}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            id="review-rating-filter"
+            value={ratingFilter}
+            onChange={(event) => setRatingFilter(event.target.value)}
+            className="h-10 min-w-36 rounded border border-zinc-300 bg-white px-3.5 py-2 text-xs font-semibold text-zinc-700 outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+          >
+            <option value="all">All ratings</option>
+            {[5, 4, 3, 2, 1].map((rating) => (
+              <option key={rating} value={rating}>
+                {"★".repeat(rating)} {rating} {rating === 1 ? "star" : "stars"}
+              </option>
+            ))}
+          </select>
 
           <div className="flex items-center gap-1 text-xs bg-zinc-100 p-1 rounded">
           <button
