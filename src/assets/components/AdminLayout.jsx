@@ -7,7 +7,6 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
 
   const activeTab =
     propActiveTab ||
@@ -210,34 +209,6 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
   const orderedNavItems = [...navItems].sort(
     (a, b) => navGroupOrder[a.group] - navGroupOrder[b.group]
   );
-
-  const adminNotifications = [
-    {
-      id: "notif-1",
-      title: "New Installment Application",
-      detail:
-        "ORD-2026-0891 · Juan Dela Cruz submitted valid ID & payslip for Yamaha NMAX 155",
-      time: "10 mins ago",
-      type: "application",
-      unread: true,
-    },
-    {
-      id: "notif-2",
-      title: "Low Stock Alert",
-      detail: "Motul 7100 10W-40 4T is at 4 units (Threshold: 5 units)",
-      time: "1 hour ago",
-      type: "stock",
-      unread: true,
-    },
-    {
-      id: "notif-3",
-      title: "Downpayment Settled",
-      detail: "ORD-2026-0885 · ₱32,000 confirmed via BDO Online Deposit",
-      time: "3 hours ago",
-      type: "payment",
-      unread: false,
-    },
-  ];
 
   return (
     <div className="admin-shell min-h-screen bg-zinc-100/60 text-zinc-900 flex antialiased font-sans">
@@ -455,68 +426,6 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
 
           {/* Right Header Operations */}
           <div className="flex items-center gap-3">
-            {/* Notification Bell */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="w-8 h-8 rounded-md border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 flex items-center justify-center text-zinc-600 transition-colors relative cursor-pointer"
-                title="System Notifications"
-              >
-                <svg
-                  className="w-4 h-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-600 text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-white">
-                  2
-                </span>
-              </button>
-
-              {/* Notifications Dropdown */}
-              {showNotifications && (
-                <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 bg-white border border-zinc-200 rounded-lg shadow-lg z-50 p-2 text-xs animate-fadeIn">
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-100 px-2">
-                    <span className="font-bold text-zinc-900 text-xs">
-                      Dealership Alerts
-                    </span>
-                    <span className="text-[10px] text-zinc-500">
-                      Mailtrap & In-App Log
-                    </span>
-                  </div>
-                  <div className="space-y-1.5 max-h-72 overflow-y-auto">
-                    {adminNotifications.map((n) => (
-                      <div
-                        key={n.id}
-                        className={`p-2.5 rounded-md border transition-colors ${
-                          n.unread
-                            ? "bg-emerald-50/40 border-emerald-200/80"
-                            : "bg-zinc-50 border-zinc-100"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="font-semibold text-zinc-900">
-                            {n.title}
-                          </span>
-                          <span className="text-[10px] text-zinc-400 font-mono">
-                            {n.time}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-zinc-600 mt-1 leading-relaxed">
-                          {n.detail}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Quick Switch to Customer View */}
             <Link
               to="/"
