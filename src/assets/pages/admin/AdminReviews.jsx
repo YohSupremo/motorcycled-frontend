@@ -2,11 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import {
   getAdminReviews,
   toggleReviewVisibility,
-  deleteReview,
 } from "../../../actions/reviewActions";
 import { adminDataGridSx } from "../../../utils/adminDataGridTheme";
 
@@ -26,6 +24,7 @@ const formatDate = (value) => {
 export const AdminReviews = () => {
   const dispatch = useDispatch();
   const [filterMode, setFilterMode] = useState("all"); // "all", "public", "hidden"
+  const [ratingFilter, setRatingFilter] = useState("all");
 
   const { loading, reviews: rawReviews } = useSelector(
     (state) => state.adminReviews || {}
@@ -75,34 +74,15 @@ export const AdminReviews = () => {
     [dispatch]
   );
 
-  const handleDelete = useCallback(
-    async (reviewId) => {
-      const confirm = await Swal.fire({
-        title: "Delete this review?",
-        text: "The review is removed for good and cannot be restored.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#dc2626",
-        cancelButtonColor: "#6b7280",
-        confirmButtonText: "Delete review",
-        cancelButtonText: "Cancel",
-      });
-
-      if (!confirm.isConfirmed) return;
-
-      const result = await dispatch(deleteReview(reviewId));
-      if (result?.type?.endsWith?.("SUCCESS")) {
-        toast.success("Review deleted.");
-      }
-      dispatch(getAdminReviews());
-    },
-    [dispatch]
-  );
-
   const filteredReviews = reviews.filter((r) => {
-    if (filterMode === "public") return !r.isHidden;
-    if (filterMode === "hidden") return r.isHidden;
-    return true;
+    const matchesVisibility =
+      filterMode === "all" ||
+      (filterMode === "public" && !r.isHidden) ||
+      (filterMode === "hidden" && r.isHidden);
+    const matchesRating =
+      ratingFilter === "all" || String(r.rating) === ratingFilter;
+
+    return matchesVisibility && matchesRating;
   });
 
   const columns = useMemo(
@@ -218,12 +198,21 @@ export const AdminReviews = () => {
               <p className="font-semibold text-zinc-900 text-xs truncate">
                 {r.title}
               </p>
-              <p
-                className="text-zinc-600 text-xs mt-1 line-clamp-1"
-                title={r.body}
-              >
-                {r.body}
-              </p>
+              <div className="group relative min-w-0">
+                <p className="text-zinc-600 text-xs mt-1 line-clamp-1 cursor-help">
+                  {r.body}
+                </p>
+                <div
+                  role="tooltip"
+                  className="pointer-events-none invisible absolute bottom-full left-0 z-50 mb-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-zinc-200 bg-zinc-950 px-3 py-2.5 text-left text-xs leading-relaxed text-white opacity-0 shadow-xl transition-all duration-150 group-hover:visible group-hover:opacity-100"
+                >
+                  <span className="mb-1 block text-[10px] font-semibold tracking-wide text-zinc-400">
+                    Full review
+                  </span>
+                  {r.body}
+                  <span className="absolute -bottom-1.5 left-5 h-3 w-3 rotate-45 border-r border-b border-zinc-950 bg-zinc-950" />
+                </div>
+              </div>
               <span className="text-[11px] font-mono text-zinc-500 mt-1">
                 Submitted {r.createdAt}
               </span>
@@ -258,7 +247,7 @@ export const AdminReviews = () => {
       {
         field: "actions",
         headerName: "Actions",
-        width: 190,
+        width: 100,
         headerAlign: "right",
         align: "right",
         sortable: false,
@@ -313,33 +302,12 @@ export const AdminReviews = () => {
                   </>
                 )}
               </button>
-              <button
-                type="button"
-                onClick={() => handleDelete(r.id)}
-                className="inline-flex items-center justify-center w-8 h-8 rounded border border-zinc-300 bg-white text-zinc-600 hover:bg-zinc-50 hover:text-rose-700 hover:border-rose-300 transition-colors cursor-pointer"
-                title="Delete review"
-                aria-label="Delete review"
-              >
-                <svg
-                  className="w-3.5 h-3.5 shrink-0"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <polyline points="3 6 5 6 21 6" />
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                </svg>
-              </button>
             </div>
           );
         },
       },
     ],
-    [handleToggleHide, handleDelete]
+    [handleToggleHide]
   );
 
   return (
@@ -356,7 +324,25 @@ export const AdminReviews = () => {
         </div>
 
         {/* Filter tabs */}
-        <div className="flex items-center gap-1 text-xs bg-zinc-100 p-1 rounded">
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <label className="sr-only" htmlFor="review-rating-filter">
+            Filter by rating
+          </label>
+          <select
+            id="review-rating-filter"
+            value={ratingFilter}
+            onChange={(event) => setRatingFilter(event.target.value)}
+            className="h-9 rounded border border-zinc-300 bg-white px-2.5 text-xs font-semibold text-zinc-700 outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+          >
+            <option value="all">All ratings</option>
+            {[5, 4, 3, 2, 1].map((rating) => (
+              <option key={rating} value={rating}>
+                {rating} {rating === 1 ? "star" : "stars"}
+              </option>
+            ))}
+          </select>
+
+          <div className="flex items-center gap-1 text-xs bg-zinc-100 p-1 rounded">
           <button
             type="button"
             onClick={() => setFilterMode("all")}
@@ -391,6 +377,7 @@ export const AdminReviews = () => {
             Hidden ({hiddenCount})
           </button>
         </div>
+      </div>
       </div>
 
       {/* Reviews grid */}

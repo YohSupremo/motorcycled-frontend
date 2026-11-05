@@ -150,22 +150,6 @@ export const toggleReviewVisibility = (id) => async (dispatch) => {
   }
 };
 
-// ─── Admin: delete review ─────────────────────────────────────────────────────
-export const deleteReview = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: MODERATE_REVIEW_REQUEST });
-    const { data } = await axios.delete(`${API}/admin/review/${id}`, {
-      withCredentials: true,
-    });
-    return dispatch({ type: MODERATE_REVIEW_SUCCESS, payload: data });
-  } catch (error) {
-    return dispatch({
-      type: MODERATE_REVIEW_FAIL,
-      payload: error.response?.data?.message || "Failed to delete review",
-    });
-  }
-};
-
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
