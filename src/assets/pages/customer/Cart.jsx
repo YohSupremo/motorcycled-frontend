@@ -162,6 +162,24 @@ export const Cart = () => {
     dispatch(updateCartItemQuantity(item.cartItemId, newQty));
   };
 
+  const handleTypedQty = (item, value) => {
+    if (value === "") return;
+    const parsed = Number(value);
+    if (!Number.isInteger(parsed) || parsed < 1) return;
+
+    const max = Number(item.inStock) || 0;
+    if (max <= 0) {
+      toast.warning(`"${item.name}" is currently out of stock`);
+      return;
+    }
+
+    const quantity = Math.min(parsed, max);
+    if (parsed > max) {
+      toast.warning(`Maximum available inventory is ${max} units`);
+    }
+    dispatch(updateCartItemQuantity(item.cartItemId, quantity));
+  };
+
   const handleSelect = (cartItemId, val) =>
     dispatch(selectCartItem(cartItemId, val));
 
@@ -627,9 +645,17 @@ export const Cart = () => {
                       >
                         –
                       </button>
-                      <span className="w-8 text-center text-xs font-mono font-bold text-zinc-900">
-                        {item.quantity}
-                      </span>
+                      <input
+                        type="number"
+                        min="1"
+                        max={item.inStock}
+                        value={item.quantity}
+                        onChange={(event) =>
+                          handleTypedQty(item, event.target.value)
+                        }
+                        className="h-7 w-10 appearance-none bg-transparent text-center text-xs font-mono font-bold text-zinc-900 outline-none"
+                        aria-label={`Quantity for ${item.name}`}
+                      />
                       <button
                         type="button"
                         onClick={() => handleQty(item, 1)}

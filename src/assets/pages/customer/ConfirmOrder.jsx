@@ -265,10 +265,12 @@ export const ConfirmOrder = () => {
     const isOnlinePayment = paymentMethod !== "cash_on_releasing";
 
     return (
-      <div className="min-h-screen bg-zinc-50 font-sans text-zinc-900 antialiased py-8">
+      <div className="receipt-print-page min-h-screen bg-zinc-50 font-sans text-zinc-900 antialiased py-8">
         <main className="max-w-2xl mx-auto px-4 sm:px-6">
-          <CheckoutStepper activeStep={3} />
-          <div className="bg-white border border-zinc-200 rounded-xl shadow-xs overflow-hidden">
+          <div className="receipt-print-stepper">
+            <CheckoutStepper activeStep={3} />
+          </div>
+          <div className="receipt-print-card bg-white border border-zinc-200 rounded-xl shadow-xs overflow-hidden">
             {/* Status Header */}
             <div className="p-8 text-center border-b border-zinc-100 space-y-3">
               <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
@@ -367,7 +369,7 @@ export const ConfirmOrder = () => {
             </div>
 
             {/* Actions */}
-            <div className="p-6 bg-zinc-50 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="receipt-print-actions p-6 bg-zinc-50 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => {
