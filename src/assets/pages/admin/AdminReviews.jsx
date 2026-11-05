@@ -337,7 +337,7 @@ export const AdminReviews = () => {
             <option value="all">All ratings</option>
             {[5, 4, 3, 2, 1].map((rating) => (
               <option key={rating} value={rating}>
-                {"★".repeat(rating)} {rating} {rating === 1 ? "star" : "stars"}
+                {rating} {rating === 1 ? "star" : "stars"}
               </option>
             ))}
           </select>
