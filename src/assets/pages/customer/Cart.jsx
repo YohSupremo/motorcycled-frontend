@@ -646,9 +646,9 @@ export const Cart = () => {
                         –
                       </button>
                       <input
-                        type="number"
-                        min="1"
-                        max={item.inStock}
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         value={item.quantity}
                         onChange={(event) =>
                           handleTypedQty(item, event.target.value)
