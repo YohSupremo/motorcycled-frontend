@@ -740,7 +740,7 @@ export const Shipping = () => {
                                 <input
                                   type="text"
                                   {...registerAddress("street")}
-                                  placeholder="Block 03 Lot 18, Palayan Village"
+                                  placeholder="e.g. Block 03 Lot 18, Palayan Village"
                                   className={`w-full px-3 py-2 text-xs bg-white border rounded-lg focus:outline-none ${
                                     addressFormErrors.street ? "border-red-500" : "border-zinc-300 focus:border-zinc-900"
                                   }`}
