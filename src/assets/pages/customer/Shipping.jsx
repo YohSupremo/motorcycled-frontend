@@ -181,7 +181,7 @@ export const Shipping = () => {
     mode: "onTouched",
     resolver: yupResolver(shippingAddressSchema),
     defaultValues: {
-      label: "Home",
+      label: "",
       street: "",
       barangay: "",
       city: "",
@@ -725,15 +725,19 @@ export const Shipping = () => {
                                 <label className="block text-zinc-600 font-medium mb-1">
                                   Address Label
                                 </label>
-                                <select
+                                <input
+                                  type="text"
                                   {...registerAddress("label")}
+                                  list="address-label-suggestions"
+                                  placeholder="e.g. Home, Work, Office"
                                   className="w-full px-3 py-2 text-xs bg-white border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-                                >
-                                  <option value="Home">Home</option>
-                                  <option value="Work">Work / Office</option>
-                                  <option value="Warehouse">Warehouse</option>
-                                  <option value="Other">Other</option>
-                                </select>
+                                />
+                                <datalist id="address-label-suggestions">
+                                  <option value="Home" />
+                                  <option value="Work" />
+                                  <option value="Office" />
+                                  <option value="Warehouse" />
+                                </datalist>
                               </div>
 
                               <div className="sm:col-span-2">
@@ -870,15 +874,19 @@ export const Shipping = () => {
                                 <label className="block text-zinc-600 font-medium mb-1">
                                   Address Label
                                 </label>
-                                <select
+                                <input
+                                  type="text"
                                   {...registerAddress("label")}
+                                  list="address-label-suggestions"
+                                  placeholder="e.g. Home, Work, Office"
                                   className="w-full px-3 py-2 text-xs bg-white border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-                                >
-                                  <option value="Home">Home</option>
-                                  <option value="Work">Work / Office</option>
-                                  <option value="Warehouse">Warehouse</option>
-                                  <option value="Other">Other</option>
-                                </select>
+                                />
+                                <datalist id="address-label-suggestions">
+                                  <option value="Home" />
+                                  <option value="Work" />
+                                  <option value="Office" />
+                                  <option value="Warehouse" />
+                                </datalist>
                               </div>
 
                               <div className="sm:col-span-2">
