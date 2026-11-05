@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
+import Tooltip from "@mui/material/Tooltip";
 import { toast } from "react-toastify";
 import {
   getAdminReviews,
@@ -198,21 +199,20 @@ export const AdminReviews = () => {
               <p className="font-semibold text-zinc-900 text-xs truncate">
                 {r.title}
               </p>
-              <div className="group relative min-w-0">
+              <Tooltip
+                arrow
+                placement="top-start"
+                enterDelay={250}
+                title={
+                  <span className="block max-w-xs whitespace-normal text-xs leading-relaxed">
+                    {r.body}
+                  </span>
+                }
+              >
                 <p className="text-zinc-600 text-xs mt-1 line-clamp-1 cursor-help">
                   {r.body}
                 </p>
-                <div
-                  role="tooltip"
-                  className="pointer-events-none invisible absolute bottom-full left-0 z-50 mb-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-zinc-200 bg-zinc-950 px-3 py-2.5 text-left text-xs leading-relaxed text-white opacity-0 shadow-xl transition-all duration-150 group-hover:visible group-hover:opacity-100"
-                >
-                  <span className="mb-1 block text-[10px] font-semibold tracking-wide text-zinc-400">
-                    Full review
-                  </span>
-                  {r.body}
-                  <span className="absolute -bottom-1.5 left-5 h-3 w-3 rotate-45 border-r border-b border-zinc-950 bg-zinc-950" />
-                </div>
-              </div>
+              </Tooltip>
               <span className="text-[11px] font-mono text-zinc-500 mt-1">
                 Submitted {r.createdAt}
               </span>
@@ -328,19 +328,28 @@ export const AdminReviews = () => {
           <label className="sr-only" htmlFor="review-rating-filter">
             Filter by rating
           </label>
-          <select
-            id="review-rating-filter"
-            value={ratingFilter}
-            onChange={(event) => setRatingFilter(event.target.value)}
-            className="h-9 rounded border border-zinc-300 bg-white px-2.5 text-xs font-semibold text-zinc-700 outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-          >
-            <option value="all">All ratings</option>
-            {[5, 4, 3, 2, 1].map((rating) => (
-              <option key={rating} value={rating}>
-                {rating} {rating === 1 ? "star" : "stars"}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <svg
+              className="pointer-events-none absolute left-2.5 top-1/2 z-10 h-3.5 w-3.5 -translate-y-1/2 fill-amber-400 text-amber-400"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <select
+              id="review-rating-filter"
+              value={ratingFilter}
+              onChange={(event) => setRatingFilter(event.target.value)}
+              className="h-9 rounded border border-zinc-300 bg-white py-1.5 pl-8 pr-2.5 text-xs font-semibold text-zinc-700 outline-none transition-colors focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+            >
+              <option value="all">All ratings</option>
+              {[5, 4, 3, 2, 1].map((rating) => (
+                <option key={rating} value={rating}>
+                  {rating} {rating === 1 ? "star" : "stars"}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <div className="flex items-center gap-1 text-xs bg-zinc-100 p-1 rounded">
           <button
