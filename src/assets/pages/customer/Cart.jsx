@@ -22,6 +22,7 @@ import {
   setItemPurchaseMethod,
   setItemTermMonths,
   clearCart,
+  updateCartItemStock,
 } from "../../../actions/cartActions";
 import { toast } from "react-toastify";
 import { ProductImagePlaceholder } from "../../components/ProductImagePlaceholder";
@@ -55,6 +56,38 @@ export const Cart = () => {
 
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const selectAllRef = useRef(null);
+  const cartProductIdsKey = useMemo(
+    () => [...new Set(cartItems.map((item) => item.productId))].sort().join(","),
+    [cartItems]
+  );
+
+  useEffect(() => {
+    if (!cartProductIdsKey) return;
+
+    const productIds = cartProductIdsKey.split(",");
+    Promise.all(
+      productIds.map((productId) =>
+        axios
+          .get(`${API}/product/${productId}`, { withCredentials: true })
+          .then(({ data }) => ({ productId, stock: data.product?.stock }))
+          .catch((error) => {
+            console.error(`Unable to refresh stock for product ${productId}:`, error);
+            return null;
+          })
+      )
+    ).then((products) => {
+      products.forEach((product) => {
+        if (!product || product.stock === undefined) return;
+        cartItems
+          .filter((item) => item.productId === product.productId)
+          .forEach((item) =>
+            dispatch(updateCartItemStock(item.cartItemId, product.stock))
+          );
+      });
+    });
+    // Stock refresh is keyed by product IDs; cart item updates must not refetch.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartProductIdsKey, dispatch]);
 
   // Credit verification — only fetch when authenticated
   const [creditStatus, setCreditStatus] = useState(null);
@@ -85,6 +118,9 @@ export const Cart = () => {
   const allSelected =
     cartItems.length > 0 && cartItems.every((i) => i.selected);
   const someSelected = selectedItems.length > 0;
+  const selectedUnavailable = selectedItems.some(
+    (item) => item.inStock <= 0 || item.quantity <= 0
+  );
 
   const selectedMotorcycles = selectedItems.filter((i) => i.isVehicle);
   const selectedParts = selectedItems.filter((i) => !i.isVehicle);
@@ -114,6 +150,10 @@ export const Cart = () => {
 
   const handleQty = (item, delta) => {
     const current = Number(item.quantity) || 1;
+    if (item.inStock <= 0) {
+      toast.warning(`"${item.name}" is currently out of stock`);
+      return;
+    }
     if (delta > 0 && current >= item.inStock) {
       toast.warning(`Maximum available inventory is ${item.inStock} units`);
       return;
@@ -210,6 +250,10 @@ export const Cart = () => {
     }
     if (!someSelected) {
       toast.warning("Please select at least one item to proceed to checkout");
+      return;
+    }
+    if (selectedUnavailable) {
+      toast.warning("Remove unavailable items or unselect them before checkout");
       return;
     }
     if (hasInstallment && creditStatus !== "approved") {
@@ -380,9 +424,15 @@ export const Cart = () => {
                             <h3 className="text-base sm:text-lg font-extrabold text-zinc-900 tracking-tight mt-1">
                               {item.name}
                             </h3>
-                            <p className="text-xs text-zinc-500">
-                              {item.category}. {item.inStock} units available.
-                            </p>
+                            {item.inStock <= 0 ? (
+                              <p className="text-xs font-semibold text-rose-600">
+                                {item.category}. Out of stock
+                              </p>
+                            ) : (
+                              <p className="text-xs text-zinc-500">
+                                {item.category}. {item.inStock} units available.
+                              </p>
+                            )}
                           </div>
 
                           <div className="text-right shrink-0">
@@ -551,6 +601,15 @@ export const Cart = () => {
                       <p className="text-[11px] text-zinc-500">
                         {item.brand}, {item.category}
                       </p>
+                      {item.inStock <= 0 ? (
+                        <p className="text-[11px] font-semibold text-rose-600">
+                          Out of stock
+                        </p>
+                      ) : (
+                        <p className="text-[11px] text-zinc-500">
+                          {item.inStock} units available.
+                        </p>
+                      )}
                       <span className="text-xs font-mono font-bold text-zinc-900 mt-0.5 block">
                         {fmt(item.price)}
                       </span>

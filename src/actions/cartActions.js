@@ -3,6 +3,7 @@ import {
   ADD_TO_CART,
   REMOVE_ITEM_CART,
   UPDATE_ITEM_CART,
+  UPDATE_ITEM_STOCK,
   SELECT_CART_ITEM,
   SELECT_ALL_CART_ITEMS,
   SAVE_SHIPPING_INFO,
@@ -101,6 +102,13 @@ export const removeFromCart = (cartItemId) => (dispatch) => {
 export const updateCartItemQuantity = (cartItemId, quantity) => (dispatch) => {
   if (!Number.isInteger(quantity) || quantity < 1) return
   dispatch({ type: UPDATE_ITEM_CART, payload: { cartItemId, quantity } })
+}
+
+export const updateCartItemStock = (cartItemId, stock) => (dispatch) => {
+  dispatch({
+    type: UPDATE_ITEM_STOCK,
+    payload: { cartItemId, stock: Math.max(0, Number(stock) || 0) },
+  })
 }
 
 export const selectCartItem = (cartItemId, selected) => (dispatch) => {

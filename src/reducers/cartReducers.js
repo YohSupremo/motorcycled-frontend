@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_ITEM_CART,
   UPDATE_ITEM_CART,
+  UPDATE_ITEM_STOCK,
   SELECT_CART_ITEM,
   SELECT_ALL_CART_ITEMS,
   SAVE_SHIPPING_INFO,
@@ -93,6 +94,21 @@ export const cartReducer = (state = initialState, action) => {
       const { cartItemId, quantity } = action.payload
       const updated = state.cartItems.map((item) =>
         item.cartItemId === cartItemId ? { ...item, quantity } : item
+      )
+      persist(updated, state.shippingInfo)
+      return { ...state, cartItems: updated }
+    }
+
+    case UPDATE_ITEM_STOCK: {
+      const { cartItemId, stock } = action.payload
+      const updated = state.cartItems.map((item) =>
+        item.cartItemId === cartItemId
+          ? {
+              ...item,
+              inStock: stock,
+              quantity: Math.min(Number(item.quantity) || 1, stock),
+            }
+          : item
       )
       persist(updated, state.shippingInfo)
       return { ...state, cartItems: updated }
