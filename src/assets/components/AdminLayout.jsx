@@ -37,8 +37,6 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
       id: "orders",
       group: "Operations",
       label: "Orders & Financing",
-      badge: "3",
-      badgeColor: "bg-amber-100 text-amber-800 border-amber-200",
       icon: (
         <svg
           className="w-4 h-4 shrink-0"
@@ -121,8 +119,6 @@ export const AdminLayout = ({ activeTab: propActiveTab }) => {
       id: "inventory",
       group: "Operations",
       label: "Inventory & Restock",
-      badge: "2 low",
-      badgeColor: "bg-red-50 text-red-800 border-red-200",
       icon: (
         <svg
           className="w-4 h-4 shrink-0"
